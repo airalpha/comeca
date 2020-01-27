@@ -3,8 +3,7 @@
         <div class="card mt-5">
             <div class="card-header d-flex">
                 <h3 class="card-title">Utilisateurs</h3>
-                <button type="button" class="btn btn-outline-success ml-auto" data-toggle="modal"
-                        data-target="#addUserModal">
+                <button type="button" class="btn btn-outline-success ml-auto" @click="newModal()">
                     <i class="fas fa-user-plus"></i>
                 </button>
             </div>
@@ -31,8 +30,8 @@
                                 <i class="fas fa-pencil-alt white">
                                 </i>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
+                            <a class="btn btn-danger btn-sm" @click="deleteUser(user.id)">
+                                <i class="fas fa-trash white">
                                 </i>
                             </a>
                         </td>
@@ -131,8 +130,20 @@
         methods: {
             createUser() {
                 this.$Progress.start();
-                this.form.post('/api/user');
-                this.$Progress.finish();
+                this.form.post('/api/user')
+                    .then(() => {
+                        Fire.$emit('Aftercreate');
+                        $('#addUserModal').modal('hide');
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Utilisateur ajouté !'
+                        });
+
+                        this.$Progress.finish();
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
             },
 
             loadUsers() {
@@ -149,6 +160,39 @@
                 this.$Progress.finish();
             },
 
+            deleteUser(id) {
+                Swal.fire({
+                    title: 'Etes vous sure ?',
+                    text: "Vous ne pourrez pas revenir sur cela !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui supprimer !'
+                }).then((result) => {
+                    if (result.value) {
+                        this.form.delete('/api/user/' + id)
+                            .then(() => {
+                                Swal.fire(
+                                    'Supprimer !',
+                                    'Utilisateur supprimé !',
+                                    'success'
+                                );
+                                Fire.$emit('Aftercreate');
+                            }, (error) => {
+                                Swal.fire(
+                                    'Oups !',
+                                    'Nous avons rencontré une erreur',
+                                    'warning'
+                                )
+                            });
+                    }
+                })
+            },
+
+            newModal() {
+
+            }
         },
 
         mounted() {
@@ -157,6 +201,9 @@
 
         created() {
             this.loadUsers();
+            Fire.$on('Aftercreate', () => {
+                this.loadUsers();
+            });
         }
     }
 

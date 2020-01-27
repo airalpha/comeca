@@ -72,6 +72,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        //Delete the user
+        $user->delete();
+
+        //Return message
+        return ['message' => 'Utilisateur supprimé !'];
     }
 }
