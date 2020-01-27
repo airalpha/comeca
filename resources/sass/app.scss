@@ -8,6 +8,9 @@ $fa-font-path: "../webfonts";
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//Datatables
+@import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css";
+
 //Admin lte
 @import '~admin-lte/dist/css/adminlte.css';
 
@@ -15,3 +18,11 @@ $fa-font-path: "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
+
+.router-link-exact-active {
+    @extend .active;
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+

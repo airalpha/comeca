@@ -8,6 +8,40 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//Vform axios
+import { Form, HasError, AlertError } from 'vform';
+window.Form = Form;
+Vue.component(HasError.name, HasError);
+Vue.component(AlertError.name, AlertError);
+
+//Vue progress-bar
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar, {
+    color: 'rgb(143, 255, 199)',
+    failedColor: 'red',
+    height: '2px'
+});
+
+
+//Vue router
+import VueRouter from "vue-router"
+Vue.use(VueRouter);
+
+let routes = [
+    { path: '/dashboard', component: require("./components/Dashboard").default },
+    { path: '/profile', component: require("./components/Profile").default },
+    { path: '/users', component: require("./components/Users").default },
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
+
+
+
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -29,4 +63,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router
 });
