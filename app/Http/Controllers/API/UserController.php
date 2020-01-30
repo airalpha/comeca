@@ -27,6 +27,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required|string|max:191',
             'email' => 'required|string|email|max:191|unique:users',
@@ -61,7 +62,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $this->validate($request, [
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
+            'password' => 'sometimes|min:6'
+        ]);
+
+        $user->update($request->all());
+
+        return response()->json(["message" => "Utilisateur modifié !"]);
     }
 
     /**
@@ -78,6 +89,6 @@ class UserController extends Controller
         $user->delete();
 
         //Return message
-        return ['message' => 'Utilisateur supprimé !'];
+        return response()->json(["message" => "Utilisateur supprimé !"]);
     }
 }

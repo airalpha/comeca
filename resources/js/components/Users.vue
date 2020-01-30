@@ -26,7 +26,7 @@
                         <td>{{ user.email }}</td>
                         <td>{{ user.type }}</td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" href="#">
+                            <a class="btn btn-info btn-sm" @click="editModal(user)">
                                 <i class="fas fa-pencil-alt white">
                                 </i>
                             </a>
@@ -53,17 +53,17 @@
 
 
         <!-- Add User Modal -->
-        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalTitle"
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalTitle"
              aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addUserModalTitle">Ajouter un utilisateur</h5>
+                        <h5 class="modal-title" id="userModalTitle">{{ editMode ? "Modifier " : "Ajouter " }} un utilisateur</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form @submit.prevent="createUser">
+                    <form @submit.prevent="editMode ? updateUser() : createUser()">
                         <div class="modal-body">
                             <!-- Name Input -->
                             <div class="form-group">
@@ -104,7 +104,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <button type="submit" v-show="!editMode" class="btn btn-primary">Ajouter</button>
+                            <button type="submit" v-show="editMode" class="btn btn-primary">Modifier</button>
                         </div>
                     </form>
                 </div>
@@ -117,8 +118,10 @@
     export default {
         data() {
             return {
+                editMode: true,
                 users: {},
                 form: new Form({
+                    id: '',
                     name: '',
                     email: '',
                     type: '',
@@ -133,7 +136,7 @@
                 this.form.post('/api/user')
                     .then(() => {
                         Fire.$emit('Aftercreate');
-                        $('#addUserModal').modal('hide');
+                        $('#userModal').modal('hide');
 
                         Toast.fire({
                             icon: 'success',
@@ -141,6 +144,24 @@
                         });
 
                         this.$Progress.finish();
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+            },
+
+            updateUser() {
+                this.$Progress.start();
+                this.form.put('/api/user/' + this.form.id)
+                    .then((data) => {
+                        $('#userModal').modal('hide');
+
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.data.message
+                        });
+
+                        this.$Progress.finish();
+                        Fire.$emit('Aftercreate');
                     }, (error) => {
                         this.$Progress.fail();
                     });
@@ -172,10 +193,10 @@
                 }).then((result) => {
                     if (result.value) {
                         this.form.delete('/api/user/' + id)
-                            .then(() => {
+                            .then((data) => {
                                 Swal.fire(
                                     'Supprimer !',
-                                    'Utilisateur supprimé !',
+                                    data.data.message,
                                     'success'
                                 );
                                 Fire.$emit('Aftercreate');
@@ -191,7 +212,16 @@
             },
 
             newModal() {
+                this.editMode = false;
+                this.form.reset();
+                $('#userModal').modal('show');
+            },
 
+            editModal(user) {
+                this.editMode = true;
+                this.form.reset();
+                $('#userModal').modal('show');
+                this.form.fill(user);
             }
         },
 

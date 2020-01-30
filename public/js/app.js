@@ -17640,11 +17640,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      editMode: true,
       users: {},
       form: new Form({
+        id: '',
         name: '',
         email: '',
         type: '',
@@ -17659,7 +17662,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$Progress.start();
       this.form.post('/api/user').then(function () {
         Fire.$emit('Aftercreate');
-        $('#addUserModal').modal('hide');
+        $('#userModal').modal('hide');
         Toast.fire({
           icon: 'success',
           title: 'Utilisateur ajouté !'
@@ -17670,22 +17673,40 @@ __webpack_require__.r(__webpack_exports__);
         _this.$Progress.fail();
       });
     },
-    loadUsers: function loadUsers() {
+    updateUser: function updateUser() {
       var _this2 = this;
 
       this.$Progress.start();
+      this.form.put('/api/user/' + this.form.id).then(function (data) {
+        $('#userModal').modal('hide');
+        Toast.fire({
+          icon: 'success',
+          title: data.data.message
+        });
+
+        _this2.$Progress.finish();
+
+        Fire.$emit('Aftercreate');
+      }, function (error) {
+        _this2.$Progress.fail();
+      });
+    },
+    loadUsers: function loadUsers() {
+      var _this3 = this;
+
+      this.$Progress.start();
       axios.get('api/user').then(function (data) {
-        _this2.users = data.data;
+        _this3.users = data.data;
         $(function () {
           $("#example1").DataTable();
         });
       }, function (error) {
-        _this2.$Progress.fail();
+        _this3.$Progress.fail();
       });
       this.$Progress.finish();
     },
     deleteUser: function deleteUser(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       Swal.fire({
         title: 'Etes vous sure ?',
@@ -17697,8 +17718,8 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Oui supprimer !'
       }).then(function (result) {
         if (result.value) {
-          _this3.form["delete"]('/api/user/' + id).then(function () {
-            Swal.fire('Supprimer !', 'Utilisateur supprimé !', 'success');
+          _this4.form["delete"]('/api/user/' + id).then(function (data) {
+            Swal.fire('Supprimer !', data.data.message, 'success');
             Fire.$emit('Aftercreate');
           }, function (error) {
             Swal.fire('Oups !', 'Nous avons rencontré une erreur', 'warning');
@@ -17706,15 +17727,25 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    newModal: function newModal() {}
+    newModal: function newModal() {
+      this.editMode = false;
+      this.form.reset();
+      $('#userModal').modal('show');
+    },
+    editModal: function editModal(user) {
+      this.editMode = true;
+      this.form.reset();
+      $('#userModal').modal('show');
+      this.form.fill(user);
+    }
   },
   mounted: function mounted() {},
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.loadUsers();
     Fire.$on('Aftercreate', function () {
-      _this4.loadUsers();
+      _this5.loadUsers();
     });
   }
 });
@@ -72670,7 +72701,18 @@ var render = function() {
                   _c("td", [_vm._v(_vm._s(user.type))]),
                   _vm._v(" "),
                   _c("td", { staticClass: "project-actions text-right" }, [
-                    _vm._m(1, true),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-info btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.editModal(user)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-pencil-alt white" })]
+                    ),
                     _vm._v(" "),
                     _c(
                       "a",
@@ -72690,7 +72732,7 @@ var render = function() {
               0
             ),
             _vm._v(" "),
-            _vm._m(2)
+            _vm._m(1)
           ]
         )
       ])
@@ -72701,10 +72743,10 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "addUserModal",
+          id: "userModal",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "addUserModalTitle",
+          "aria-labelledby": "userModalTitle",
           "aria-hidden": "true"
         }
       },
@@ -72717,7 +72759,23 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "userModalTitle" }
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.editMode ? "Modifier " : "Ajouter ") +
+                        " un utilisateur"
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -72725,7 +72783,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.createUser($event)
+                      _vm.editMode ? _vm.updateUser() : _vm.createUser()
                     }
                   }
                 },
@@ -72928,7 +72986,50 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editMode,
+                            expression: "!editMode"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Ajouter")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Modifier")]
+                    )
+                  ])
                 ]
               )
             ])
@@ -72961,16 +73062,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-info btn-sm", attrs: { href: "#" } },
-      [_c("i", { staticClass: "fas fa-pencil-alt white" })]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("tfoot", [
       _c("tr", [
         _c("th", [_vm._v("ID")]),
@@ -72989,47 +73080,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "addUserModalTitle" } },
-        [_vm._v("Ajouter un utilisateur")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-danger",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Ajouter")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
