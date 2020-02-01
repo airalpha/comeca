@@ -20,7 +20,6 @@ $fa-font-path: "../webfonts";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 
 .router-link-exact-active {
-    @extend .active;
     background-color: #007bff;
     color: #ffffff;
 }

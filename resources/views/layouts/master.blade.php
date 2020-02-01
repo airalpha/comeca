@@ -90,6 +90,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                             </li>
                             <li class="nav-item">
+                                <router-link to="/category" class="nav-link">
+                                    <i class="fas fa-cog nav-icon"></i>
+                                    <p>Categories</p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="far fa-circle-o nav-icon"></i>
                                     <p>Produits</p>
