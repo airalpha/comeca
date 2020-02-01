@@ -34,12 +34,21 @@ class UserController extends Controller
             'password' => 'required|string|min:6'
         ]);
 
-        return User::create([
+         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => $request->type
         ]);
+
+         $user->profile()->create([
+             'city' => '',
+             'bio' => '',
+             'phone' => '',
+             'avatar' => 'uploads/avatars/default.png'
+         ]);
+
+         return response()->json(["message" => "Utilisateur ajouté !"]);
     }
 
     /**

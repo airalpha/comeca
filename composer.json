@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "freshbitsweb/laratables": "^2.1",
         "laravel/framework": "^6.2",
+        "laravel/passport": "^8.3",
         "laravel/tinker": "^2.0"
     },
     "require-dev": {

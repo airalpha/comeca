@@ -54,6 +54,7 @@ let routes = [
     {path: '/dashboard', component: require("./components/Dashboard").default},
     {path: '/profile', component: require("./components/Profile").default},
     {path: '/users', component: require("./components/Users").default},
+    {path: '/products', component: require("./components/Products").default}
 ]
 
 const router = new VueRouter({

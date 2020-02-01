@@ -2,7 +2,7 @@
     <div class="container">
         <div class="card mt-5">
             <div class="card-header d-flex">
-                <h3 class="card-title">Utilisateurs</h3>
+                <h3 class="card-title">Produits</h3>
                 <button type="button" class="btn btn-outline-success ml-auto" @click="newModal()">
                     <i class="fas fa-user-plus"></i>
                 </button>
@@ -12,25 +12,27 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>Image</th>
                         <th>Nom</th>
-                        <th>E-mail</th>
-                        <th>Type</th>
+                        <th>Categorie</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
                         <th>Operations</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="user in users" :key="user.id">
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.type }}</td>
+                    <tr v-for="product in products" :key="product.id">
+                        <td>{{ product.image }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.quantity }}</td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-info btn-sm" @click="editModal(user)">
+                            <a class="btn btn-info btn-sm" @click="editModal(product)">
                                 <i class="fas fa-pencil-alt white">
                                 </i>
                             </a>
-                            <a class="btn btn-danger btn-sm" @click="deleteUser(user.id)">
+                            <a class="btn btn-danger btn-sm" @click="deleteUser(product.id)">
                                 <i class="fas fa-trash white">
                                 </i>
                             </a>
@@ -39,10 +41,11 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>ID</th>
+                        <th>Image</th>
                         <th>Nom</th>
-                        <th>E-mail</th>
-                        <th>Type</th>
+                        <th>Categorie</th>
+                        <th>Prix</th>
+                        <th>Quantité</th>
                         <th>Operations</th>
                     </tr>
                     </tfoot>
