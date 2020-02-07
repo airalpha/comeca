@@ -11,13 +11,17 @@ $fa-font-path: "../webfonts";
 //Datatables
 @import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css";
 
+@import "~ionicons/scss/ionicons";
+
 //Admin lte
 @import '~admin-lte/dist/css/adminlte.css';
+
 
 //Font awesome
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
+
 
 .router-link-exact-active {
     background-color: #007bff;
