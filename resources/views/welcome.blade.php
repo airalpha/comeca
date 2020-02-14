@@ -83,6 +83,7 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
+                {{ Auth::guard('api')->user() }}
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
