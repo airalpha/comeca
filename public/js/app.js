@@ -18147,7 +18147,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getAvatar: function getAvatar() {
-      return "uploads/profile/" + this.form.profile.avatar;
+      var photo = this.form.profile.avatar.length > 200 ? this.form.profile.avatar : "uploads/profile/" + this.form.profile.avatar;
+      return photo;
     },
     updateProfile: function updateProfile(e) {
       var _this = this;

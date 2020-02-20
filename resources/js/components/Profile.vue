@@ -155,7 +155,8 @@
 
         methods: {
             getAvatar() {
-                return "uploads/profile/" + this.form.profile.avatar;
+                let photo = (this.form.profile.avatar.length > 200) ? this.form.profile.avatar : "uploads/profile/" + this.form.profile.avatar;
+                return photo;
             },
 
             updateProfile(e) {
