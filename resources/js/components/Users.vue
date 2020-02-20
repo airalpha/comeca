@@ -15,7 +15,8 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <div class="card">
+        <not-found v-if="!$gate.isAdmin()"></not-found>
+        <div class="card" v-if="$gate.isAdmin()">
             <div class="card-header d-flex">
                 <h3 class="card-title">Utilisateurs</h3>
                 <button type="button" class="btn btn-outline-success ml-auto" @click="newModal()">
@@ -192,6 +193,11 @@
                         })
                     }, (error) => {
                         this.$Progress.fail();
+                        Swal.fire(
+                            'Oups !',
+                            'Nous avons rencontré une erreur',
+                            'warning'
+                        )
                     });
                 this.$Progress.finish();
             },

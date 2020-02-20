@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -14,6 +15,9 @@ import {Form, HasError, AlertError} from 'vform';
 window.Form = Form;
 Vue.component(HasError.name, HasError);
 Vue.component(AlertError.name, AlertError);
+
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
 
 //Vue progress-bar
 import VueProgressBar from 'vue-progressbar'
@@ -44,6 +48,11 @@ window.Toast = Toast;
 
 //For event
 window.Fire = new Vue();
+
+Vue.component(
+    'not-found',
+    require("./components/NotFound").default
+);
 
 //Vue router
 import VueRouter from "vue-router"

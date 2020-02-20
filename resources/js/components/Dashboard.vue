@@ -81,7 +81,9 @@
 </template>
 
 <script>
+    import NotFound from "./NotFound";
     export default {
+        components: {NotFound},
         mounted() {
             console.log('Component mounted.')
         }
