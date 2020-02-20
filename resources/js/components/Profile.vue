@@ -22,7 +22,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" :src="getAvatar()" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" width="100" height="100" :src="getAvatar()" alt="User profile picture">
                         </div>
 
                         <h3 class="profile-username text-center">{{ this.form.name }}</h3>
@@ -89,7 +89,8 @@
                                     <div class="form-group row">
                                         <label for="password" class="col-sm-2 col-form-label">Mot de passe</label>
                                         <div class="col-sm-10">
-                                            <input type="text" v-model="form.password" class="form-control" id="password" placeholder="Laisse vide si vous volez conserver">
+                                            <input type="text" v-model="form.password" class="form-control" id="password" placeholder="Laisse vide si vous volez conserver" :class="{ 'is-invalid': form.errors.has('password') }">
+                                            <has-error :form="form" field="password"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group row">
