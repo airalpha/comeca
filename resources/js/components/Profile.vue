@@ -63,13 +63,15 @@
                                     <div class="form-group row">
                                         <label for="name" class="col-sm-2 col-form-label">Nom</label>
                                         <div class="col-sm-10">
-                                            <input type="text" v-model="form.name" class="form-control" id="name" placeholder="Name">
+                                            <input type="text" v-model="form.name" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }" id="name" placeholder="Name">
+                                            <has-error :form="form" field="name"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="email" v-model="form.email" class="form-control" id="email" placeholder="Email">
+                                            <input type="email" v-model="form.email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }" id="email" placeholder="Email">
+                                            <has-error :form="form" field="email"></has-error>
                                         </div>
                                     </div>
                                     <div class="form-group row">

@@ -76,9 +76,7 @@ class ProfileController extends Controller
 
             Image::make($request->profile["avatar"])->save(public_path('uploads/profile/') . $name);
 
-            $user->profile->avatar = $name;
-            $user->save();
-            $user->profile->save();
+            /*$request->merge(['user.profile.avatar' => $name]);*/
 
             // Efface l'ancien photo
             $userPhoto = public_path('uploads/profile/') . $user->profile->avatar;
@@ -94,6 +92,10 @@ class ProfileController extends Controller
 
         $user->update($request->all());
         $user->profile()->update($request->profile);
+
+        $user->profile->avatar = $name;
+        $user->save();
+        $user->profile->save();
     }
 
     /**
