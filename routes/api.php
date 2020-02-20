@@ -21,5 +21,7 @@ Route::apiResource('user', 'API\UserController');
 
 Route::apiResource('profile', 'API\ProfileController');
 
+Route::apiResource('product', 'API\ProductController');
+
 Route::apiResource('category', 'API\CategoryController');
 

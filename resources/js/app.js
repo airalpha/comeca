@@ -54,6 +54,10 @@ Vue.component(
     require("./components/NotFound").default
 );
 
+import Vuetable from 'vuetable-2'
+
+Vue.component('vuetable', Vuetable);
+
 //Vue router
 import VueRouter from "vue-router"
 

@@ -74,7 +74,7 @@ class RegisterController extends Controller
             'city' => '',
             'bio' => '',
             'phone' => '',
-            'avatar' => 'uploads/avatars/default.png'
+            'avatar' => 'uploads/profile/avatar.png'
         ]);
 
         return $user;

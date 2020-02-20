@@ -16,5 +16,9 @@ export default class Gate {
         return this.user.type == 'producer';
     }
 
+    isMe(userU) {
+        return this.user.id == userU.id;
+    }
+
 
 }

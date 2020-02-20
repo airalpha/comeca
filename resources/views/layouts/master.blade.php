@@ -53,7 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="./img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ Auth::user()->profile->avatar }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -77,16 +77,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @can('isAdmin')
                     <li class="nav-item has-treeview menu-open">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cogs"></i>
+                            <i class="nav-icon fas fa-cogs text-primary"></i>
                             <p>
                                 Gerer
-                                <i class="right fas fa-angle-left"></i>
+                                <i class="right fas fa-angle-left text-primary"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <router-link to="/users" class="nav-link">
-                                    <i class="fas fa-users-cog nav-icon"></i>
+                                    <i class="fas fa-users-cog nav-icon text-success"></i>
                                     <p>Utilisateurs</p>
                                 </router-link>
                             </li>
@@ -97,10 +97,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <router-link to="/products" class="nav-link">
                                     <i class="far fa-circle-o nav-icon"></i>
                                     <p>Produits</p>
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
                     </li>

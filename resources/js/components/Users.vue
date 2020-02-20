@@ -41,7 +41,7 @@
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.type }}</td>
-                        <td class="project-actions text-right">
+                        <td class="project-actions text-right" v-if="!$gate.isMe(user)">
                             <a class="btn btn-info btn-sm" @click="editModal(user)">
                                 <i class="fas fa-pencil-alt white">
                                 </i>
@@ -50,6 +50,11 @@
                                 <i class="fas fa-trash white">
                                 </i>
                             </a>
+                        </td>
+                        <td class="project-actions text-right" v-if="$gate.isMe(user)">
+                            <router-link to="/profile" class="btn btn-block btn-outline-primary btn-lg">
+                                <i class="fas fa-user"></i> Vous
+                            </router-link>
                         </td>
                     </tr>
                     </tbody>
