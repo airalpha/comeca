@@ -17938,6 +17938,7 @@ __webpack_require__.r(__webpack_exports__);
     createProduct: function createProduct() {
       var _this = this;
 
+      this.form.user_id = user.id;
       this.$Progress.start();
       this.form.post('/api/product').then(function (data) {
         Fire.$emit('Aftercreate');
@@ -17992,6 +17993,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$Progress.start();
       axios.get('api/product').then(function (data) {
         _this4.products = data.data;
+        console.log(_this4.products);
         $(function () {
           $("#example1").DataTable();
         });
@@ -18044,6 +18046,9 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
       $('#productModal').modal('show');
       this.form.fill(product);
+    },
+    getImage: function getImage(name) {
+      return "uploads/products/" + name;
     }
   },
   mounted: function mounted() {},
@@ -74301,11 +74306,20 @@ var render = function() {
               "tbody",
               _vm._l(_vm.products, function(product) {
                 return _c("tr", { key: product.id }, [
-                  _c("td", [_vm._v(_vm._s(product.image))]),
+                  _c("td", [
+                    _c("img", {
+                      attrs: {
+                        src: _vm.getImage(product.image),
+                        alt: "",
+                        height: "50",
+                        width: "50"
+                      }
+                    })
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(product.name))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(product.category))]),
+                  _c("td", [_vm._v(_vm._s(product.category.name))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(product.price))]),
                   _vm._v(" "),
@@ -74331,7 +74345,7 @@ var render = function() {
                         staticClass: "btn btn-danger btn-sm",
                         on: {
                           click: function($event) {
-                            return _vm.deleteUser(product.id)
+                            return _vm.deleteProduct(product.id)
                           }
                         }
                       },
@@ -74437,32 +74451,6 @@ var render = function() {
                       ],
                       1
                     ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.user_id,
-                          expression: "form.user_id"
-                        }
-                      ],
-                      attrs: {
-                        type: "hidden",
-                        value: "",
-                        name: "user_id",
-                        id: "user_id"
-                      },
-                      domProps: { value: _vm.form.user_id },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "user_id", $event.target.value)
-                        }
-                      }
-                    }),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { attrs: { for: "avatar" } }, [
@@ -74591,7 +74579,10 @@ var render = function() {
                             _vm._l(_vm.categories, function(category) {
                               return _c(
                                 "option",
-                                { key: category.id, attrs: { value: "admin" } },
+                                {
+                                  key: category.id,
+                                  domProps: { value: category.id }
+                                },
                                 [
                                   _vm._v(
                                     "\n                                    " +

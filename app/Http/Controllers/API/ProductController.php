@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return Product::with('Category')->get();
     }
 
     /**
@@ -34,6 +35,15 @@ class ProductController extends Controller
             'quantity' => 'required|integer',
             'image' => 'required|string'
         ]);
+
+        $name = time() . '.' . explode('/',
+                explode(':',
+                    substr($request->image, 0,
+                        strpos($request->image, ';')))[1])[1];
+
+        Image::make($request->image)->save(public_path('uploads/products/') . $name);
+
+        $request->merge(['image' => $name]);
 
         $product = Product::create($request->all());
 
@@ -69,6 +79,18 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'quantity' => 'required|integer',
         ]);
+
+        if ($request->hasFile('image')) {
+            $name = time() . '.' . explode('/',
+                    explode(':',
+                        substr($request->image, 0,
+                            strpos($request->image, ';')))[1])[1];
+
+            Image::make($request->image)->save(public_path('uploads/products/') . $name);
+
+            $request->merge(['image' => $name]);
+        }
+
 
         $product->update($request->all());
 

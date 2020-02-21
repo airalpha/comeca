@@ -37,9 +37,9 @@
                     </thead>
                     <tbody>
                     <tr v-for="product in products" :key="product.id">
-                        <td>{{ product.image }}</td>
+                        <td><a class="image-link" :href="getImage(product.image)"></a><img :src="getImage(product.image)" alt="" height="50" width="50"></td>
                         <td>{{ product.name }}</td>
-                        <td>{{ product.category }}</td>
+                        <td>{{ product.category.name }}</td>
                         <td>{{ product.price }}</td>
                         <td>{{ product.quantity }}</td>
                         <td class="project-actions text-right">
@@ -47,7 +47,7 @@
                                 <i class="fas fa-pencil-alt white">
                                 </i>
                             </a>
-                            <a class="btn btn-danger btn-sm" @click="deleteUser(product.id)">
+                            <a class="btn btn-danger btn-sm" @click="deleteProduct(product.id)">
                                 <i class="fas fa-trash white">
                                 </i>
                             </a>
@@ -90,8 +90,8 @@
                                        class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
                                 <has-error :form="form" field="name"></has-error>
                             </div>
-                            <!-- User Id -->
-                            <input v-model="form.user_id" type="hidden" value="" name="user_id" id="user_id">
+                            <!-- User Id
+                            <input v-model="form.user_id" type="hidden" :value="user.id" name="user_id"> -->
 
                             <!-- Image Input -->
                             <div class="form-group">
@@ -121,7 +121,7 @@
                                 <select v-model="form.category_id" type="text" name="category_id" id="category_id"
                                         class="form-control" :class="{ 'is-invalid': form.errors.has('category_id') }">
                                     <option value="" selected>Categorie du produit</option>
-                                    <option value="admin" v-for="category in categories" :key="category.id">
+                                    <option :value="category.id" v-for="category in categories" :key="category.id">
                                         {{ category.name }}
                                     </option>
                                 </select>
@@ -170,6 +170,7 @@
 
         methods: {
             createProduct() {
+                this.form.user_id = user.id;
                 this.$Progress.start();
                 this.form.post('/api/product')
                     .then((data) => {
@@ -227,6 +228,7 @@
                 axios.get('api/product')
                     .then((data) => {
                         this.products = data.data;
+                        console.log(this.products);
                         $(function () {
                             $("#example1").DataTable();
                         })
@@ -289,11 +291,15 @@
                 this.form.reset();
                 $('#productModal').modal('show');
                 this.form.fill(product);
+            },
+
+            getImage(name) {
+                return "uploads/products/" + name;
             }
         },
 
         mounted() {
-
+            $('.image-link').magnificPopup({type:'image'});
         },
 
         created() {
