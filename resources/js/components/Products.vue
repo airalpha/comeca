@@ -15,11 +15,11 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <div class="card mt-5">
+        <div class="card">
             <div class="card-header d-flex">
                 <h3 class="card-title">Produits</h3>
                 <button type="button" class="btn btn-outline-success ml-auto" @click="newModal()">
-                    <i class="fas fa-user-plus"></i>
+                    <i class="fab fa-product-hunt"></i>
                 </button>
             </div>
             <!-- /.card-header -->
@@ -37,7 +37,7 @@
                     </thead>
                     <tbody>
                     <tr v-for="product in products" :key="product.id">
-                        <td><a class="image-link" :href="getImage(product.image)"></a><img :src="getImage(product.image)" alt="" height="50" width="50"></td>
+                        <td><a class="test-popup-link" :href="getImage(product.image)"><img :src="getImage(product.image)" alt="" height="50" width="50"></a></td>
                         <td>{{ product.name }}</td>
                         <td>{{ product.category.name }}</td>
                         <td>{{ product.price }}</td>
@@ -65,6 +65,7 @@
                     </tr>
                     </tfoot>
                 </table>
+                <a class="test-popup-link" href="path-to-image.jpg">Open popup</a>
             </div>
             <!-- /.card-body -->
         </div>
@@ -228,7 +229,6 @@
                 axios.get('api/product')
                     .then((data) => {
                         this.products = data.data;
-                        console.log(this.products);
                         $(function () {
                             $("#example1").DataTable();
                         })
@@ -243,7 +243,6 @@
                 axios.get('api/category')
                     .then((data) => {
                         this.categories = data.data;
-                        console.log(this.categories);
                     }, (error) => {
                         this.$Progress.fail();
                     });
@@ -299,7 +298,7 @@
         },
 
         mounted() {
-            $('.image-link').magnificPopup({type:'image'});
+
         },
 
         created() {
