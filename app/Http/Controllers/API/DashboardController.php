@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Category;
 use App\Http\Controllers\Controller;
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -14,7 +17,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all()->count();
+        $users = User::all()->count();
+        $category = Category::all()->count();
+
+        return response()->json([
+            'products' => $products,
+            'users' => $users,
+            'category' => $category,
+        ]);
     }
 
     /**

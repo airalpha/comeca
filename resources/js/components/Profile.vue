@@ -50,6 +50,11 @@
             </div>
             <!-- /.col -->
             <div class="col-md-9">
+                <div class="alert alert-info alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h5><i class="icon fas fa-info"></i> Tips !</h5>
+                    Modifier uniquement ce que vous voulez changer.
+                </div>
                 <div class="card">
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">

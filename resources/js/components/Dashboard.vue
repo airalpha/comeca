@@ -20,12 +20,13 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <h3>{{ infos.products }}</h3>
 
                         <p>Produits</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
+                        <i class="fas fa-shopping-bag"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -41,6 +42,7 @@
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -50,12 +52,13 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{ infos.users }}</h3>
 
                         <p>User Registrations</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
+                        <i class="fas fa-person-booth"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -71,21 +74,48 @@
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
+                        <i class="fas fa-chart-pie"></i>
                     </div>
                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
         </div>
+        <div class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <h5><i class="icon fas fa-info"></i> Alert!</h5>
+            Info alert preview. This alert is dismissable.
+        </div>
     </div>
 </template>
 
 <script>
-    import NotFound from "./NotFound";
     export default {
-        components: {NotFound},
+        data() {
+            return {
+                infos: {},
+            }
+        },
+
+        methods: {
+            loadDatas() {
+                this.$Progress.start();
+                axios.get('api/dashboard')
+                    .then((data) => {
+                        this.infos = data.data;
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+                this.$Progress.finish();
+            },
+        },
+
         mounted() {
             console.log('Component mounted.')
+        },
+
+        created() {
+            this.loadDatas();
         }
     }
 </script>
