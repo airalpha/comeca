@@ -77273,7 +77273,9 @@ var render = function() {
                           [
                             _vm._v(_vm._s(category.name) + " "),
                             _c("span", { staticClass: "text-muted" }, [
-                              _vm._v("(72)")
+                              _vm._v(
+                                "(" + _vm._s(category.products.length) + ")"
+                              )
                             ])
                           ]
                         )
