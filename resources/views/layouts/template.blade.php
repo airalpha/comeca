@@ -39,8 +39,8 @@
                     <div class="top-header-content d-flex align-items-center justify-content-between">
                         <!-- Top Header Content -->
                         <div class="top-header-meta">
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: infodeercreative@gmail.com</span></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: +1 234 122 122</span></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: comeca@gmail.com</span></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Tel: +237 697 456 383</span></a>
                         </div>
 
                         <!-- Top Header Content -->
@@ -50,18 +50,14 @@
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle mr-30" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Language</button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Francais</a>
                                         <a class="dropdown-item" href="#">USA</a>
-                                        <a class="dropdown-item" href="#">UK</a>
-                                        <a class="dropdown-item" href="#">Bangla</a>
-                                        <a class="dropdown-item" href="#">Hindi</a>
-                                        <a class="dropdown-item" href="#">Spanish</a>
-                                        <a class="dropdown-item" href="#">Latin</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- Login -->
                             <div class="login">
-                                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                                <a href="{{ route('login') }}"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
                             </div>
                             <!-- Cart -->
                             <div class="cart">
@@ -82,7 +78,7 @@
                 <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
                     <!-- Nav Brand -->
-                    <a href="index.html" class="nav-brand"><img src="{{ asset("template/img/core-img/comeca.png") }}" alt=""></a>
+                    <a href="/" class="nav-brand"><img src="{{ asset("template/img/core-img/comeca.png") }}" alt=""></a>
 
                     <!-- Navbar Toggler -->
                     <div class="classy-navbar-toggler">
@@ -100,40 +96,11 @@
                         <!-- Navbar Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="dropdown">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="shop.html">Shop</a>
-                                            <ul class="dropdown">
-                                                <li><a href="shop.html">Shop</a></li>
-                                                <li><a href="shop-details.html">Shop Details</a></li>
-                                                <li><a href="cart.html">Shopping Cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="portfolio.html">Portfolio</a>
-                                            <ul class="dropdown">
-                                                <li><a href="portfolio.html">Portfolio</a></li>
-                                                <li><a href="single-portfolio.html">Portfolio Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog.html">Blog</a>
-                                            <ul class="dropdown">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-post.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="shop.html">Shop</a></li>
-                                <li><a href="portfolio.html">Portfolio</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="/"><i class="fa fa-home"></i> &nbsp; Home</a></li>
+                                <li><a href="{{ route('about') }}"><i class="fa fa-info"></i> &nbsp; Apropos</a></li>
+                                <li><a href="{{ route('shop') }}"><i class="fa fa-shopping-bag"></i> &nbsp; Boutique</a></li>
+                                <li><a href="contact.html"><i class="fa fa-address-book"></i>&nbsp; Contact</a></li>
                             </ul>
-
                             <!-- Search Icon -->
                             <div id="searchIcon">
                                 <i class="fa fa-search" aria-hidden="true"></i>
