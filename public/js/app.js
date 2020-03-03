@@ -18836,10 +18836,271 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Shop",
+  data: function data() {
+    return {
+      products: [],
+      categories: []
+    };
+  },
+  methods: {
+    loadProducts: function loadProducts() {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.get('api/product').then(function (data) {
+        _this.products = data.data;
+      }, function (error) {
+        _this.$Progress.fail();
+      });
+      this.$Progress.finish();
+    },
+    loadCategories: function loadCategories() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      axios.get('api/category').then(function (data) {
+        _this2.categories = data.data;
+      }, function (error) {
+        _this2.$Progress.fail();
+      });
+      this.$Progress.finish();
+    },
+    getImage: function getImage(name) {
+      return "uploads/products/" + name;
+    }
+  },
   mounted: function mounted() {
     alert("Sop");
+  },
+  created: function created() {
+    this.loadCategories();
+    this.loadProducts();
   }
 });
 
@@ -76916,9 +77177,559 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("section", { staticClass: "shop-page section-padding-0-100" }, [
+      _c("div", { staticClass: "container" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12 col-md-4 col-lg-3" }, [
+            _c("div", { staticClass: "shop-sidebar-area" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "shop-widget catagory mb-50" }, [
+                _c("h4", { staticClass: "widget-title" }, [
+                  _vm._v("Categories")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "widget-desc" },
+                  _vm._l(_vm.categories, function(category) {
+                    return _c(
+                      "div",
+                      {
+                        key: category,
+                        staticClass:
+                          "custom-control custom-checkbox d-flex align-items-center mb-2"
+                      },
+                      [
+                        _c("input", {
+                          staticClass: "custom-control-input",
+                          attrs: { type: "checkbox", id: category.name }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-control-label",
+                            attrs: { for: category.name }
+                          },
+                          [
+                            _vm._v(_vm._s(category.name) + " "),
+                            _c("span", { staticClass: "text-muted" }, [
+                              _vm._v("(72)")
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4)
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-md-8 col-lg-9" }, [
+            _c("div", { staticClass: "shop-products-area" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.products, function(product) {
+                  return _c(
+                    "div",
+                    { key: product, staticClass: "col-12 col-sm-6 col-lg-4" },
+                    [
+                      _c("div", { staticClass: "single-product-area mb-50" }, [
+                        _c("div", { staticClass: "product-img" }, [
+                          _c("a", { attrs: { href: "shop-details.html" } }, [
+                            _c("img", {
+                              attrs: {
+                                src: _vm.getImage(product.image),
+                                alt: ""
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(5, true)
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "product-info mt-15 text-center" },
+                          [
+                            _c("a", { attrs: { href: "shop-details.html" } }, [
+                              _c("p", [_vm._v(_vm._s(product.name))])
+                            ]),
+                            _vm._v(" "),
+                            _c("h6", [_vm._v("$" + _vm._s(product.price))])
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm._m(6)
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "breadcrumb-area" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center",
+          staticStyle: {
+            "background-image": "url(/template/img/bg-img/24.jpg)"
+          }
+        },
+        [_c("h2", [_vm._v("Shop")])]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c("ol", { staticClass: "breadcrumb" }, [
+                _c("li", { staticClass: "breadcrumb-item" }, [
+                  _c("a", { attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "fa fa-home" }),
+                    _vm._v(" Home")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass: "breadcrumb-item active",
+                    attrs: { "aria-current": "page" }
+                  },
+                  [_vm._v("Shop")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "shop-sorting-data d-flex flex-wrap align-items-center justify-content-between"
+          },
+          [
+            _c("div", { staticClass: "shop-page-count" }, [
+              _c("p", [_vm._v("Showing 1–9 of 72 results")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "search_by_terms" }, [
+              _c(
+                "form",
+                {
+                  staticClass: "form-inline",
+                  attrs: { action: "#", method: "post" }
+                },
+                [
+                  _c("select", { staticClass: "custom-select widget-title" }, [
+                    _c("option", { attrs: { selected: "" } }, [
+                      _vm._v("Short by Popularity")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("Short by Newest")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("Short by Sales")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "3" } }, [
+                      _vm._v("Short by Ratings")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("select", { staticClass: "custom-select widget-title" }, [
+                    _c("option", { attrs: { selected: "" } }, [
+                      _vm._v("Show: 9")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("12")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [_vm._v("18")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "3" } }, [_vm._v("24")])
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "shop-widget price mb-50" }, [
+      _c("h4", { staticClass: "widget-title" }, [_vm._v("Prices")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "widget-desc" }, [
+        _c("div", { staticClass: "slider-range" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all",
+              attrs: {
+                "data-min": "8",
+                "data-max": "30",
+                "data-unit": "$",
+                "data-value-min": "8",
+                "data-value-max": "30",
+                "data-label-result": "Price:"
+              }
+            },
+            [
+              _c("div", {
+                staticClass: "ui-slider-range ui-widget-header ui-corner-all"
+              }),
+              _vm._v(" "),
+              _c("span", {
+                staticClass:
+                  "ui-slider-handle ui-state-default ui-corner-all first-handle",
+                attrs: { tabindex: "0" }
+              }),
+              _vm._v(" "),
+              _c("span", {
+                staticClass: "ui-slider-handle ui-state-default ui-corner-all",
+                attrs: { tabindex: "0" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "range-price" }, [_vm._v("Price: $8 - $30")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "shop-widget sort-by mb-50" }, [
+      _c("h4", { staticClass: "widget-title" }, [_vm._v("Sort by")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "widget-desc" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center mb-2"
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "customCheck7" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck7" }
+              },
+              [_vm._v("New arrivals")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center mb-2"
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "customCheck8" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck8" }
+              },
+              [_vm._v("A-Z")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center mb-2"
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "customCheck9" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck9" }
+              },
+              [_vm._v("Z-A")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center mb-2"
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "customCheck10" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck10" }
+              },
+              [_vm._v("Price: low to high")]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "custom-control custom-checkbox d-flex align-items-center"
+          },
+          [
+            _c("input", {
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "customCheck11" }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "customCheck11" }
+              },
+              [_vm._v("Price: high to low")]
+            )
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "shop-widget best-seller mb-50" }, [
+      _c("h4", { staticClass: "widget-title" }, [_vm._v("Best Seller")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "widget-desc" }, [
+        _c(
+          "div",
+          {
+            staticClass: "single-best-seller-product d-flex align-items-center"
+          },
+          [
+            _c("div", { staticClass: "product-thumbnail" }, [
+              _c("a", { attrs: { href: "shop-details.html" } }, [
+                _c("img", {
+                  attrs: { src: "/template/img/bg-img/4.jpg", alt: "" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-info" }, [
+              _c("a", { attrs: { href: "shop-details.html" } }, [
+                _vm._v("Cactus Flower")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("$10.99")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ratings" }, [
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" })
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "single-best-seller-product d-flex align-items-center"
+          },
+          [
+            _c("div", { staticClass: "product-thumbnail" }, [
+              _c("a", { attrs: { href: "shop-details.html" } }, [
+                _c("img", {
+                  attrs: { src: "/template/img/bg-img/5.jpg", alt: "" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-info" }, [
+              _c("a", { attrs: { href: "shop-details.html" } }, [
+                _vm._v("Tulip Flower")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("$11.99")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ratings" }, [
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" })
+              ])
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "single-best-seller-product d-flex align-items-center"
+          },
+          [
+            _c("div", { staticClass: "product-thumbnail" }, [
+              _c("a", { attrs: { href: "shop-details.html" } }, [
+                _c("img", {
+                  attrs: { src: "/template/img/bg-img/34.jpg", alt: "" }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-info" }, [
+              _c("a", { attrs: { href: "shop-details.html" } }, [
+                _vm._v("Recuerdos Plant")
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v("$9.99")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "ratings" }, [
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" }),
+                _vm._v(" "),
+                _c("i", { staticClass: "fa fa-star" })
+              ])
+            ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-meta d-flex" }, [
+      _c("a", { staticClass: "wishlist-btn", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "icon_heart_alt" })
+      ]),
+      _vm._v(" "),
+      _c(
+        "a",
+        { staticClass: "add-to-cart-btn", attrs: { href: "cart.html" } },
+        [_vm._v("Add to cart")]
+      ),
+      _vm._v(" "),
+      _c("a", { staticClass: "compare-btn", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "arrow_left-right_alt" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
+      _c("ul", { staticClass: "pagination" }, [
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("1")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("2")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "fa fa-angle-right" })
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

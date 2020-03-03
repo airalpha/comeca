@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index');
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +33,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('isAdmin');
+
         $this->validate($request, [
             'name' => 'required|string|min:6'
         ]);
@@ -58,6 +67,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('isAdmin');
+
         $category = Category::findOrFail($id);
 
         $this->validate($request, [
@@ -77,6 +88,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
+
         $category = Category::findOrFail($id);
 
         //Delete the user

@@ -9,6 +9,11 @@ use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,7 +46,9 @@ class ProductController extends Controller
                     substr($request->image, 0,
                         strpos($request->image, ';')))[1])[1];
 
-        Image::make($request->image)->save(public_path('uploads/products/') . $name);
+        $img = Image::make($request->image)->save(public_path('uploads/products/') . $name);
+        $img->fit(270, 320);
+        $img->save();
 
         $request->merge(['image' => $name]);
 
@@ -105,6 +112,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('isAdmin');
+
+        $product = Product::findOrFail($id);
+
+        //Delete the user
+        $product->delete();
+
+        //Return message
+        return response()->json(["message" => "Produits supprimé !"]);
     }
 }
