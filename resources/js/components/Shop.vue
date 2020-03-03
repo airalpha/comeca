@@ -79,8 +79,8 @@
                                 <h4 class="widget-title">Categories</h4>
                                 <div class="widget-desc">
                                     <!-- Single Checkbox -->
-                                    <div class="custom-control custom-checkbox d-flex align-items-center mb-2" v-for="category in categories" :key="category">
-                                        <input type="checkbox" class="custom-control-input" :id="category.name">
+                                    <div class="custom-control custom-checkbox d-flex align-items-center mb-2" v-for="category in categories" :key="category.id">
+                                        <input type="checkbox" class="custom-control-input" :id="category.name" :value="category.name" v-model="selectedCategory">
                                         <label class="custom-control-label" :for="category.name">{{ category.name}} <span class="text-muted">(72)</span></label>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
                                         <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <label class="custom-control-label" for="customCheck7">New arrivals</label>
+                                        <label class="custom-control-label" for="customCheck7">Récents</label>
                                     </div>
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
@@ -108,19 +108,19 @@
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
                                         <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                        <label class="custom-control-label" for="customCheck10">Price: low to high</label>
+                                        <label class="custom-control-label" for="customCheck10">Prix bas</label>
                                     </div>
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center">
                                         <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                        <label class="custom-control-label" for="customCheck11">Price: high to low</label>
+                                        <label class="custom-control-label" for="customCheck11">Prix élévé</label>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Shop Widget -->
                             <div class="shop-widget best-seller mb-50">
-                                <h4 class="widget-title">Best Seller</h4>
+                                <h4 class="widget-title">Meilleurs Ventes</h4>
                                 <div class="widget-desc">
 
                                     <!-- Single Best Seller Products -->
@@ -187,7 +187,7 @@
                         <div class="shop-products-area">
                             <div class="row">
                                 <!-- Single Product Area -->
-                                <div class="col-12 col-sm-6 col-lg-4" v-for="product in products" :key="product">
+                                <div class="col-12 col-sm-6 col-lg-4" v-for="product in filterProtuct" :key="product.id">
                                     <div class="single-product-area mb-50">
                                         <!-- Product Image -->
                                         <div class="product-img">
@@ -232,6 +232,8 @@
 
         data(){
             return {
+                categoriesSelect: [],
+                selectedCategory: [],
                 products: [],
                 categories: [],
             }
@@ -262,11 +264,27 @@
 
             getImage(name) {
                 return "uploads/products/" + name;
-            }
+            },
         },
 
         mounted() {
             alert("Sop");
+        },
+
+        computed: {
+            filterProtuct: {
+              get: function () {
+                  let cats = this.selectedCategory;
+
+                  if(cats.length === 0) {
+                      return this.products;
+                  } else {
+                      return this.products.filter(function (product) {
+                          return -1 !== _.indexOf(cats, product.category.name);
+                      });
+                  }
+              },
+            },
         },
 
         created() {

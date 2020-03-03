@@ -19064,6 +19064,8 @@ __webpack_require__.r(__webpack_exports__);
   name: "Shop",
   data: function data() {
     return {
+      categoriesSelect: [],
+      selectedCategory: [],
       products: [],
       categories: []
     };
@@ -19097,6 +19099,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     alert("Sop");
+  },
+  computed: {
+    filterProtuct: {
+      get: function get() {
+        var cats = this.selectedCategory;
+
+        if (cats.length === 0) {
+          return this.products;
+        } else {
+          return this.products.filter(function (product) {
+            return -1 !== _.indexOf(cats, product.category.name);
+          });
+        }
+      }
+    }
   },
   created: function created() {
     this.loadCategories();
@@ -77201,14 +77218,50 @@ var render = function() {
                     return _c(
                       "div",
                       {
-                        key: category,
+                        key: category.id,
                         staticClass:
                           "custom-control custom-checkbox d-flex align-items-center mb-2"
                       },
                       [
                         _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selectedCategory,
+                              expression: "selectedCategory"
+                            }
+                          ],
                           staticClass: "custom-control-input",
-                          attrs: { type: "checkbox", id: category.name }
+                          attrs: { type: "checkbox", id: category.name },
+                          domProps: {
+                            value: category.name,
+                            checked: Array.isArray(_vm.selectedCategory)
+                              ? _vm._i(_vm.selectedCategory, category.name) > -1
+                              : _vm.selectedCategory
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$a = _vm.selectedCategory,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = category.name,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 &&
+                                    (_vm.selectedCategory = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.selectedCategory = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.selectedCategory = $$c
+                              }
+                            }
+                          }
                         }),
                         _vm._v(" "),
                         _c(
@@ -77242,10 +77295,13 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "row" },
-                _vm._l(_vm.products, function(product) {
+                _vm._l(_vm.filterProtuct, function(product) {
                   return _c(
                     "div",
-                    { key: product, staticClass: "col-12 col-sm-6 col-lg-4" },
+                    {
+                      key: product.id,
+                      staticClass: "col-12 col-sm-6 col-lg-4"
+                    },
                     [
                       _c("div", { staticClass: "single-product-area mb-50" }, [
                         _c("div", { staticClass: "product-img" }, [
@@ -77466,7 +77522,7 @@ var staticRenderFns = [
                 staticClass: "custom-control-label",
                 attrs: { for: "customCheck7" }
               },
-              [_vm._v("New arrivals")]
+              [_vm._v("Récents")]
             )
           ]
         ),
@@ -77535,7 +77591,7 @@ var staticRenderFns = [
                 staticClass: "custom-control-label",
                 attrs: { for: "customCheck10" }
               },
-              [_vm._v("Price: low to high")]
+              [_vm._v("Prix bas")]
             )
           ]
         ),
@@ -77558,7 +77614,7 @@ var staticRenderFns = [
                 staticClass: "custom-control-label",
                 attrs: { for: "customCheck11" }
               },
-              [_vm._v("Price: high to low")]
+              [_vm._v("Prix élévé")]
             )
           ]
         )
@@ -77570,7 +77626,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "shop-widget best-seller mb-50" }, [
-      _c("h4", { staticClass: "widget-title" }, [_vm._v("Best Seller")]),
+      _c("h4", { staticClass: "widget-title" }, [_vm._v("Meilleurs Ventes")]),
       _vm._v(" "),
       _c("div", { staticClass: "widget-desc" }, [
         _c(
