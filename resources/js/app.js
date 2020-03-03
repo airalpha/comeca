@@ -49,15 +49,6 @@ window.Toast = Toast;
 //For event
 window.Fire = new Vue();
 
-Vue.component(
-    'not-found',
-    require("./components/NotFound").default
-);
-
-import Vuetable from 'vuetable-2'
-
-Vue.component('vuetable', Vuetable);
-
 //Vue router
 import VueRouter from "vue-router"
 
@@ -69,12 +60,12 @@ let routes = [
     {path: '/users', component: require("./components/Users").default},
     {path: '/products', component: require("./components/Products").default},
     {path: '/category', component: require("./components/Category").default}
-]
+];
 
 const router = new VueRouter({
     mode: 'history',
     routes
-})
+});
 
 
 /**
@@ -85,8 +76,8 @@ const router = new VueRouter({
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
 /**
