@@ -26,6 +26,11 @@ class IndexController extends Controller
         return view('shop');
     }
 
+    public function shopDetail($id)
+    {
+        return view('shop-detail', compact('id'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

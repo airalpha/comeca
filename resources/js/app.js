@@ -9,6 +9,16 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//Mixin
+Vue.mixin({
+    methods: {
+        route,
+        getImage(name) {
+            return "/uploads/products/" + name;
+        },
+    }
+});
+
 //Vform axios
 import {Form, HasError, AlertError} from 'vform';
 

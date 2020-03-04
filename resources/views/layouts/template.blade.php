@@ -128,6 +128,7 @@
 
 <div id="app">
     @yield('content')
+    <vue-progress-bar></vue-progress-bar>
 </div>
 
 <!-- ##### Footer Area Start ##### -->
@@ -265,9 +266,10 @@
 </footer>
 <!-- ##### Footer Area End ##### -->
 
+@routes
+<script src="/js/app.js"></script>
 <!-- ##### All Javascript Files ##### -->
 <!-- jQuery-2.2.4 js -->
-<script src="/js/app.js"></script>
 <script src="{{ asset("template/js/jquery/jquery-2.2.4.min.js") }}"></script>
 <!-- Popper js -->
 <script src="{{ asset("template/js/bootstrap/popper.min.js") }}"></script>

@@ -64,7 +64,7 @@
                                 <h4 class="widget-title">Prices</h4>
                                 <div class="widget-desc">
                                     <div class="slider-range">
-                                        <div data-min="8" data-max="30" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="8" data-value-max="30" data-label-result="Price:">
+                                        <div data-min="1" data-max="30000" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="30000" data-label-result="Price:">
                                             <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all first-handle" tabindex="0"></span>
                                             <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
@@ -92,13 +92,13 @@
                                 <div class="widget-desc">
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <label class="custom-control-label" for="customCheck7">Récents</label>
+                                        <input type="checkbox" class="custom-control-input" id="news" value="news" v-model="others">
+                                        <label class="custom-control-label" for="news">Récents</label>
                                     </div>
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                        <label class="custom-control-label" for="customCheck8">A-Z</label>
+                                        <input type="checkbox" class="custom-control-input" id="az" value="az" v-model="others">
+                                        <label class="custom-control-label" for="az">A-Z</label>
                                     </div>
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
@@ -191,7 +191,7 @@
                                     <div class="single-product-area mb-50">
                                         <!-- Product Image -->
                                         <div class="product-img">
-                                            <a href="shop-details.html"><img :src="getImage(product.image)" alt=""></a>
+                                            <a :href="route('shop-detail', {id: product.id})"><img :src="getImage(product.image)" alt=""></a>
                                             <div class="product-meta d-flex">
                                                 <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
                                                 <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
@@ -200,10 +200,10 @@
                                         </div>
                                         <!-- Product Info -->
                                         <div class="product-info mt-15 text-center">
-                                            <a href="shop-details.html">
+                                            <a :href="route('shop-detail', {id: product.id})">
                                                 <p>{{ product.name }}</p>
                                             </a>
-                                            <h6>${{ product.price }}</h6>
+                                            <h6>{{ product.price }} FCFA</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@
 
         data(){
             return {
-                categoriesSelect: [],
+                others: [],
                 selectedCategory: [],
                 products: [],
                 categories: [],
@@ -275,8 +275,13 @@
             filterProtuct: {
               get: function () {
                   let cats = this.selectedCategory;
-
-                  if(cats.length === 0) {
+                  let oths = this.others;
+                  if(-1 !== _.indexOf(oths, "news")) {
+                      return this.products.sort(function (product1, product2) {
+                          return new Date(product2.created_at) - new Date(product1.created_at);
+                      })
+                  }
+                  if(_.isEmpty(cats)) {
                       return this.products;
                   } else {
                       return this.products.filter(function (product) {

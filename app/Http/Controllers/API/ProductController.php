@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('index');
+        $this->middleware('auth:api')->except('index', 'show');
     }
 
     /**
@@ -65,7 +65,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return $product;
     }
 
     /**

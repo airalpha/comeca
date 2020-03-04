@@ -11,10 +11,12 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "freshbitsweb/laratables": "^2.1",
+        "hardevine/shoppingcart": "^2.7",
         "intervention/image": "^2.5",
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.3",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "tightenco/ziggy": "^0.9.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

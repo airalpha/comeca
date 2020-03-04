@@ -23,5 +23,7 @@ Route::get('/about', 'IndexController@about')->name('about');
 
 Route::get('/shop', 'IndexController@shop')->name('shop');
 
+Route::get('/shop/{id}', 'IndexController@shopDetail')->name('shop-detail');
+
 Route::get('{path}', 'HomeController@index')->where('path', '[-a-z0-9_\s]+');
 //Route::get('{path}', 'HomeController@index')->where('path', '([A-z\d-\/_.]+)?');
