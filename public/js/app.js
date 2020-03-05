@@ -19455,7 +19455,6 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$Progress.start();
       axios.get('/api/product/' + this.product_id).then(function (data) {
-        console.log(data);
         _this.product = data.data;
       }, function (error) {
         _this.$Progress.fail();
@@ -19478,9 +19477,12 @@ __webpack_require__.r(__webpack_exports__);
       return "background-image: url(".concat(path, ");");
     }
   },
-  mounted: function mounted() {
-    alert("Shop details" + this.product_id);
+  computed: {
+    raitingProduct: function raitingProduct() {
+      return _.slice(this.products, 0, 4);
+    }
   },
+  mounted: function mounted() {},
   created: function created() {
     this.loadProduct();
     this.loadProducts();
@@ -78407,11 +78409,13 @@ var render = function() {
                 _c("div", { staticClass: "products--meta" }, [
                   _vm._m(3),
                   _vm._v(" "),
-                  _c("p", [
-                    _c("span", [_vm._v("Category:")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(_vm.product.category))])
-                  ]),
+                  _vm.product.category
+                    ? _c("p", [
+                        _c("span", [_vm._v("Category:")]),
+                        _vm._v(" "),
+                        _c("span", [_vm._v(_vm._s(_vm.product.category.name))])
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _vm._m(4),
                   _vm._v(" "),
@@ -78433,7 +78437,7 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row" },
-          _vm._l(_vm.products, function(product) {
+          _vm._l(_vm.raitingProduct, function(product) {
             return _c(
               "div",
               { key: product.id, staticClass: "col-12 col-sm-6 col-lg-3" },
@@ -78460,9 +78464,15 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "product-info mt-15 text-center" }, [
-                    _c("a", { attrs: { href: "shop-details.html" } }, [
-                      _c("p", [_vm._v(_vm._s(product.name))])
-                    ]),
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: _vm.route("shop-detail", { id: product.id })
+                        }
+                      },
+                      [_c("p", [_vm._v(_vm._s(product.name))])]
+                    ),
                     _vm._v(" "),
                     _c("h6", [_vm._v(_vm._s(product.price) + " FCFA")])
                   ])

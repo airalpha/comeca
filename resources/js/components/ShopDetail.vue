@@ -88,7 +88,7 @@
 
                                 <div class="products--meta">
                                     <p><span>SKU:</span> <span>CT201807</span></p>
-                                    <p><span>Category:</span> <span>{{ product.category}}</span></p>
+                                    <p v-if="product.category"><span>Category:</span> <span>{{ product.category.name }}</span></p>
                                     <p><span>Tags:</span> <span>plants, green, cactus </span></p>
                                     <p>
                                         <span>Share on:</span>
@@ -267,7 +267,7 @@
                 <div class="row">
 
                     <!-- Single Product Area -->
-                    <div class="col-12 col-sm-6 col-lg-3" v-for="product in products" :key="product.id">
+                    <div class="col-12 col-sm-6 col-lg-3" v-for="product in raitingProduct" :key="product.id">
                         <div class="single-product-area mb-100">
                             <!-- Product Image -->
                             <div class="product-img">
@@ -284,7 +284,7 @@
                             </div>
                             <!-- Product Info -->
                             <div class="product-info mt-15 text-center">
-                                <a href="shop-details.html">
+                                <a :href="route('shop-detail', {id: product.id})">
                                     <p>{{ product.name }}</p>
                                 </a>
                                 <h6>{{ product.price }} FCFA</h6>
@@ -317,7 +317,6 @@
                 this.$Progress.start();
                 axios.get('/api/product/'+this.product_id)
                     .then((data) => {
-                        console.log(data);
                         this.product = data.data;
                     }, (error) => {
                         this.$Progress.fail();
@@ -342,8 +341,13 @@
             }
         },
 
+        computed: {
+          raitingProduct() {
+              return _.slice(this.products, 0, 4);
+          }
+        },
+
         mounted() {
-            alert("Shop details"+this.product_id);
         },
 
         created() {
