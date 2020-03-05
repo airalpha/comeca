@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -16,6 +15,26 @@ class CartController extends Controller
      */
     public function index()
     {
+        $products = Cart::content();
+        $result = [];
+        foreach ($products as $product) {
+            $result[] = $product->model;
+        }
+        return $result;
+    }
+
+    public function cart()
+    {
+        return view('cart');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         //
     }
 
@@ -28,7 +47,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $duplicata = Cart::search(function ($cardItem, $rowId) use ($request) {
-            return $cardItem == $request->id;
+            return $cardItem->id == $request->id;
         });
 
         if($duplicata->isNotEmpty()) {
@@ -38,7 +57,7 @@ class CartController extends Controller
         $product = Product::find($request->id);
 
         Cart::add($request->id, $request->name, 1, $request->price)
-            ->associate('App\Product');
+            ->associate(Product::class);
 
         return response()->json(["message" => $product->name . " a été ajouté au panier !"]);
     }
@@ -50,6 +69,17 @@ class CartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
     {
         //
     }

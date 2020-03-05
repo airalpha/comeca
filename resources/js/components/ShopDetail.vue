@@ -74,10 +74,10 @@
                                     <form class="cart clearfix d-flex align-items-center" method="post">
                                         <div class="quantity">
                                             <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" name="quantity" value="1">
+                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" v-model="form.qte" name="quantity" value="1">
                                             <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                         </div>
-                                        <button type="submit" name="addtocart" value="5" class="btn alazea-btn ml-15">Add to cart</button>
+                                        <button type="submit" name="addtocart" value="5" @click.prevent="addToCart(product)" class="btn alazea-btn ml-15">Add to cart</button>
                                     </form>
                                     <!-- Wishlist & Compare -->
                                     <div class="wishlist-compare d-flex flex-wrap align-items-center">
@@ -278,7 +278,7 @@
                                 </div>
                                 <div class="product-meta d-flex">
                                     <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                    <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
+                                    <a href="#" class="add-to-cart-btn" @click.stop="addToCart(product)">Add to cart</a>
                                     <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
                                 </div>
                             </div>
@@ -309,10 +309,33 @@
             return {
                 products: [],
                 product: {},
+                form: new Form({
+                    id: '',
+                    name: '',
+                    price: '',
+                    qte: '1',
+                }),
             }
         },
 
         methods: {
+            addToCart(product) {
+                this.form.fill(product);
+                this.$Progress.start();
+                this.form.post('/api/cart')
+                    .then((data) => {
+                        Fire.$emit('Aftercreate');
+                        console.log(data);
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.data.message
+                        });
+                        this.$Progress.finish();
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+            },
+
             loadProduct() {
                 this.$Progress.start();
                 axios.get('/api/product/'+this.product_id)
@@ -353,6 +376,9 @@
         created() {
             this.loadProduct();
             this.loadProducts();
+            Fire.$on('Aftercreate', () => {
+                //location.reload();
+            });
         }
     }
 </script>

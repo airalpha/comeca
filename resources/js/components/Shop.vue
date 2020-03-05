@@ -194,7 +194,7 @@
                                             <a :href="route('shop-detail', {id: product.id})"><img :src="getImage(product.image)" alt=""></a>
                                             <div class="product-meta d-flex">
                                                 <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                                <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
+                                                <a href="#" class="add-to-cart-btn" @click.stop="addToCart(product)">Add to cart</a>
                                                 <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
                                             </div>
                                         </div>
@@ -236,10 +236,33 @@
                 selectedCategory: [],
                 products: [],
                 categories: [],
+                form: new Form({
+                    id: '',
+                    name: '',
+                    price: '',
+                    qte: '1',
+                }),
             }
         },
 
         methods: {
+            addToCart(product) {
+                this.form.fill(product);
+                this.$Progress.start();
+                this.form.post('/api/cart')
+                    .then((data) => {
+                        Fire.$emit('Aftercreate');
+                        console.log(data);
+                        Toast.fire({
+                            icon: 'success',
+                            title: data.data.message
+                        });
+                        this.$Progress.finish();
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+            },
+
             loadProducts() {
                 this.$Progress.start();
                 axios.get('api/product')

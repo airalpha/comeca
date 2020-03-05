@@ -20,6 +20,7 @@
 </head>
 
 <body>
+
 <!-- Preloader -->
 <div class="preloader d-flex align-items-center justify-content-center">
     <div class="preloader-circle"></div>
@@ -40,7 +41,7 @@
                         <!-- Top Header Content -->
                         <div class="top-header-meta">
                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: comeca@gmail.com</span></a>
-                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Tel: +237 697 456 383</span></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Tel: +237 697 456 833</span></a>
                         </div>
 
                         <!-- Top Header Content -->
@@ -61,7 +62,7 @@
                             </div>
                             <!-- Cart -->
                             <div class="cart">
-                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity">(1)</span></span></a>
+                                <a href="{{ route('cart.view') }}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity">({{ Cart::count() }})</span></span></a>
                             </div>
                         </div>
                     </div>
@@ -100,6 +101,7 @@
                                 <li><a href="{{ route('about') }}"><i class="fa fa-info"></i> &nbsp; Apropos</a></li>
                                 <li><a href="{{ route('shop') }}"><i class="fa fa-shopping-bag"></i> &nbsp; Boutique</a></li>
                                 <li><a href="contact.html"><i class="fa fa-address-book"></i>&nbsp; Contact</a></li>
+                                <!-- <li><a href="route('cart.index')"><i class="fa fa-shopping-cart"></i> &nbsp; <span class="cart-quantity">{{ Cart::count() }}</span></a></li> -->
                             </ul>
                             <!-- Search Icon -->
                             <div id="searchIcon">
