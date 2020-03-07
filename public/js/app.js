@@ -77732,7 +77732,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "number",
+                            type: "tel",
                             id: "phone",
                             placeholder: "Numero de téléphone"
                           },

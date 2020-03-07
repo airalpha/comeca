@@ -82,7 +82,7 @@
                                     <div class="form-group row">
                                         <label for="phone" class="col-sm-2 col-form-label">Téléphone</label>
                                         <div class="col-sm-10">
-                                            <input type="number" v-model="form.profile.phone" class="form-control" id="phone" placeholder="Numero de téléphone">
+                                            <input type="tel" v-model="form.profile.phone" class="form-control" id="phone" placeholder="Numero de téléphone">
                                         </div>
                                     </div>
                                     <div class="form-group row">
