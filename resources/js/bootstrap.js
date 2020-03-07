@@ -14,6 +14,7 @@ try {
     require('admin-lte');
     require('admin-lte/plugins/datatables/jquery.dataTables');
     require('admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4');
+    require('admin-lte/plugins/select2/js/select2.full.min.js');
     require('magnific-popup/dist/jquery.magnific-popup.min');
 } catch (e) {}
 

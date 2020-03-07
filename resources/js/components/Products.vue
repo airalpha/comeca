@@ -137,6 +137,26 @@
                                 <has-error :form="form" field="quantity"></has-error>
                             </div>
 
+                            <!-- Tags Input -->
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="tags">Tags</label>
+                                    <select class="select2" v-model="form.tags" multiple="multiple" id="tags" data-placeholder="Un ou plusieurs tags" required >
+                                        <option :value="tag.id" v-for="tag in tags" :key="tag.id">
+                                            {{ tag.name }}
+                                        </option>
+                                    </select>
+                                    <has-error :form="form" field="tags"></has-error>
+                                </div>
+                            </div>
+
+                            <!-- Description Input -->
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea v-model="form.description" name="description" class="form-control" :class="{ 'is-invalid': form.errors.has('description') }" id="description" placeholder="Description du produit !"></textarea>
+                                <has-error :form="form" field="description"></has-error>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -157,6 +177,7 @@
                 editMode: true,
                 products: [],
                 categories: [],
+                tags: [],
                 form: new Form({
                     id: '',
                     name: '',
@@ -164,7 +185,9 @@
                     category_id: '',
                     image: '',
                     price: '',
-                    quantity: ''
+                    quantity: '',
+                    description: '',
+                    tags: [],
                 }),
             }
         },
@@ -226,7 +249,7 @@
 
             loadProducts() {
                 this.$Progress.start();
-                axios.get('api/product')
+                axios.get('/api/product')
                     .then((data) => {
                         this.products = data.data;
                         $(function () {
@@ -243,6 +266,17 @@
                 axios.get('api/category')
                     .then((data) => {
                         this.categories = data.data;
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+                this.$Progress.finish();
+            },
+
+            loadTags() {
+                this.$Progress.start();
+                axios.get('/api/tag')
+                    .then((data) => {
+                        this.tags = data.data;
                     }, (error) => {
                         this.$Progress.fail();
                     });
@@ -298,11 +332,12 @@
         },
 
         mounted() {
-
+            $('.select2').select2();
         },
 
         created() {
             this.loadCategories();
+            this.loadTags();
             this.loadProducts();
             Fire.$on('Aftercreate', () => {
                 this.loadProducts();

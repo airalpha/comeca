@@ -11,6 +11,11 @@ $fa-font-path: "../webfonts";
 //Datatables
 @import "~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.css";
 
+//Select 2
+@import "~admin-lte/plugins/select2/css/select2.min.css";
+// Bootstrap select
+@import "~admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css";
+
 //Admin lte
 @import '~admin-lte/dist/css/adminlte.css';
 

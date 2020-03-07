@@ -27,6 +27,8 @@ Route::apiResource('dashboard', 'API\DashboardController');
 
 Route::apiResource('category', 'API\CategoryController');
 
+Route::apiResource('tag', 'API\TagController');
+
 //Cart
 //Route::apiResource('cart', 'API\CartController');
 

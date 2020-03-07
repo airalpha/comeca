@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
@@ -38,6 +39,7 @@ class ProductController extends Controller
             'user_id' => 'required|integer',
             'price' => 'required|integer',
             'quantity' => 'required|integer',
+            'description' => 'required|string',
             'image' => 'required|string'
         ]);
 
@@ -51,8 +53,13 @@ class ProductController extends Controller
         $img->save();
 
         $request->merge(['image' => $name]);
+        $request->request->add(['slug' => Str::slug($request->name)]);
+        $tags = $request->tags;
+        $request->request->remove('tags');
 
         $product = Product::create($request->all());
+
+        $product->tags()->attach($tags);
 
         return response()->json(["message" => "Produit ajouté !"]);
     }
@@ -63,9 +70,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $product = Product::with('Category')->get()->find($id);
+        $product = Product::with('Category')->get()->where('slug', $slug);
         return $product;
     }
 
@@ -99,8 +106,13 @@ class ProductController extends Controller
             $request->merge(['image' => $name]);
         }
 
+        $tags = $request->tags;
+        $request->request->remove('tags');
+
 
         $product->update($request->all());
+
+        $product->tags()->sync($tags);
 
         return response()->json(["message" => "Produit modifié !"]);
     }

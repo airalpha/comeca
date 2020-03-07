@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::all();
     }
 
     /**
@@ -25,7 +32,17 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('isAdmin');
+
+        $this->validate($request, [
+            'name' => 'required|string|min:3'
+        ]);
+
+        Tag::create([
+            'name' => $request->name
+        ]);
+
+        return response()->json(["message" => "Tag ajouté !"]);
     }
 
     /**
@@ -48,7 +65,17 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('isAdmin');
+
+        $tag = Tag::findOrFail($id);
+
+        $this->validate($request, [
+            'name' => 'required|string|min:4',
+        ]);
+
+        $tag->update($request->all());
+
+        return response()->json(["message" => "Tag modifié !"]);
     }
 
     /**
@@ -59,6 +86,13 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('isAdmin');
+
+        $tag = Tag::findOrFail($id);
+
+        $tag->delete();
+
+        //Return message
+        return response()->json(["message" => "Tag supprimé !"]);
     }
 }
