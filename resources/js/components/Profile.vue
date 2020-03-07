@@ -200,7 +200,7 @@
         created() {
             this.$Progress.start();
             axios.get("/api/profile").then((data) => {
-                this.form.fill(data.data[0]);
+                this.form.fill(data.data);
                 this.$Progress.finish();
             }, (error) => {
                 this.$Progress.fail();

@@ -35,12 +35,11 @@
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th>TOTAL</th>
-                                    <th>{{cart}}</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr v-for="product in cart" :key="cart.id">
-                                    {{ product }}
                                     <td class="cart_product_img">
                                         <a href="#"><img :src="getImage(product.image)" :alt="product.name"></a>
                                         <h5>{{ product.name }}</h5>

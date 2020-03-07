@@ -18039,7 +18039,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Cart",
   data: function data() {
@@ -18969,7 +18968,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$Progress.start();
     axios.get("/api/profile").then(function (data) {
-      _this3.form.fill(data.data[0]);
+      _this3.form.fill(data.data);
 
       _this3.$Progress.finish();
     }, function (error) {
@@ -75615,29 +75614,12 @@ var render = function() {
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "cart-table clearfix" }, [
               _c("table", { staticClass: "table table-responsive" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [_vm._v("Products")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Quantity")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Price")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("TOTAL")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v(_vm._s(_vm.cart))])
-                  ])
-                ]),
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "tbody",
                   _vm._l(_vm.cart, function(product) {
                     return _c("tr", { key: _vm.cart.id }, [
-                      _vm._v(
-                        "\n                                " +
-                          _vm._s(product) +
-                          "\n                                "
-                      ),
                       _c("td", { staticClass: "cart_product_img" }, [
                         _c("a", { attrs: { href: "#" } }, [
                           _c("img", {
@@ -75651,15 +75633,15 @@ var render = function() {
                         _c("h5", [_vm._v(_vm._s(product.name))])
                       ]),
                       _vm._v(" "),
-                      _vm._m(1, true),
+                      _vm._m(2, true),
                       _vm._v(" "),
                       _c("td", { staticClass: "price" }, [
                         _c("span", [_vm._v(_vm._s(product.price) + " FCFA")])
                       ]),
                       _vm._v(" "),
-                      _vm._m(2, true),
+                      _vm._m(3, true),
                       _vm._v(" "),
-                      _vm._m(3, true)
+                      _vm._m(4, true)
                     ])
                   }),
                   0
@@ -75669,7 +75651,7 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(5)
       ])
     ])
   ])
@@ -75716,6 +75698,24 @@ var staticRenderFns = [
             ])
           ])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Products")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Quantity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Price")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("TOTAL")]),
+        _vm._v(" "),
+        _c("th")
       ])
     ])
   },
