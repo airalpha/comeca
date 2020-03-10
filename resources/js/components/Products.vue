@@ -65,7 +65,6 @@
                     </tr>
                     </tfoot>
                 </table>
-                <a class="test-popup-link" href="path-to-image.jpg">Open popup</a>
             </div>
             <!-- /.card-body -->
         </div>
@@ -94,20 +93,13 @@
                             <!-- User Id
                             <input v-model="form.user_id" type="hidden" :value="user.id" name="user_id"> -->
 
-                            <!-- Image Input -->
+                            <!-- Images Input -->
                             <div class="form-group">
-                                <label for="avatar">Photo</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" @change="updateImage" class="custom-file-input" name="image" id="avatar">
-                                        <label class="custom-file-label" for="avatar">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="">Upload</span>
-                                    </div>
+                                <label for="">Image <small>3 max</small></label>
+                                <div id="dZUpload" class="dropzone">
+                                    <div class="dz-default dz-message"></div>
                                 </div>
                             </div>
-
                             <!-- Price Input -->
                             <div class="form-group">
                                 <label for="price">Prix</label>
@@ -183,7 +175,7 @@
                     name: '',
                     user_id: '',
                     category_id: '',
-                    image: '',
+                    image: [],
                     price: '',
                     quantity: '',
                     description: '',
@@ -230,12 +222,11 @@
                     });
             },
 
-            updateImage(e) {
-                let file = e.target.files[0];
+            updateImage(file) {
                 let reader = new FileReader();
                 if (file['size'] < 2111775) {
                     reader.onloadend = (file) => {
-                        this.form.image = reader.result;
+                        this.form.image.push(reader.result);
                     }
                     reader.readAsDataURL(file);
                 } else {
@@ -333,6 +324,20 @@
 
         mounted() {
             $('.select2').select2();
+            //Simple Dropzonejs
+            $("#dZUpload").dropzone({
+                url: "/",
+                addRemoveLinks: true,
+                maxFiles: 3,
+                acceptedFiles: 'image/*',
+                error:  (file, response) => {
+                    file.previewElement.classList.add("dz-success");
+                    this.updateImage(file);
+                },
+                maxfilesexceeded: function(file) {
+                    this.removeFile(file);
+                }
+            });
         },
 
         created() {
@@ -346,3 +351,9 @@
     }
 
 </script>
+
+<style scoped>
+    .dz-image {
+        width: 1px;
+    }
+</style>

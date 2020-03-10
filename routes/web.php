@@ -22,6 +22,11 @@ Route::get('/vide-panier', function (){
     return view('shop');
 });
 
+Route::get('/test', function (){
+    $path = public_path().'/images';
+    $result = File::makeDirectory($path, 0775);
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/about', 'IndexController@about')->name('about');

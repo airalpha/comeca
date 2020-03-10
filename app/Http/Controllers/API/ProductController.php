@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -42,17 +43,24 @@ class ProductController extends Controller
             'description' => 'required|string',
             'image' => 'required|string'
         ]);
+        $names = [];
+        $path = public_path('uploads/products/images/' . uniqid());
+        File::makeDirectory($path, 0775);
 
-        $name = time() . '.' . explode('/',
-                explode(':',
-                    substr($request->image, 0,
-                        strpos($request->image, ';')))[1])[1];
+        foreach ($request->image as $image) {
+            $name = time() . '.' . explode('/',
+                    explode(':',
+                        substr($request->image, 0,
+                            strpos($request->image, ';')))[1])[1];
 
-        $img = Image::make($request->image)->save(public_path('uploads/products/') . $name);
-        $img->fit(270, 320);
-        $img->save();
+            $img = Image::make($request->image)->save($path . $name);
+            $img->fit(270, 320);
+            $img->save();
 
-        $request->merge(['image' => $name]);
+            $names[] = $path . '/'. $name;
+        }
+
+        $request->request->remove('image');
         $request->request->add(['slug' => Str::slug($request->name)]);
         $tags = $request->tags;
         $request->request->remove('tags');
@@ -60,6 +68,7 @@ class ProductController extends Controller
         $product = Product::create($request->all());
 
         $product->tags()->attach($tags);
+        $product->images()->attach($names);
 
         return response()->json(["message" => "Produit ajouté !"]);
     }
@@ -100,8 +109,11 @@ class ProductController extends Controller
                     explode(':',
                         substr($request->image, 0,
                             strpos($request->image, ';')))[1])[1];
+            $path = public_path('uploads/products/images/' . uniqid());
+            File::makeDirectory($path, 0775);
+            Image::make($request->image)->save($path . $name);
 
-            Image::make($request->image)->save(public_path('uploads/products/') . $name);
+            $name = $path . '/'. $name;
 
             $request->merge(['image' => $name]);
         }

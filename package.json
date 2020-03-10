@@ -26,6 +26,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.0",
         "admin-lte": "^3.0.2",
+        "dropzone": "^5.7.0",
         "magnific-popup": "^1.1.0",
         "sweetalert2": "^9.7.0",
         "vform": "^1.0.1",
