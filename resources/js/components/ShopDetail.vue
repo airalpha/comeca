@@ -33,28 +33,14 @@
                             <div class="single_product_thumb">
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <a class="product-img" :href="getImage(product.image)" title="Product Image">
-                                                <img class="d-block w-100" :src="getImage(product.image)" alt="1">
-                                            </a>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <a class="product-img" :href="getImage(product.image)" title="Product Image">
-                                                <img class="d-block w-100" :src="getImage(product.image)" alt="1">
-                                            </a>
-                                        </div>
-                                        <div class="carousel-item">
-                                            <a class="product-img" :href="getImage(product.image)" title="Product Image">
-                                                <img class="d-block w-100" :src="getImage(product.image)" alt="1">
+                                        <div class="carousel-item" :class="product.images[0] === image ? 'active' : ''" v-for="(image, index) in product.images">
+                                            <a class="product-img" :href="image.path" title="Product Image">
+                                                <img class="d-block w-100" :src="image.path" alt="1">
                                             </a>
                                         </div>
                                     </div>
                                     <ol class="carousel-indicators">
-                                        <li class="active" data-target="#product_details_slider" data-slide-to="0" :style="background(product.image)">
-                                        </li>
-                                        <li data-target="#product_details_slider" data-slide-to="1" :style="background(product.image)">
-                                        </li>
-                                        <li data-target="#product_details_slider" data-slide-to="2" :style="background(product.image)">
+                                        <li class="active" data-target="#product_details_slider" :data-slide-to="index" :style="background(image.path)" v-for="(image, index) in product.images">
                                         </li>
                                     </ol>
                                 </div>
@@ -89,7 +75,7 @@
                                 <div class="products--meta">
                                     <p><span>SKU:</span> <span>CT201807</span></p>
                                     <p v-if="product.category"><span>Category:</span> <span>{{ product.category.name }}</span></p>
-                                    <p><span>Tags:</span> <span>plants, green, cactus </span></p>
+                                    <p><span>Tags:</span> <span v-for="tag in product.tags">{{ tag.name }}</span></p>
                                     <p>
                                         <span>Share on:</span>
                                         <span>
@@ -271,7 +257,7 @@
                         <div class="single-product-area mb-100">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <a :href="route('shop-detail', {id: product.id})"><img :src="getImage(product.image)" alt=""></a>
+                                <a :href="route('shop-detail', {slug: product.slug})"><img :src="product.images[0].path" alt=""></a>
                                 <!-- Product Tag -->
                                 <div class="product-tag">
                                     <a href="#">Hot</a>
@@ -284,7 +270,7 @@
                             </div>
                             <!-- Product Info -->
                             <div class="product-info mt-15 text-center">
-                                <a :href="route('shop-detail', {id: product.id})">
+                                <a :href="route('shop-detail', {slug: product.slug})">
                                     <p>{{ product.name }}</p>
                                 </a>
                                 <h6>{{ product.price }} FCFA</h6>
@@ -295,7 +281,6 @@
             </div>
         </div>
         <!-- ##### Related Product Area End ##### -->
-
     </div>
 </template>
 
@@ -303,7 +288,9 @@
     export default {
         name: "ShopDetail",
 
-        props: ['product_id'],
+        props: {
+            product_slug: String,
+        },
 
         data() {
             return {
@@ -338,8 +325,9 @@
 
             loadProduct() {
                 this.$Progress.start();
-                axios.get('/api/product/'+this.product_id)
+                axios.get('/api/product/slug/'+this.product_slug)
                     .then((data) => {
+                        console.log(data);
                         this.product = data.data;
                     }, (error) => {
                         this.$Progress.fail();
@@ -359,8 +347,7 @@
             },
 
             background(image) {
-                let path = "/uploads/products/"+image;
-                return `background-image: url(${path});`
+                return `background-image: url(${image});`
             }
         },
 
@@ -376,9 +363,6 @@
         created() {
             this.loadProduct();
             this.loadProducts();
-            Fire.$on('Aftercreate', () => {
-                //location.reload();
-            });
         }
     }
 </script>

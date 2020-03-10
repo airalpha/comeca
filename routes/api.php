@@ -23,6 +23,8 @@ Route::apiResource('profile', 'API\ProfileController');
 
 Route::apiResource('product', 'API\ProductController');
 
+Route::get('product/slug/{slug}', 'API\ProductController@slug');
+
 Route::apiResource('dashboard', 'API\DashboardController');
 
 Route::apiResource('category', 'API\CategoryController');

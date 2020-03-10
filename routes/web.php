@@ -11,6 +11,8 @@
 |
 */
 
+use App\Product;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,9 +25,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    $path = public_path().'/uploads/products/images/' . uniqid();
-    $path = \Illuminate\Support\Str::after($path, '/public');
-    return $path;
+    return Product::with('Category', 'Images')->get()->where('slug', 'leslie-guy');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -34,7 +34,7 @@ Route::get('/about', 'IndexController@about')->name('about');
 
 Route::get('/shop', 'IndexController@shop')->name('shop');
 
-Route::get('/shop/{id}', 'IndexController@shopDetail')->name('shop-detail');
+Route::get('/shop/{slug}', 'IndexController@shopDetail')->name('shop-detail');
 
 Route::post('/api/cart', 'CartController@store')->name('cart.store');
 

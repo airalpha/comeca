@@ -26,9 +26,9 @@ class IndexController extends Controller
         return view('shop');
     }
 
-    public function shopDetail($id)
+    public function shopDetail($slug)
     {
-        return view('shop-detail', compact('id'));
+        return view('shop-detail', compact('slug'));
     }
 
     /**

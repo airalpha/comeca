@@ -191,7 +191,7 @@
                                     <div class="single-product-area mb-50">
                                         <!-- Product Image -->
                                         <div class="product-img">
-                                            <a :href="route('shop-detail', {id: product.id})"><img :src="getImage(product.image)" alt=""></a>
+                                            <a :href="route('shop-detail', {slug: product.slug})"><img :src="product.images[0].path" alt=""></a>
                                             <div class="product-meta d-flex">
                                                 <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
                                                 <a href="#" class="add-to-cart-btn" @click.stop="addToCart(product)">Add to cart</a>
@@ -200,7 +200,7 @@
                                         </div>
                                         <!-- Product Info -->
                                         <div class="product-info mt-15 text-center">
-                                            <a :href="route('shop-detail', {id: product.id})">
+                                            <a :href="route('shop-detail', {slug: product.slug})">
                                                 <p>{{ product.name }}</p>
                                             </a>
                                             <h6>{{ product.price }} FCFA</h6>

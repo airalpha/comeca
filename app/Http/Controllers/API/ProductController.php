@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('index', 'show');
+        $this->middleware('auth:api')->except('index', 'show', 'slug');
     }
 
     /**
@@ -23,7 +23,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('Category', 'Images')->get();
+        return Product::with('Category', 'Images', 'Tags')->get();
+    }
+
+    public function slug($slug)
+    {
+        return Product::with('Category', 'Images', 'Tags')->get()->where('slug', $slug)->first();
     }
 
     /**
@@ -86,9 +91,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $product = Product::with('Category')->get()->where('slug', $slug);
+        $product = Product::with('Category')->get()->find($id);
         return $product;
     }
 
