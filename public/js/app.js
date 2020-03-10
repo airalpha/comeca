@@ -81814,23 +81814,16 @@ var render = function() {
               _vm._l(_vm.products, function(product) {
                 return _c("tr", { key: product.id }, [
                   _c("td", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "test-popup-link",
-                        attrs: { href: _vm.getImage(product.image) }
-                      },
-                      [
-                        _c("img", {
-                          attrs: {
-                            src: _vm.getImage(product.image),
-                            alt: "",
-                            height: "50",
-                            width: "50"
-                          }
-                        })
-                      ]
-                    )
+                    _c("a", { attrs: { href: product.images[0].path } }, [
+                      _c("img", {
+                        attrs: {
+                          src: _vm.getImage(product.image),
+                          alt: "",
+                          height: "50",
+                          width: "50"
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(product.name))]),

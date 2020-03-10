@@ -17,4 +17,8 @@ class Product extends Model
     public function tags() {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function images() {
+        return $this->belongsToMany(Image::class, 'product_image');
+    }
 }

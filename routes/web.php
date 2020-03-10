@@ -23,8 +23,9 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    $path = public_path().'/images';
-    $result = File::makeDirectory($path, 0775);
+    $path = public_path().'/uploads/products/images/' . uniqid();
+    $path = \Illuminate\Support\Str::after($path, '/public');
+    return $path;
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('Category')->get();
+        return Product::with('Category', 'Images')->get();
     }
 
     /**
@@ -41,23 +41,30 @@ class ProductController extends Controller
             'price' => 'required|integer',
             'quantity' => 'required|integer',
             'description' => 'required|string',
-            'image' => 'required|string'
+            'image' => 'required'
         ]);
         $names = [];
-        $path = public_path('uploads/products/images/' . uniqid());
-        File::makeDirectory($path, 0775);
+        $path = public_path().'/uploads/products/images/' . uniqid();
+        File::makeDirectory($path, 0775, true);
 
         foreach ($request->image as $image) {
-            $name = time() . '.' . explode('/',
+            $name = time() .uniqid(). '.' . explode('/',
                     explode(':',
-                        substr($request->image, 0,
-                            strpos($request->image, ';')))[1])[1];
+                        substr($image, 0,
+                            strpos($image, ';')))[1])[1];
 
-            $img = Image::make($request->image)->save($path . $name);
+            $img = Image::make($image)->save($path .'/'. $name);
             $img->fit(270, 320);
             $img->save();
 
-            $names[] = $path . '/'. $name;
+            $name = $path . '/'. $name;
+            $corectPath = Str::after($name, '/public');
+
+            $pi = \App\Image::create([
+                'path' => $corectPath
+            ]);
+
+            $names[] = $pi->id;
         }
 
         $request->request->remove('image');
