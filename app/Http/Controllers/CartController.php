@@ -20,7 +20,6 @@ class CartController extends Controller
         foreach ($products as $product) {
             $result[] = $product->model;
         }
-        return $result;
     }
 
     public function cart()

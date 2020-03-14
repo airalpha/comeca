@@ -19679,16 +19679,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ShopDetail",
   props: {
@@ -19703,6 +19693,14 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         price: '',
         qte: '1'
+      }),
+      raiting: new Form({
+        product_id: '',
+        id: '',
+        type: '',
+        user_name: '',
+        message: '',
+        stars: ''
       })
     };
   },
@@ -19724,6 +19722,9 @@ __webpack_require__.r(__webpack_exports__);
       }, function (error) {
         _this.$Progress.fail();
       });
+    },
+    sendReview: function sendReview() {
+      console.log(this.raiting);
     },
     loadProduct: function loadProduct() {
       var _this2 = this;
@@ -83751,7 +83752,9 @@ var render = function() {
                   _vm._v(_vm._s(_vm.product.price) + " FCFA")
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
+                _c("div", { staticClass: "short_overview" }, [
+                  _c("p", [_vm._v(_vm._s(_vm.product.description))])
+                ]),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -83768,7 +83771,7 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "quantity" }, [
-                          _vm._m(2),
+                          _vm._m(1),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -83800,7 +83803,7 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm._m(3)
+                          _vm._m(2)
                         ]),
                         _vm._v(" "),
                         _c(
@@ -83819,17 +83822,21 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Add to cart")]
+                          [
+                            _vm._v(
+                              "Add to\n                                        cart\n                                    "
+                            )
+                          ]
                         )
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(3)
                   ]
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "products--meta" }, [
-                  _vm._m(5),
+                  _vm._m(4),
                   _vm._v(" "),
                   _vm.product.category
                     ? _c("p", [
@@ -83851,7 +83858,7 @@ var render = function() {
                     2
                   ),
                   _vm._v(" "),
-                  _vm._m(6)
+                  _vm._m(5)
                 ])
               ])
             ])
@@ -83859,12 +83866,424 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(7)
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "product_details_tab clearfix" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "tab-content" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade show active",
+                    attrs: { role: "tabpanel", id: "description" }
+                  },
+                  [
+                    _c("div", { staticClass: "description_area" }, [
+                      _c("p", [_vm._v(_vm._s(_vm.product.description))])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: { role: "tabpanel", id: "reviews" }
+                  },
+                  [
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "submit_a_review_area mt-50" }, [
+                      _c("h4", [_vm._v("Votre avis")]),
+                      _vm._v(" "),
+                      _c("form", { attrs: { action: "#", method: "post" } }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "form-group d-flex align-items-center"
+                              },
+                              [
+                                _c("span", { staticClass: "mr-15" }, [
+                                  _vm._v("Your Ratings:")
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "stars" }, [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.raiting.stars,
+                                        expression: "raiting.stars"
+                                      }
+                                    ],
+                                    staticClass: "star-1",
+                                    attrs: {
+                                      value: "1",
+                                      type: "radio",
+                                      name: "star",
+                                      id: "star-1"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(_vm.raiting.stars, "1")
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.raiting,
+                                          "stars",
+                                          "1"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "star-1",
+                                      attrs: { for: "star-1" }
+                                    },
+                                    [_vm._v("1")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.raiting.stars,
+                                        expression: "raiting.stars"
+                                      }
+                                    ],
+                                    staticClass: "star-2",
+                                    attrs: {
+                                      value: "2",
+                                      type: "radio",
+                                      name: "star",
+                                      id: "star-2"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(_vm.raiting.stars, "2")
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.raiting,
+                                          "stars",
+                                          "2"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "star-2",
+                                      attrs: { for: "star-2" }
+                                    },
+                                    [_vm._v("2")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.raiting.stars,
+                                        expression: "raiting.stars"
+                                      }
+                                    ],
+                                    staticClass: "star-3",
+                                    attrs: {
+                                      value: "3",
+                                      type: "radio",
+                                      name: "star",
+                                      id: "star-3"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(_vm.raiting.stars, "3")
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.raiting,
+                                          "stars",
+                                          "3"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "star-3",
+                                      attrs: { for: "star-3" }
+                                    },
+                                    [_vm._v("3")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.raiting.stars,
+                                        expression: "raiting.stars"
+                                      }
+                                    ],
+                                    staticClass: "star-4",
+                                    attrs: {
+                                      value: "4",
+                                      type: "radio",
+                                      name: "star",
+                                      id: "star-4"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(_vm.raiting.stars, "4")
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.raiting,
+                                          "stars",
+                                          "4"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "star-4",
+                                      attrs: { for: "star-4" }
+                                    },
+                                    [_vm._v("4")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.raiting.stars,
+                                        expression: "raiting.stars"
+                                      }
+                                    ],
+                                    staticClass: "star-5",
+                                    attrs: {
+                                      value: "5",
+                                      type: "radio",
+                                      name: "star",
+                                      id: "star-5"
+                                    },
+                                    domProps: {
+                                      checked: _vm._q(_vm.raiting.stars, "5")
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.$set(
+                                          _vm.raiting,
+                                          "stars",
+                                          "5"
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    {
+                                      staticClass: "star-5",
+                                      attrs: { for: "star-5" }
+                                    },
+                                    [_vm._v("5")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("span")
+                                ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "name" } }, [
+                                _vm._v("Votre nom")
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.raiting.user_name,
+                                    expression: "raiting.user_name"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  type: "text",
+                                  id: "name",
+                                  placeholder: "Nom"
+                                },
+                                domProps: { value: _vm.raiting.user_name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.raiting,
+                                      "user_name",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12 col-md-6" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "options" } }, [
+                                _vm._v("Reason for your rating")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.raiting.type,
+                                      expression: "raiting.type"
+                                    }
+                                  ],
+                                  staticClass: "form-control",
+                                  attrs: { id: "options" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.raiting,
+                                        "type",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "quality" } },
+                                    [_vm._v("Qualité")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "price" } }, [
+                                    _vm._v("Prix")
+                                  ])
+                                ]
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "comments" } }, [
+                                _vm._v("Comments")
+                              ]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.raiting.message,
+                                    expression: "raiting.message"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  id: "comments",
+                                  rows: "5",
+                                  "data-max-length": "150"
+                                },
+                                domProps: { value: _vm.raiting.message },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.raiting,
+                                      "message",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn alazea-btn",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.sendReview($event)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "Submit Your Review\n                                                "
+                                )
+                              ]
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "related-products-area" }, [
       _c("div", { staticClass: "container" }, [
-        _vm._m(8),
+        _vm._m(9),
         _vm._v(" "),
         _c(
           "div",
@@ -83890,10 +84309,10 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(9, true),
+                    _vm._m(10, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "product-meta d-flex" }, [
-                      _vm._m(10, true),
+                      _vm._m(11, true),
                       _vm._v(" "),
                       _c(
                         "a",
@@ -83910,7 +84329,7 @@ var render = function() {
                         [_vm._v("Add to cart")]
                       ),
                       _vm._v(" "),
-                      _vm._m(11, true)
+                      _vm._m(12, true)
                     ])
                   ]),
                   _vm._v(" "),
@@ -83983,18 +84402,6 @@ var staticRenderFns = [
             ])
           ])
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "short_overview" }, [
-      _c("p", [
-        _vm._v(
-          "Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellem malesuada in nibh selama euismod. Curabitur a rhoncus dui. Nunc lobortis cursus magna utrum faucibus. Vivamus justo nibh, pharetra non risus accumsan, tincidunt suscipit leo."
-        )
       ])
     ])
   },
@@ -84093,483 +84500,151 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("div", { staticClass: "product_details_tab clearfix" }, [
-            _c(
-              "ul",
-              {
-                staticClass: "nav nav-tabs",
-                attrs: { role: "tablist", id: "product-details-tab" }
-              },
-              [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link active",
-                      attrs: {
-                        href: "#description",
-                        "data-toggle": "tab",
-                        role: "tab"
-                      }
-                    },
-                    [_vm._v("Description")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: {
-                        href: "#addi-info",
-                        "data-toggle": "tab",
-                        role: "tab"
-                      }
-                    },
-                    [_vm._v("Additional Information")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link",
-                      attrs: {
-                        href: "#reviews",
-                        "data-toggle": "tab",
-                        role: "tab"
-                      }
-                    },
-                    [
-                      _vm._v("Reviews "),
-                      _c("span", { staticClass: "text-muted" }, [_vm._v("(1)")])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "tab-content" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "tab-pane fade show active",
-                  attrs: { role: "tabpanel", id: "description" }
-                },
-                [
-                  _c("div", { staticClass: "description_area" }, [
-                    _c("p", [
-                      _vm._v(
-                        "Sed a facilisis orci. Curabitur magna urna, varius placerat placerat sodales, pretium vitae orci. Aliquam erat volutpat. Cras sit amet suscipit magna. Quisque turpis odio, facilisis vel eleifend eu, dignissim ac odio."
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque augue at the moment mattis. Proin vitae arcu sit amet justo sollicitudin tincidunt sit amet ut velit.Proin placerat vel augue eget euismod. Phasellus cursus orci eu tellus vestibulum, vestibulum urna accumsan. Vestibulum ut ullamcorper sapien. Pellentesque molestie, est ac vestibulum eleifend, lorem ipsum mollis ipsum."
-                      )
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "tab-pane fade",
-                  attrs: { role: "tabpanel", id: "addi-info" }
-                },
-                [
-                  _c("div", { staticClass: "additional_info_area" }, [
-                    _c("p", [
-                      _vm._v(
-                        "What should I do if I receive a damaged parcel?\n                                        "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore."
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "I have received my order but the wrong item was delivered to me.\n                                        "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?"
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "Product Receipt and Acceptance Confirmation Process\n                                        "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?"
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v(
-                        "How do I cancel my order?\n                                        "
-                      ),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!"
-                        )
-                      ])
-                    ])
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "tab-pane fade",
-                  attrs: { role: "tabpanel", id: "reviews" }
-                },
-                [
-                  _c("div", { staticClass: "reviews_area" }, [
-                    _c("ul", [
-                      _c("li", [
-                        _c("div", { staticClass: "single_user_review mb-15" }, [
-                          _c("div", { staticClass: "review-rating" }, [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("span", [_vm._v("for Quality")])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "review-details" }, [
-                            _c("p", [
-                              _vm._v("by "),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _vm._v("Colorlib")
-                              ]),
-                              _vm._v(" on "),
-                              _c("span", [_vm._v("12 Sep 2018")])
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "single_user_review mb-15" }, [
-                          _c("div", { staticClass: "review-rating" }, [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("span", [_vm._v("for Design")])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "review-details" }, [
-                            _c("p", [
-                              _vm._v("by "),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _vm._v("Colorlib")
-                              ]),
-                              _vm._v(" on "),
-                              _c("span", [_vm._v("12 Sep 2018")])
-                            ])
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "single_user_review" }, [
-                          _c("div", { staticClass: "review-rating" }, [
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass: "fa fa-star",
-                              attrs: { "aria-hidden": "true" }
-                            }),
-                            _vm._v(" "),
-                            _c("span", [_vm._v("for Value")])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "review-details" }, [
-                            _c("p", [
-                              _vm._v("by "),
-                              _c("a", { attrs: { href: "#" } }, [
-                                _vm._v("Colorlib")
-                              ]),
-                              _vm._v(" on "),
-                              _c("span", [_vm._v("12 Sep 2018")])
-                            ])
-                          ])
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "submit_a_review_area mt-50" }, [
-                    _c("h4", [_vm._v("Submit A Review")]),
-                    _vm._v(" "),
-                    _c("form", { attrs: { action: "#", method: "post" } }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "form-group d-flex align-items-center"
-                            },
-                            [
-                              _c("span", { staticClass: "mr-15" }, [
-                                _vm._v("Your Ratings:")
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "stars" }, [
-                                _c("input", {
-                                  staticClass: "star-1",
-                                  attrs: {
-                                    type: "radio",
-                                    name: "star",
-                                    id: "star-1"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "star-1",
-                                    attrs: { for: "star-1" }
-                                  },
-                                  [_vm._v("1")]
-                                ),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass: "star-2",
-                                  attrs: {
-                                    type: "radio",
-                                    name: "star",
-                                    id: "star-2"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "star-2",
-                                    attrs: { for: "star-2" }
-                                  },
-                                  [_vm._v("2")]
-                                ),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass: "star-3",
-                                  attrs: {
-                                    type: "radio",
-                                    name: "star",
-                                    id: "star-3"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "star-3",
-                                    attrs: { for: "star-3" }
-                                  },
-                                  [_vm._v("3")]
-                                ),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass: "star-4",
-                                  attrs: {
-                                    type: "radio",
-                                    name: "star",
-                                    id: "star-4"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "star-4",
-                                    attrs: { for: "star-4" }
-                                  },
-                                  [_vm._v("4")]
-                                ),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass: "star-5",
-                                  attrs: {
-                                    type: "radio",
-                                    name: "star",
-                                    id: "star-5"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "label",
-                                  {
-                                    staticClass: "star-5",
-                                    attrs: { for: "star-5" }
-                                  },
-                                  [_vm._v("5")]
-                                ),
-                                _vm._v(" "),
-                                _c("span")
-                              ])
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12 col-md-6" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "name" } }, [
-                              _vm._v("Nickname")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "email",
-                                id: "name",
-                                placeholder: "Nazrul"
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12 col-md-6" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "options" } }, [
-                              _vm._v("Reason for your rating")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "options" }
-                              },
-                              [
-                                _c("option", [_vm._v("Quality")]),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Value")]),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Design")]),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Price")]),
-                                _vm._v(" "),
-                                _c("option", [_vm._v("Others")])
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "comments" } }, [
-                              _vm._v("Comments")
-                            ]),
-                            _vm._v(" "),
-                            _c("textarea", {
-                              staticClass: "form-control",
-                              attrs: {
-                                id: "comments",
-                                rows: "5",
-                                "data-max-length": "150"
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn alazea-btn",
-                              attrs: { type: "submit" }
-                            },
-                            [_vm._v("Submit Your Review")]
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ]
+    return _c(
+      "ul",
+      {
+        staticClass: "nav nav-tabs",
+        attrs: { role: "tablist", id: "product-details-tab" }
+      },
+      [
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: { href: "#description", "data-toggle": "tab", role: "tab" }
+            },
+            [_vm._v("Description")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "#addi-info", "data-toggle": "tab", role: "tab" }
+            },
+            [
+              _vm._v(
+                "Additional\n                                    Information"
               )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link",
+              attrs: { href: "#reviews", "data-toggle": "tab", role: "tab" }
+            },
+            [
+              _vm._v("Reviews "),
+              _c("span", { staticClass: "text-muted" }, [_vm._v("(1)")])
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade",
+        attrs: { role: "tabpanel", id: "addi-info" }
+      },
+      [
+        _c("div", { staticClass: "additional_info_area" }, [
+          _c("p", [
+            _vm._v(
+              "What should I do if I receive a damaged parcel?\n                                        "
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore."
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "I have received my order but the wrong item was delivered to me.\n                                        "
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?"
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "Product Receipt and Acceptance Confirmation Process\n                                        "
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?"
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "How do I cancel my order?\n                                        "
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v(
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!"
+              )
+            ])
+          ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "reviews_area" }, [
+      _c("ul", { staticClass: "d-flex" }, [
+        _c("li", [
+          _c("div", { staticClass: "single_user_review mb-15" }, [
+            _c("div", { staticClass: "review-rating" }, [
+              _c("i", {
+                staticClass: "fa fa-star",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("i", {
+                staticClass: "fa fa-star",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("Qualité")])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "review-details" }, [
+              _c("p", [
+                _vm._v("Par "),
+                _c("a", { attrs: { href: "#" } }, [_vm._v("Alpha")]),
+                _vm._v(" on "),
+                _c("span", [_vm._v("12 Sep 2018")])
+              ])
             ])
           ])
         ])
@@ -100654,6 +100729,11 @@ function () {
     key: "isMe",
     value: function isMe(userU) {
       return this.user.id == userU.id;
+    }
+  }, {
+    key: "getName",
+    value: function getName() {
+      return this.user != null ? this.user.name : "";
     }
   }]);
 

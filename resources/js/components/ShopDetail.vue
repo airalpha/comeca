@@ -3,7 +3,8 @@
         <!-- ##### Breadcrumb Area Start ##### -->
         <div class="breadcrumb-area">
             <!-- Top Breadcrumb Area -->
-            <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/template/img/bg-img/24.jpg);">
+            <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
+                 style="background-image: url(/template/img/bg-img/24.jpg);">
                 <h2>SHOP DETAILS</h2>
             </div>
 
@@ -33,14 +34,16 @@
                             <div class="single_product_thumb">
                                 <div id="product_details_slider" class="carousel slide" data-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item" :class="product.images[0] === image ? 'active' : ''" v-for="(image, index) in product.images">
+                                        <div class="carousel-item" :class="product.images[0] === image ? 'active' : ''"
+                                             v-for="(image, index) in product.images">
                                             <a class="product-img" :href="image.path" title="Product Image">
                                                 <img class="d-block w-100" :src="image.path" alt="1">
                                             </a>
                                         </div>
                                     </div>
                                     <ol class="carousel-indicators">
-                                        <li class="active" data-target="#product_details_slider" :data-slide-to="index" :style="background(image.path)" v-for="(image, index) in product.images">
+                                        <li class="active" data-target="#product_details_slider" :data-slide-to="index"
+                                            :style="background(image.path)" v-for="(image, index) in product.images">
                                         </li>
                                     </ol>
                                 </div>
@@ -52,18 +55,26 @@
                                 <h4 class="title">{{ product.name }}</h4>
                                 <h4 class="price">{{ product.price }} FCFA</h4>
                                 <div class="short_overview">
-                                    <p>Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellem malesuada in nibh selama euismod. Curabitur a rhoncus dui. Nunc lobortis cursus magna utrum faucibus. Vivamus justo nibh, pharetra non risus accumsan, tincidunt suscipit leo.</p>
+                                    <p>{{ product.description }}</p>
                                 </div>
 
                                 <div class="cart--area d-flex flex-wrap align-items-center">
                                     <!-- Add to Cart Form -->
                                     <form class="cart clearfix d-flex align-items-center" method="post">
                                         <div class="quantity">
-                                            <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12" v-model="form.qte" name="quantity" value="1">
-                                            <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                            <span class="qty-minus"
+                                                  onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i
+                                                class="fa fa-minus" aria-hidden="true"></i></span>
+                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12"
+                                                   v-model="form.qte" name="quantity" value="1">
+                                            <span class="qty-plus"
+                                                  onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i
+                                                class="fa fa-plus" aria-hidden="true"></i></span>
                                         </div>
-                                        <button type="submit" name="addtocart" value="5" @click.prevent="addToCart(product)" class="btn alazea-btn ml-15">Add to cart</button>
+                                        <button type="submit" name="addtocart" value="5"
+                                                @click.prevent="addToCart(product)" class="btn alazea-btn ml-15">Add to
+                                            cart
+                                        </button>
                                     </form>
                                     <!-- Wishlist & Compare -->
                                     <div class="wishlist-compare d-flex flex-wrap align-items-center">
@@ -74,7 +85,8 @@
 
                                 <div class="products--meta">
                                     <p><span>SKU:</span> <span>CT201807</span></p>
-                                    <p v-if="product.category"><span>Category:</span> <span>{{ product.category.name }}</span></p>
+                                    <p v-if="product.category"><span>Category:</span>
+                                        <span>{{ product.category.name }}</span></p>
                                     <p><span>Tags:</span> <span v-for="tag in product.tags">{{ tag.name }}</span></p>
                                     <p>
                                         <span>Share on:</span>
@@ -103,73 +115,49 @@
                                     <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional Information</a>
+                                    <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional
+                                        Information</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span class="text-muted">(1)</span></a>
+                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span
+                                        class="text-muted">(1)</span></a>
                                 </li>
                             </ul>
                             <!-- Tab Content -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="description">
                                     <div class="description_area">
-                                        <p>Sed a facilisis orci. Curabitur magna urna, varius placerat placerat sodales, pretium vitae orci. Aliquam erat volutpat. Cras sit amet suscipit magna. Quisque turpis odio, facilisis vel eleifend eu, dignissim ac odio.</p>
-                                        <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. In scelerisque augue at the moment mattis. Proin vitae arcu sit amet justo sollicitudin tincidunt sit amet ut velit.Proin placerat vel augue eget euismod. Phasellus cursus orci eu tellus vestibulum, vestibulum urna accumsan. Vestibulum ut ullamcorper sapien. Pellentesque molestie, est ac vestibulum eleifend, lorem ipsum mollis ipsum.</p>
+                                        <p>{{ product.description }}</p>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="addi-info">
                                     <div class="additional_info_area">
                                         <p>What should I do if I receive a damaged parcel?
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span></p>
+                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span>
+                                        </p>
                                         <p>I have received my order but the wrong item was delivered to me.
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span></p>
+                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span>
+                                        </p>
                                         <p>Product Receipt and Acceptance Confirmation Process
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span></p>
+                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span>
+                                        </p>
                                         <p>How do I cancel my order?
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span></p>
+                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span>
+                                        </p>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="reviews">
                                     <div class="reviews_area">
-                                        <ul>
+                                        <ul class="d-flex">
                                             <li>
                                                 <div class="single_user_review mb-15">
                                                     <div class="review-rating">
                                                         <i class="fa fa-star" aria-hidden="true"></i>
                                                         <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Quality</span>
+                                                        <span>Qualité</span>
                                                     </div>
                                                     <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="single_user_review mb-15">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Design</span>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="single_user_review">
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>for Value</span>
-                                                    </div>
-                                                    <div class="review-details">
-                                                        <p>by <a href="#">Colorlib</a> on <span>12 Sep 2018</span></p>
+                                                        <p>Par <a href="#">Alpha</a> on <span>12 Sep 2018</span></p>
                                                     </div>
                                                 </div>
                                             </li>
@@ -177,22 +165,23 @@
                                     </div>
 
                                     <div class="submit_a_review_area mt-50">
-                                        <h4>Submit A Review</h4>
+                                        <h4>Votre avis</h4>
                                         <form action="#" method="post">
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group d-flex align-items-center">
                                                         <span class="mr-15">Your Ratings:</span>
                                                         <div class="stars">
-                                                            <input type="radio" name="star" class="star-1" id="star-1">
+                                                            <input value="1" v-model="raiting.stars" type="radio" name="star"
+                                                                   class="star-1" id="star-1">
                                                             <label class="star-1" for="star-1">1</label>
-                                                            <input type="radio" name="star" class="star-2" id="star-2">
+                                                            <input value="2" v-model="raiting.stars" type="radio" name="star" class="star-2" id="star-2">
                                                             <label class="star-2" for="star-2">2</label>
-                                                            <input type="radio" name="star" class="star-3" id="star-3">
+                                                            <input value="3" v-model="raiting.stars" type="radio" name="star" class="star-3" id="star-3">
                                                             <label class="star-3" for="star-3">3</label>
-                                                            <input type="radio" name="star" class="star-4" id="star-4">
+                                                            <input value="4" v-model="raiting.stars" type="radio" name="star" class="star-4" id="star-4">
                                                             <label class="star-4" for="star-4">4</label>
-                                                            <input type="radio" name="star" class="star-5" id="star-5">
+                                                            <input value="5" v-model="raiting.stars" type="radio" name="star" class="star-5" id="star-5">
                                                             <label class="star-5" for="star-5">5</label>
                                                             <span></span>
                                                         </div>
@@ -200,30 +189,30 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
-                                                        <label for="name">Nickname</label>
-                                                        <input type="email" class="form-control" id="name" placeholder="Nazrul">
+                                                        <label for="name">Votre nom</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                               placeholder="Nom" v-model="raiting.user_name">
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
                                                         <label for="options">Reason for your rating</label>
-                                                        <select class="form-control" id="options">
-                                                            <option>Quality</option>
-                                                            <option>Value</option>
-                                                            <option>Design</option>
-                                                            <option>Price</option>
-                                                            <option>Others</option>
+                                                        <select class="form-control" id="options" v-model="raiting.type">
+                                                            <option value="quality">Qualité</option>
+                                                            <option value="price">Prix</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="comments">Comments</label>
-                                                        <textarea class="form-control" id="comments" rows="5" data-max-length="150"></textarea>
+                                                        <textarea class="form-control" id="comments" rows="5"
+                                                                  data-max-length="150" v-model="raiting.message"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <button type="submit" class="btn alazea-btn">Submit Your Review</button>
+                                                    <button type="submit" @click.prevent="sendReview" class="btn alazea-btn">Submit Your Review
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -257,7 +246,8 @@
                         <div class="single-product-area mb-100">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <a :href="route('shop-detail', {slug: product.slug})"><img :src="product.images[0].path" alt=""></a>
+                                <a :href="route('shop-detail', {slug: product.slug})"><img :src="product.images[0].path"
+                                                                                           alt=""></a>
                                 <!-- Product Tag -->
                                 <div class="product-tag">
                                     <a href="#">Hot</a>
@@ -302,6 +292,14 @@
                     price: '',
                     qte: '1',
                 }),
+                raiting: new Form({
+                    product_id: '',
+                    id: '',
+                    type: '',
+                    user_name: '',
+                    message: '',
+                    stars: ''
+                }),
             }
         },
 
@@ -323,9 +321,13 @@
                     });
             },
 
+            sendReview() {
+                console.log(this.raiting);
+            },
+
             loadProduct() {
                 this.$Progress.start();
-                axios.get('/api/product/slug/'+this.product_slug)
+                axios.get('/api/product/slug/' + this.product_slug)
                     .then((data) => {
                         console.log(data);
                         this.product = data.data;
@@ -352,9 +354,9 @@
         },
 
         computed: {
-          raitingProduct() {
-              return _.slice(this.products, 0, 4);
-          }
+            raitingProduct() {
+                return _.slice(this.products, 0, 4);
+            }
         },
 
         mounted() {

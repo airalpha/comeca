@@ -20,5 +20,9 @@ export default class Gate {
         return this.user.id == userU.id;
     }
 
+    getName() {
+        return (this.user != null) ? this.user.name : "";
+    }
+
 
 }
