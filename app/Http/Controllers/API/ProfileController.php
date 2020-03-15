@@ -61,6 +61,7 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         $user = auth('api')->user();
+        $name = "";
 
         $this->validate($request, [
             'name' => 'required|string|max:191',
@@ -90,8 +91,11 @@ class ProfileController extends Controller
             $request->merge(["password" => Hash::make($request->password)]);
         }
 
+        $data =  $request->profile;
+        unset($data['avatar']);
+
         $user->update($request->all());
-        $user->profile()->update($request->profile);
+        $user->profile()->update($data);
 
         $user->profile->avatar = $name;
         $user->save();

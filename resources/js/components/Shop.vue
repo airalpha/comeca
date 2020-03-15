@@ -251,10 +251,8 @@
                 this.$Progress.start();
                 this.form.post('/api/cart')
                     .then((data) => {
-                        Fire.$emit('Aftercreate');
-                        console.log(data);
                         Toast.fire({
-                            icon: 'success',
+                            icon: data.data.type,
                             title: data.data.message
                         });
                         this.$Progress.finish();

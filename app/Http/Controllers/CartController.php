@@ -50,15 +50,21 @@ class CartController extends Controller
         });
 
         if($duplicata->isNotEmpty()) {
-            return response()->json(["message" => $request->name . " est déjà dans le panier !"]);
+            return response()->json([
+                "message" => $request->name . " est déjà dans le panier !",
+                "type" => "warning"
+            ]);
         }
 
         $product = Product::find($request->id);
-
-        Cart::add($request->id, $request->name, 1, $request->price)
+        $qte = intval($request->qte) ? intval($request->qte) : 1;
+        Cart::add($request->id, $request->name, $qte, $request->price)
             ->associate(Product::class);
 
-        return response()->json(["message" => $product->name . " a été ajouté au panier !"]);
+        return response()->json([
+            "message" => $product->name . " a été ajouté au panier !",
+            "type" => "success"
+        ]);
     }
 
     /**
@@ -101,8 +107,13 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($rowId)
     {
-        //
+        Cart::remove($rowId);
+
+        return response()->json([
+            "message" => "Le produit a été retiré au panier !",
+            "type" => "success"
+        ]);
     }
 }

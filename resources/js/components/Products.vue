@@ -133,7 +133,7 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="tags">Tags</label>
-                                    <select class="select2" v-model="form.tags" multiple="multiple" id="tags" data-placeholder="Un ou plusieurs tags" required >
+                                    <select class="select2" v-model="form.tags" multiple="multiple" id="tags" data-placeholder="Un ou plusieurs tags" >
                                         <option :value="tag.id" v-for="tag in tags" :key="tag.id">
                                             {{ tag.name }}
                                         </option>

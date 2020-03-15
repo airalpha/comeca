@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/vide-panier', function (){
     Cart::destroy();
-    return view('shop');
+    return view('cart');
 });
 
 Route::get('/test', function (){
@@ -38,7 +38,7 @@ Route::get('/shop/{slug}', 'IndexController@shopDetail')->name('shop-detail');
 
 Route::post('/api/cart', 'CartController@store')->name('cart.store');
 
-Route::get('/api/cart', 'CartController@index')->name('cart.index');
+Route::delete('/api/cart/{rowId}', 'CartController@destroy')->name('cart.delete');
 
 Route::get('/cart', 'CartController@cart')->name('cart.view');
 

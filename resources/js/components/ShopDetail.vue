@@ -65,7 +65,7 @@
                                             <span class="qty-minus"
                                                   onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i
                                                 class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="qty" step="1" min="1" max="12"
+                                            <input type="number" class="qty-text" id="qty" step="1" min="1" :max="product.quantity"
                                                    v-model="form.qte" name="quantity" value="1">
                                             <span class="qty-plus"
                                                   onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i
@@ -306,13 +306,14 @@
         methods: {
             addToCart(product) {
                 this.form.fill(product);
+                this.form.qte = $("#qty").val();
                 this.$Progress.start();
                 this.form.post('/api/cart')
                     .then((data) => {
                         Fire.$emit('Aftercreate');
                         console.log(data);
                         Toast.fire({
-                            icon: 'success',
+                            icon: data.data.type,
                             title: data.data.message
                         });
                         this.$Progress.finish();
