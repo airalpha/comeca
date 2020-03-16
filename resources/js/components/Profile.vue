@@ -160,7 +160,7 @@
 
         methods: {
             getAvatar() {
-                let photo = (this.form.profile.avatar.length > 200) ? this.form.profile.avatar : "uploads/profile/" + this.form.profile.avatar;
+                let photo = (this.form.profile.avatar.length > 200) ? this.form.profile.avatar : this.form.profile.avatar;
                 return photo;
             },
 
@@ -183,9 +183,10 @@
 
             updateInfo() {
                 this.$Progress.start();
+                console.log(this.form);
                 this.form.put('/api/profile/' + this.form.id)
                     .then((data) => {
-
+                        console.log(data);
                         this.$Progress.finish();
                     }, error => {
                         this.$Progress.fail();

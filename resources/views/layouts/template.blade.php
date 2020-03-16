@@ -14,6 +14,7 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('template/img/core-img/favicon.ico') }}">
 
+    <link rel="stylesheet" href="/css/app.css">
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ asset("template/style.css") }}">
 
@@ -100,6 +101,7 @@
                                 <li><a href="/"><i class="fa fa-home"></i> &nbsp; Home</a></li>
                                 <li><a href="{{ route('about') }}"><i class="fa fa-info"></i> &nbsp; Apropos</a></li>
                                 <li><a href="{{ route('shop') }}"><i class="fa fa-shopping-bag"></i> &nbsp; Boutique</a></li>
+                                <li><a href="{{ route('producers') }}"><i class="fa fa-users"></i> &nbsp; Producteurs</a></li>
                                 <li><a href="contact.html"><i class="fa fa-address-book"></i>&nbsp; Contact</a></li>
                                 <!-- <li><a href="route('cart.index')"><i class="fa fa-shopping-cart"></i> &nbsp; <span class="cart-quantity">{{ Cart::count() }}</span></a></li> -->
                             </ul>

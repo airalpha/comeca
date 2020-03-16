@@ -77,7 +77,7 @@
                         <p>Les coupons peuvent être appliqués dans le panier avant le paiement. Ajoutez un article éligible sur le stand du vendeur qui a créé le code promo dans votre panier. Cliquez sur le bouton vert "Appliquer le code" pour ajouter le coupon à votre commande. Le total de la commande sera mis à jour pour indiquer les économies spécifiques au code promo saisi.</p>
                         <form action="#" method="post">
                             <input type="text" name="coupon-code" placeholder="Entrer votre coupon">
-                            <button type="submit">APPLIQUER LE COUPON</button>
+                            <button type="submit">APPLIQUER</button>
                         </form>
                     </div>
                 </div>
@@ -115,9 +115,11 @@
                             <h5>Total</h5>
                             <h5>{{ getPrice(Cart::total()) }} FCFA</h5>
                         </div>
+                        @if(Cart::count() > 0)
                         <div class="checkout-btn">
-                            <a href="#" class="btn alazea-btn w-100">PROCEDER AU PAYMENT</a>
+                            <a href="{{ route('checkout.index') }}" class="btn alazea-btn w-100">PROCEDER AU PAYMENT</a>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

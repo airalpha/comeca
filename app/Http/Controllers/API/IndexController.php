@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -11,39 +13,9 @@ class IndexController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function producers()
     {
-        return view('welcome');
-    }
-
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function shop()
-    {
-        return view('shop');
-    }
-
-    public function producer()
-    {
-        return view('producer');
-    }
-
-    public function shopDetail($slug)
-    {
-        return view('shop-detail', compact('slug'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return User::with('Profile')->where('type', 'producer')->get();
     }
 
     /**
@@ -64,17 +36,6 @@ class IndexController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

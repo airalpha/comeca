@@ -74,13 +74,13 @@ class ProfileController extends Controller
                     explode(':',
                         substr($request->profile["avatar"], 0,
                             strpos($request->profile["avatar"], ';')))[1])[1];
-
-            Image::make($request->profile["avatar"])->save(public_path('uploads/profile/') . $name);
+            $name = "uploads/profile/" . $name;
+            Image::make($request->profile["avatar"])->save(public_path($name));
 
             /*$request->merge(['user.profile.avatar' => $name]);*/
 
             // Efface l'ancien photo
-            $userPhoto = public_path('uploads/profile/') . $user->profile->avatar;
+            $userPhoto = public_path($user->profile->avatar);
             if(file_exists($userPhoto)) {
                 @unlink($userPhoto);
             }
@@ -96,8 +96,9 @@ class ProfileController extends Controller
 
         $user->update($request->all());
         $user->profile()->update($data);
+        if (!empty($name))
+            $user->profile->avatar = $name;
 
-        $user->profile->avatar = $name;
         $user->save();
         $user->profile->save();
     }

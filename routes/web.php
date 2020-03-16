@@ -25,7 +25,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    return Product::with('Category', 'Images')->get()->where('slug', 'leslie-guy');
+    return \App\User::with('Profile')->where('type', 'producer')->get();
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -33,6 +33,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/about', 'IndexController@about')->name('about');
 
 Route::get('/shop', 'IndexController@shop')->name('shop');
+
+Route::get('/producers', 'IndexController@producer')->name('producers');
+
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 
 Route::get('/shop/{slug}', 'IndexController@shopDetail')->name('shop-detail');
 

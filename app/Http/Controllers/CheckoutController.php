@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,27 +13,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('welcome');
-    }
-
-    public function about()
-    {
-        return view('about');
-    }
-
-    public function shop()
-    {
-        return view('shop');
-    }
-
-    public function producer()
-    {
-        return view('producer');
-    }
-
-    public function shopDetail($slug)
-    {
-        return view('shop-detail', compact('slug'));
+        return view('checkout');
     }
 
     /**
