@@ -15,7 +15,8 @@
                 this.$Progress.start();
                 axios.delete('/api/cart/'+this.rowId)
                     .then((data) => {
-                        location.reload();
+                        //location.reload();
+                        this.$forceUpdate();
                         Toast.fire({
                             icon: data.data.type,
                             title: data.data.message

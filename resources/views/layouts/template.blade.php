@@ -18,6 +18,44 @@
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ asset("template/style.css") }}">
 
+    <style>
+        /**
+         * The CSS shown here will not be introduced in the Quickstart guide, but shows
+         * how you can use CSS to style your Element's container.
+         */
+        .StripeElement {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #ebebeb;
+            background-color: #f5f5f5;
+            font-size: 14px;
+
+            box-sizing: border-box;
+
+            padding: 10px 12px;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+        }
+
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+
+        #card-errors {
+            color: #fa755a;
+        }
+    </style>
+
+    @yield('extra-script')
+
 </head>
 
 <body>
@@ -134,7 +172,6 @@
     @yield('content')
     <vue-progress-bar></vue-progress-bar>
 </div>
-
 <!-- ##### Footer Area Start ##### -->
 <footer class="footer-area bg-img" style="background-image: url({{ asset("template/img/bg-img/3.jpg") }});">
     <!-- Main Footer Area -->
@@ -283,6 +320,22 @@
 <script src="{{ asset("template/js/plugins/plugins.js") }}"></script>
 <!-- Active js -->
 <script src="{{ asset("template/js/active.js") }}"></script>
+@yield('extra-js')
 </body>
-
+<script>
+    @if(session()->has('success'))
+    Swal.fire(
+        "Merci !",
+        "{{ session()->get('success') }}",
+        "success"
+    );
+    @endif
+    @if(session()->has('error'))
+    Swal.fire(
+        "Oups !",
+        "{{ session()->get('error') }}",
+        "error"
+    );
+    @endif
+</script>
 </html>

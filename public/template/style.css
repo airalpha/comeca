@@ -7,7 +7,7 @@ Text Domain: Alazea, Gardening & Landscaping
 Version: - v1.0
 */
 /* :: 1.0 Import Fonts */
-@import url("https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800");
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700;800&display=swap');
 /* :: 2.0 Import All CSS */
 @import url(css/bootstrap.min.css);
 @import url(css/classy-nav.css);

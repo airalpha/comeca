@@ -38,6 +38,8 @@ Route::get('/producers', 'IndexController@producer')->name('producers');
 
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
+
 Route::get('/shop/{slug}', 'IndexController@shopDetail')->name('shop-detail');
 
 Route::post('/api/cart', 'CartController@store')->name('cart.store');
