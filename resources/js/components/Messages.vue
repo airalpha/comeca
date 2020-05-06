@@ -21,7 +21,9 @@
                         <img class="direct-chat-img" src="/uploads/profile/avatar.png" alt="message user image">
                         <!-- /.direct-chat-img -->
                         <div class="direct-chat-text">
-                            Bonjour comeca c'est comment ?
+                            Bonjour comeca c'est comment ? <br>
+                            Hello les amis <br>
+                            Le site est au top
                         </div>
                         <!-- /.direct-chat-text -->
                     </div>
@@ -49,7 +51,7 @@
             <div class="card-footer">
                 <form action="#" method="post">
                     <div class="input-group">
-                        <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                        <textarea type="text" name="message" placeholder="Type Message ..." class="form-control"></textarea>
                         <span class="input-group-append">
                       <button type="button" class="btn btn-primary">Send</button>
                     </span>
@@ -72,5 +74,11 @@
 </script>
 
 <style scoped>
+    .card-body {
+        min-height: 700px;
+    }
 
+    .direct-chat-messages {
+        height: inherit;
+    }
 </style>

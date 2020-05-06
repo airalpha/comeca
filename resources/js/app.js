@@ -72,6 +72,7 @@ let routes = [
     {path: '/category', component: require("./components/Category").default},
     {path: '/tag', component: require("./components/Tag").default},
     {path: '/messages', component: require("./components/Messages").default},
+    {path: '/message', component: require("./components/Message").default},
 ];
 
 const router = new VueRouter({
