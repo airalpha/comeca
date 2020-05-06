@@ -70,7 +70,8 @@ let routes = [
     {path: '/users', component: require("./components/Users").default},
     {path: '/products', component: require("./components/Products").default},
     {path: '/category', component: require("./components/Category").default},
-    {path: '/tag', component: require("./components/Tag").default}
+    {path: '/tag', component: require("./components/Tag").default},
+    {path: '/messages', component: require("./components/Messages").default},
 ];
 
 const router = new VueRouter({

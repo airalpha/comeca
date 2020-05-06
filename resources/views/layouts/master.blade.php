@@ -43,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="" class="brand-link">
-            <img src="./img/comeca.jpg" alt="Comeca Logo" class="brand-image img-circle elevation-3"
+            <img src="./img/comeca.png" alt="Comeca Logo" class="brand-image img-circle elevation-3"
                  style="opacity: .8">
             <span class="brand-text font-weight-light">Comeca</span>
         </a>
@@ -111,6 +111,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     @endcan
+                    <li class="nav-item">
+                        <router-link to="/messages" class="nav-link">
+                            <i class="nav-icon fas fa-envelope"></i>
+                            <p>
+                                Chat
+                            </p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/message" class="nav-link">
+                            <i class="nav-icon fas fa-inbox"></i>
+                            <p>
+                                Inbox
+                            </p>
+                        </router-link>
+                    </li>
                     <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
                             <i class="nav-icon fas fa-user-alt"></i>

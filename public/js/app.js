@@ -18410,101 +18410,97 @@ __webpack_require__.r(__webpack_exports__);
     console.log('Component mounted.');
   },
   created: function created() {
+    $(function () {
+      //--------------
+      //- AREA CHART -
+      //--------------
+      var areaChartData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+          label: 'Digital Goods',
+          backgroundColor: 'rgba(60,141,188,0.9)',
+          borderColor: 'rgba(60,141,188,0.8)',
+          pointRadius: false,
+          pointColor: '#3b8bba',
+          pointStrokeColor: 'rgba(60,141,188,1)',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data: [28, 48, 40, 19, 86, 27, 90]
+        }, {
+          label: 'Electronics',
+          backgroundColor: 'rgba(210, 214, 222, 1)',
+          borderColor: 'rgba(210, 214, 222, 1)',
+          pointRadius: false,
+          pointColor: 'rgba(210, 214, 222, 1)',
+          pointStrokeColor: '#c1c7d1',
+          pointHighlightFill: '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data: [65, 59, 80, 81, 56, 55, 40]
+        }]
+      };
+      var areaChartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            gridLines: {
+              display: false
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              display: false
+            }
+          }]
+        }
+      }; //-------------
+      //- LINE CHART -
+      //--------------
+
+      var lineChartCanvas = $('#lineChart').get(0).getContext('2d');
+      var lineChartOptions = jQuery.extend(true, {}, areaChartOptions);
+      var lineChartData = jQuery.extend(true, {}, areaChartData);
+      lineChartData.datasets[0].fill = false;
+      lineChartData.datasets[1].fill = false;
+      lineChartOptions.datasetFill = false;
+      var lineChart = new Chart(lineChartCanvas, {
+        type: 'line',
+        data: lineChartData,
+        options: lineChartOptions
+      }); //-------------
+      //- DONUT CHART -
+      //-------------
+
+      var donutData = {
+        labels: ['Chrome', 'IE', 'FireFox', 'Safari', 'Opera', 'Navigator'],
+        datasets: [{
+          data: [700, 500, 400, 600, 300, 100],
+          backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
+        }]
+      }; //-------------
+      //- PIE CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+
+      var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+      var pieData = donutData;
+      var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true
+      }; //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+
+      var pieChart = new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: pieData,
+        options: pieOptions
+      });
+    });
     this.loadDatas();
   }
-});
-$(function () {
-  /* ChartJS
-   * -------
-   * Here we will create a few charts using ChartJS
-   */
-  //--------------
-  //- AREA CHART -
-  //--------------
-  var areaChartData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [{
-      label: 'Digital Goods',
-      backgroundColor: 'rgba(60,141,188,0.9)',
-      borderColor: 'rgba(60,141,188,0.8)',
-      pointRadius: false,
-      pointColor: '#3b8bba',
-      pointStrokeColor: 'rgba(60,141,188,1)',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(60,141,188,1)',
-      data: [28, 48, 40, 19, 86, 27, 90]
-    }, {
-      label: 'Electronics',
-      backgroundColor: 'rgba(210, 214, 222, 1)',
-      borderColor: 'rgba(210, 214, 222, 1)',
-      pointRadius: false,
-      pointColor: 'rgba(210, 214, 222, 1)',
-      pointStrokeColor: '#c1c7d1',
-      pointHighlightFill: '#fff',
-      pointHighlightStroke: 'rgba(220,220,220,1)',
-      data: [65, 59, 80, 81, 56, 55, 40]
-    }]
-  };
-  var areaChartOptions = {
-    maintainAspectRatio: false,
-    responsive: true,
-    legend: {
-      display: false
-    },
-    scales: {
-      xAxes: [{
-        gridLines: {
-          display: false
-        }
-      }],
-      yAxes: [{
-        gridLines: {
-          display: false
-        }
-      }]
-    }
-  }; //-------------
-  //- LINE CHART -
-  //--------------
-
-  var lineChartCanvas = $('#lineChart').get(0).getContext('2d');
-  var lineChartOptions = jQuery.extend(true, {}, areaChartOptions);
-  var lineChartData = jQuery.extend(true, {}, areaChartData);
-  lineChartData.datasets[0].fill = false;
-  lineChartData.datasets[1].fill = false;
-  lineChartOptions.datasetFill = false;
-  var lineChart = new Chart(lineChartCanvas, {
-    type: 'line',
-    data: lineChartData,
-    options: lineChartOptions
-  }); //-------------
-  //- DONUT CHART -
-  //-------------
-
-  var donutData = {
-    labels: ['Chrome', 'IE', 'FireFox', 'Safari', 'Opera', 'Navigator'],
-    datasets: [{
-      data: [700, 500, 400, 600, 300, 100],
-      backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de']
-    }]
-  }; //-------------
-  //- PIE CHART -
-  //-------------
-  // Get context with jQuery - using jQuery's .get() method.
-
-  var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
-  var pieData = donutData;
-  var pieOptions = {
-    maintainAspectRatio: false,
-    responsive: true
-  }; //Create pie or douhnut chart
-  // You can switch between pie and douhnut using the method below.
-
-  var pieChart = new Chart(pieChartCanvas, {
-    type: 'pie',
-    data: pieData,
-    options: pieOptions
-  });
 });
 
 /***/ }),
@@ -18574,6 +18570,85 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log("Mounted Index");
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messages.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Messages.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Messages",
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -99281,6 +99356,143 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messages.vue?vue&type=template&id=62dade92&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Messages.vue?vue&type=template&id=62dade92&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-3" }, [
+      _c("div", { staticClass: "card direct-chat direct-chat-primary" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card-header ui-sortable-handle",
+            staticStyle: { cursor: "move" }
+          },
+          [
+            _c("h3", { staticClass: "card-title" }, [
+              _vm._v("Messages de groupes")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "badge badge-primary",
+                  attrs: { "data-toggle": "tooltip", title: "3 New Messages" }
+                },
+                [_vm._v("3")]
+              )
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "direct-chat-messages" }, [
+            _c("div", { staticClass: "direct-chat-msg" }, [
+              _c("div", { staticClass: "direct-chat-infos clearfix" }, [
+                _c("span", { staticClass: "direct-chat-name float-left" }, [
+                  _vm._v("Idrice Roussin")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticClass: "direct-chat-timestamp float-right" },
+                  [_vm._v("23 Jan 2:00 pm")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "direct-chat-img",
+                attrs: {
+                  src: "/uploads/profile/avatar.png",
+                  alt: "message user image"
+                }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "direct-chat-text" }, [
+                _vm._v(
+                  "\n                        Bonjour comeca c'est comment ?\n                    "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "direct-chat-msg right" }, [
+              _c("div", { staticClass: "direct-chat-infos clearfix" }, [
+                _c("span", { staticClass: "direct-chat-name float-right" }, [
+                  _vm._v("Lambo Ulrich")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticClass: "direct-chat-timestamp float-left" },
+                  [_vm._v("23 Jan 2:05 pm")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("img", {
+                staticClass: "direct-chat-img",
+                attrs: { src: "/img/comeca.png", alt: "message user image" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "direct-chat-text" }, [
+                _vm._v(
+                  "\n                        Le site web qui tue bravo gar\n                    "
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-footer" }, [
+          _c("form", { attrs: { action: "#", method: "post" } }, [
+            _c("div", { staticClass: "input-group" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "message",
+                  placeholder: "Type Message ..."
+                }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "input-group-append" }, [
+                _c(
+                  "button",
+                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                  [_vm._v("Send")]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/NotFound.vue?vue&type=template&id=2ce50e5a&scoped=true& ***!
@@ -100049,16 +100261,14 @@ var render = function() {
               _vm._l(_vm.products, function(product) {
                 return _c("tr", { key: product.id }, [
                   _c("td", [
-                    _c("a", { attrs: { href: product.images[0].path } }, [
-                      _c("img", {
-                        attrs: {
-                          src: _vm.getImage(product.image),
-                          alt: "",
-                          height: "50",
-                          width: "50"
-                        }
-                      })
-                    ])
+                    _c("img", {
+                      attrs: {
+                        src: product.images[0].path,
+                        alt: "",
+                        height: "50",
+                        width: "50"
+                      }
+                    })
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(product.name))]),
@@ -118904,6 +119114,7 @@ var map = {
 	"./components/EditProduct.vue": "./resources/js/components/EditProduct.vue",
 	"./components/Empty.vue": "./resources/js/components/Empty.vue",
 	"./components/Index.vue": "./resources/js/components/Index.vue",
+	"./components/Messages.vue": "./resources/js/components/Messages.vue",
 	"./components/NotFound.vue": "./resources/js/components/NotFound.vue",
 	"./components/Producer.vue": "./resources/js/components/Producer.vue",
 	"./components/Products.vue": "./resources/js/components/Products.vue",
@@ -119081,6 +119292,9 @@ var routes = [{
 }, {
   path: '/tag',
   component: __webpack_require__(/*! ./components/Tag */ "./resources/js/components/Tag.vue")["default"]
+}, {
+  path: '/messages',
+  component: __webpack_require__(/*! ./components/Messages */ "./resources/js/components/Messages.vue")["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_4__["default"]({
   mode: 'history',
@@ -119716,6 +119930,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_bb962f12_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_bb962f12_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Messages.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Messages.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Messages_vue_vue_type_template_id_62dade92_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Messages.vue?vue&type=template&id=62dade92&scoped=true& */ "./resources/js/components/Messages.vue?vue&type=template&id=62dade92&scoped=true&");
+/* harmony import */ var _Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Messages.vue?vue&type=script&lang=js& */ "./resources/js/components/Messages.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Messages_vue_vue_type_template_id_62dade92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Messages_vue_vue_type_template_id_62dade92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "62dade92",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Messages.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Messages.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/Messages.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Messages.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messages.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Messages.vue?vue&type=template&id=62dade92&scoped=true&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Messages.vue?vue&type=template&id=62dade92&scoped=true& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_template_id_62dade92_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Messages.vue?vue&type=template&id=62dade92&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Messages.vue?vue&type=template&id=62dade92&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_template_id_62dade92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Messages_vue_vue_type_template_id_62dade92_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

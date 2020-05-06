@@ -17,7 +17,8 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view('checkout');
+        $user = auth()->user();
+        return view('checkout', compact('user'));
     }
 
     /**
@@ -54,10 +55,11 @@ class CheckoutController extends Controller
                 'source' => $request->stripeToken,
                 'description' => 'Comeca Shoping',
                 'receipt_email' => $request->email,
-                'currency' => 'eu
-                ',
+                'currency' => 'eur',
                 'amount'   => Cart::total(),
             ]);
+
+            dd($charge);
 
             session()->flash('success', 'Merci pour votre payment !');
             return redirect()->back();

@@ -39,9 +39,10 @@
                         <form action="{{ route('checkout.store') }}" method="post" id="payment-form">
                             @csrf
                             <div class="row">
+                                {{ $user->profile  }}
                                 <div class="col-md-12 mb-4">
                                     <label for="first_name">Nom *</label>
-                                    <input type="text" class="form-control  @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}"
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ $user ? $user->name : old('name') }}"
                                            required>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -51,7 +52,7 @@
                                 </div>
                                 <div class="col-12 mb-4">
                                     <label for="email_address">Email Addresse *</label>
-                                    <input type="email" class="form-control  @error('email') is-invalid @enderror" name="email" id="email_address" value="{{ old('email') }}">
+                                    <input type="email" class="form-control  @error('email') is-invalid @enderror" name="email" id="email_address" value="{{ $user ? $user->email : old('email') }}">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,7 +62,7 @@
                                 <div class="col-12 mb-4">
                                     <label for="phone_number">Phone Number *</label>
                                     <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone_number" min="0"
-                                           value="{{ old('phone') }}">
+                                           value="{{ $user ? $user->profile->phone : old('phone') }}">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -70,7 +71,7 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="city">Ville *</label>
-                                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ old('city') }}">
+                                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ $user ? $user->profile->city : old('city') }}">
                                     @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,7 +107,7 @@
                                     <div id="card-errors" role="alert"></div>
                                 </div>
                             </div>
-                            <button class="btn alazea-btn w-100" type="submit">Payer</button>
+                            <button class="btn alazea-btn w-100" id="submit-btn" type="submit">Payer</button>
                         </form>
                     </div>
                 </div>
@@ -138,7 +139,7 @@
                             <h5>{{ Cart::total() }} FCFA</h5>
                         </div>
                         <div class="checkout-btn mt-30">
-                            <a href="#" class="btn alazea-btn w-100">Payer</a>
+                            <a href="#" id="second-submit-btn" class="btn alazea-btn w-100">Payer</a>
                         </div>
                     </div>
                 </div>
@@ -224,5 +225,9 @@
             // Submit the form
             form.submit();
         }
+
+        document.getElementById("second-submit-btn").addEventListener("click", function () {
+            document.getElementById("submit-btn").click();
+        })
     </script>
 @endsection
