@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Message;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,15 @@ class UserController extends Controller
     {
         $this->authorize('isAdmin');
         return User::all();
+    }
+
+    public function contacts() {
+        return User::with("Profile")->get();
+    }
+
+    public function getMessagesFor($id) {
+        $messages = Message::where('from', $id)->orWhere('to', $id)->get();
+        return $messages;
     }
 
     /**
