@@ -99998,7 +99998,18 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c("div", { staticClass: "card-tools" }, [
+              _c(
+                "span",
+                {
+                  staticClass: "badge badge-primary",
+                  attrs: { "data-toggle": "tooltip", title: "3 New Messages" }
+                },
+                [_vm._v(_vm._s(_vm.messages.length))]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
           ]
         ),
         _vm._v(" "),
@@ -100026,31 +100037,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-tools" }, [
-      _c(
-        "span",
-        {
-          staticClass: "badge badge-primary",
-          attrs: { "data-toggle": "tooltip", title: "3 New Messages" }
-        },
-        [_vm._v("3")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-tool",
-          attrs: {
-            id: "btn-contact",
-            type: "button",
-            "data-toggle": "tooltip",
-            title: "Contacts",
-            "data-widget": "chat-pane-toggle"
-          }
-        },
-        [_c("i", { staticClass: "fas fa-comments" })]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-tool",
+        attrs: {
+          id: "btn-contact",
+          type: "button",
+          "data-toggle": "tooltip",
+          title: "Contacts",
+          "data-widget": "chat-pane-toggle"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-comments" })]
+    )
   }
 ]
 render._withStripped = true
@@ -100319,7 +100319,7 @@ var render = function() {
                         _vm._s(
                           message.to !== _vm.contact.id
                             ? _vm.contact.name
-                            : "Idrice Roussin"
+                            : _vm.$gate.user.name
                         )
                       )
                     ]
@@ -100334,7 +100334,7 @@ var render = function() {
                           ? "float-left"
                           : "float-right"
                     },
-                    [_vm._v("23 Jan 2:00 pm")]
+                    [_vm._v(_vm._s(message.date))]
                   )
                 ]),
                 _vm._v(" "),
@@ -100344,7 +100344,7 @@ var render = function() {
                     src:
                       message.to !== _vm.contact.id
                         ? _vm.contact.profile.avatar
-                        : "/img/comeca.png",
+                        : _vm.$gate.user.profile.avatar,
                     alt: "message user image"
                   }
                 }),

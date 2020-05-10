@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Message;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use function foo\func;
 
@@ -35,13 +37,20 @@ class UserController extends Controller
 
     public function getMessagesFor($id) {
         $user_id = auth('api')->user()->id;
-        return Message::where(function($q) use($id, $user_id) {
+        $messages = Message::where(function($q) use($id, $user_id) {
             $q->where('from', $id);
             $q->where('to', $user_id);
         })->orWhere(function($q) use($id, $user_id) {
             $q->where('from', $user_id);
             $q->where('to', $id);
         })->get();
+        $datas = [];
+        foreach ($messages as $message) {
+            $message->date = $message->created_at->diffForHumans();//Carbon::createFromTimeString( $message->created_at)->diffForHumans();
+            $datas[] = $message;
+        }
+
+        return $datas;
     }
 
     /**

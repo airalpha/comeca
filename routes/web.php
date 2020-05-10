@@ -25,7 +25,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    return \App\User::with('Profile')->where('type', 'producer')->get();
+    return \Illuminate\Support\Carbon::createFromTimeString( '2020-05-08T11:16:31.000000Z')->diffForHumans();
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

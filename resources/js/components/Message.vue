@@ -5,7 +5,7 @@
                 <h3 class="card-title">{{ selectedContact ? selectedContact.name : "Privée Chat" }}</h3>
 
                 <div class="card-tools">
-                    <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
+                    <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">{{ messages.length }}</span>
                     <button id="btn-contact" type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
                             data-widget="chat-pane-toggle">
                         <i class="fas fa-comments"></i>
