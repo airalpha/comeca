@@ -4,7 +4,7 @@
             <li>
                 <form class="form-inline col-md-12">
                     <div class="input-group input-group-sm center-block">
-                        <input type="search" placeholder="Search" aria-label="Search" class="form-control">
+                        <input type="search" placeholder="Search" v-model="search" aria-label="Search" class="form-control">
                         <div class="input-group-append"><button type="submit" class="btn btn-outline-primary">
                             <i class="fas fa-search"></i></button>
                         </div>
@@ -12,7 +12,7 @@
                 </form>
             </li>
             <!-- End Search contact Item -->
-            <li v-for="(contact, index) in contacts" :key="contact.id" @click="selectedContact(index, contact)">
+            <li v-for="(contact, index) in searchContact" :key="contact.id" @click="selectedContact(index, contact)">
                 <a href="#">
                     <img class="contacts-list-img" :src="contact.profile ? contact.profile.avatar : ''">
 
@@ -43,6 +43,12 @@
             }
         },
 
+        data() {
+            return {
+                search: '',
+            }
+        },
+
         mounted() {
         },
 
@@ -50,6 +56,19 @@
             selectedContact(index, contact) {
                 this.selected = index;
                 this.$emit('selected', contact);
+            }
+        },
+
+        computed: {
+            searchContact() {
+                if(this.search === '')
+                    return this.contacts;
+
+                return this.contacts.filter(
+                    contact => {
+                        return contact.name.toLowerCase().includes(this.search.toLowerCase());
+                    }
+                )
             }
         }
     }

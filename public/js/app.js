@@ -18294,11 +18294,26 @@ __webpack_require__.r(__webpack_exports__);
       "default": []
     }
   },
+  data: function data() {
+    return {
+      search: ''
+    };
+  },
   mounted: function mounted() {},
   methods: {
     selectedContact: function selectedContact(index, contact) {
       this.selected = index;
       this.$emit('selected', contact);
+    }
+  },
+  computed: {
+    searchContact: function searchContact() {
+      var _this = this;
+
+      if (this.search === '') return this.contacts;
+      return this.contacts.filter(function (contact) {
+        return contact.name.toLowerCase().includes(_this.search.toLowerCase());
+      });
     }
   }
 });
@@ -99110,9 +99125,45 @@ var render = function() {
       "ul",
       { staticClass: "contacts-list" },
       [
-        _vm._m(0),
+        _c("li", [
+          _c("form", { staticClass: "form-inline col-md-12" }, [
+            _c(
+              "div",
+              { staticClass: "input-group input-group-sm center-block" },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.search,
+                      expression: "search"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "search",
+                    placeholder: "Search",
+                    "aria-label": "Search"
+                  },
+                  domProps: { value: _vm.search },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.search = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._m(0)
+              ]
+            )
+          ])
+        ]),
         _vm._v(" "),
-        _vm._l(_vm.contacts, function(contact, index) {
+        _vm._l(_vm.searchContact, function(contact, index) {
           return _c(
             "li",
             {
@@ -99162,30 +99213,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("form", { staticClass: "form-inline col-md-12" }, [
-        _c("div", { staticClass: "input-group input-group-sm center-block" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "search",
-              placeholder: "Search",
-              "aria-label": "Search"
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-append" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-primary",
-                attrs: { type: "submit" }
-              },
-              [_c("i", { staticClass: "fas fa-search" })]
-            )
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-outline-primary", attrs: { type: "submit" } },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
     ])
   }
 ]
