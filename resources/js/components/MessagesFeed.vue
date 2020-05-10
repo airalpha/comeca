@@ -1,20 +1,22 @@
 <template>
     <div class="direct-chat-messages">
-        <!-- Message. Default to the left -->
-        <div class="direct-chat-msg" :class="message.to===contact.id ? 'right' : 'left'" v-for="message in messages" :key="message.id">
-            <div class="direct-chat-infos clearfix">
-                <span class="direct-chat-name float-left">Idrice Roussin</span>
-                <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+        <div v-if="contact">
+            <!-- Message. Default to the left -->
+            <div class="direct-chat-msg mt-3" :class="message.to===contact.id ? 'right' : 'left'" v-for="message in messages" :key="message.id">
+                <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name" :class="message.to===contact.id ? 'float-right' : 'float-left'">{{ message.to === contact.id ? contact.name : "Idrice Roussin" }}</span>
+                    <span class="direct-chat-timestamp" :class="message.to===contact.id ? 'float-left' : 'float-right'">23 Jan 2:00 pm</span>
+                </div>
+                <!-- /.direct-chat-infos -->
+                <img class="direct-chat-img" src="/uploads/profile/avatar.png" alt="message user image">
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                    {{ message.text }}
+                </div>
+                <!-- /.direct-chat-text -->
             </div>
-            <!-- /.direct-chat-infos -->
-            <img class="direct-chat-img" src="/uploads/profile/avatar.png" alt="message user image">
-            <!-- /.direct-chat-img -->
-            <div class="direct-chat-text">
-                {{ message.text }}
-            </div>
-            <!-- /.direct-chat-text -->
+            <!-- /.direct-chat-msg -->
         </div>
-        <!-- /.direct-chat-msg -->
     </div>
 </template>
 
@@ -34,7 +36,7 @@
 
         data(){
             return {
-
+                from: {},
             }
         }
     }

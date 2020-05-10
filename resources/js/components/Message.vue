@@ -6,7 +6,7 @@
 
                 <div class="card-tools">
                     <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
-                    <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
+                    <button id="btn-contact" type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
                             data-widget="chat-pane-toggle">
                         <i class="fas fa-comments"></i>
                     </button>
@@ -55,6 +55,7 @@
                     this.messages = response.data;
                     console.log(response.data);
                     this.selectedContact = contact;
+                    $("#btn-contact").click();
                 })
             }
         }

@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use function foo\func;
 
 class UserController extends Controller
 {
@@ -29,12 +30,18 @@ class UserController extends Controller
     }
 
     public function contacts() {
-        return User::with("Profile")->get();
+        return User::with("Profile")->where('id', '!=', auth('api')->user()->id)->get();
     }
 
     public function getMessagesFor($id) {
-        $messages = Message::where('from', $id)->orWhere('to', $id)->get();
-        return $messages;
+        $user_id = auth('api')->user()->id;
+        return Message::where(function($q) use($id, $user_id) {
+            $q->where('from', $id);
+            $q->where('to', $user_id);
+        })->orWhere(function($q) use($id, $user_id) {
+            $q->where('from', $user_id);
+            $q->where('to', $id);
+        })->get();
     }
 
     /**

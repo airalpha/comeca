@@ -18740,6 +18740,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.messages = response.data;
         console.log(response.data);
         _this2.selectedContact = contact;
+        $("#btn-contact").click();
       });
     }
   }
@@ -18899,6 +18900,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "MessagesFeed",
   props: {
@@ -18911,7 +18914,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   data: function data() {
-    return {};
+    return {
+      from: {}
+    };
   }
 });
 
@@ -99107,14 +99112,14 @@ var render = function() {
       [
         _vm._m(0),
         _vm._v(" "),
-        _vm._l(_vm.contacts, function(contact) {
+        _vm._l(_vm.contacts, function(contact, index) {
           return _c(
             "li",
             {
               key: contact.id,
               on: {
                 click: function($event) {
-                  return _vm.selectedContact(_vm.index, contact)
+                  return _vm.selectedContact(index, contact)
                 }
               }
             },
@@ -100036,6 +100041,7 @@ var staticRenderFns = [
         {
           staticClass: "btn btn-tool",
           attrs: {
+            id: "btn-contact",
             type: "button",
             "data-toggle": "tooltip",
             title: "Contacts",
@@ -100285,53 +100291,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "direct-chat-messages" },
-    _vm._l(_vm.messages, function(message) {
-      return _c(
-        "div",
-        {
-          key: message.id,
-          staticClass: "direct-chat-msg",
-          class: message.to === _vm.contact.id ? "right" : "left"
-        },
-        [
-          _vm._m(0, true),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "direct-chat-img",
-            attrs: {
-              src: "/uploads/profile/avatar.png",
-              alt: "message user image"
-            }
+  return _c("div", { staticClass: "direct-chat-messages" }, [
+    _vm.contact
+      ? _c(
+          "div",
+          _vm._l(_vm.messages, function(message) {
+            return _c(
+              "div",
+              {
+                key: message.id,
+                staticClass: "direct-chat-msg mt-3",
+                class: message.to === _vm.contact.id ? "right" : "left"
+              },
+              [
+                _c("div", { staticClass: "direct-chat-infos clearfix" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "direct-chat-name",
+                      class:
+                        message.to === _vm.contact.id
+                          ? "float-right"
+                          : "float-left"
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          message.to === _vm.contact.id
+                            ? _vm.contact.name
+                            : "Idrice Roussin"
+                        )
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "direct-chat-timestamp",
+                      class:
+                        message.to === _vm.contact.id
+                          ? "float-left"
+                          : "float-right"
+                    },
+                    [_vm._v("23 Jan 2:00 pm")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("img", {
+                  staticClass: "direct-chat-img",
+                  attrs: {
+                    src: "/uploads/profile/avatar.png",
+                    alt: "message user image"
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "direct-chat-text" }, [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(message.text) +
+                      "\n            "
+                  )
+                ])
+              ]
+            )
           }),
-          _vm._v(" "),
-          _c("div", { staticClass: "direct-chat-text" }, [
-            _vm._v("\n            " + _vm._s(message.text) + "\n        ")
-          ])
-        ]
-      )
-    }),
-    0
-  )
+          0
+        )
+      : _vm._e()
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "direct-chat-infos clearfix" }, [
-      _c("span", { staticClass: "direct-chat-name float-left" }, [
-        _vm._v("Idrice Roussin")
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "direct-chat-timestamp float-right" }, [
-        _vm._v("23 Jan 2:00 pm")
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

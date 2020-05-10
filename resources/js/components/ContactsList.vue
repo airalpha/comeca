@@ -12,7 +12,7 @@
                 </form>
             </li>
             <!-- End Search contact Item -->
-            <li v-for="contact in contacts" :key="contact.id" @click="selectedContact(index, contact)">
+            <li v-for="(contact, index) in contacts" :key="contact.id" @click="selectedContact(index, contact)">
                 <a href="#">
                     <img class="contacts-list-img" :src="contact.profile ? contact.profile.avatar : ''">
 
