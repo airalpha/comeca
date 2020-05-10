@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
 
@@ -81,7 +82,8 @@ class ProfileController extends Controller
 
             // Efface l'ancien photo
             $userPhoto = public_path($user->profile->avatar);
-            if(file_exists($userPhoto)) {
+            $contains = Str::contains($userPhoto, "avatar");
+            if(file_exists($userPhoto) && !$contains) {
                 @unlink($userPhoto);
             }
 

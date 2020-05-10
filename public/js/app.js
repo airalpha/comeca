@@ -100317,7 +100317,7 @@ var render = function() {
                     [
                       _vm._v(
                         _vm._s(
-                          message.to === _vm.contact.id
+                          message.to !== _vm.contact.id
                             ? _vm.contact.name
                             : "Idrice Roussin"
                         )
@@ -100341,7 +100341,10 @@ var render = function() {
                 _c("img", {
                   staticClass: "direct-chat-img",
                   attrs: {
-                    src: "/uploads/profile/avatar.png",
+                    src:
+                      message.to !== _vm.contact.id
+                        ? _vm.contact.profile.avatar
+                        : "/img/comeca.png",
                     alt: "message user image"
                   }
                 }),
