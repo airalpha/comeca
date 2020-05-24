@@ -19,7 +19,7 @@
                     <div class="contacts-list-info">
                           <span class="contacts-list-name">
                             {{ contact.name }}
-                            <small class="contacts-list-date float-right"><i class="fas fa-circle text-success"></i></small>
+                            <small class="contacts-list-date float-right"><span class="badge badge-danger">{{ contact.unread }}</span></small>
                           </span>
                         <span class="contacts-list-msg"><span class="text-primary">How have you been? I was...</span></span>
                     </div>
@@ -62,7 +62,9 @@
         computed: {
             searchContact() {
                 if(this.search === '')
-                    return this.contacts;
+                    return _.sortBy(this.contacts, [(contact) => {
+                        return contact.unread;
+                    }]).reverse();
 
                 return this.contacts.filter(
                     contact => {

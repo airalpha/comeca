@@ -14,7 +14,7 @@ class AddReadToMessages extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            //
+            $table->boolean("read")->after("to")->default(false);
         });
     }
 
@@ -26,7 +26,7 @@ class AddReadToMessages extends Migration
     public function down()
     {
         Schema::table('messages', function (Blueprint $table) {
-            //
+            $table->dropColumn("read");
         });
     }
 }

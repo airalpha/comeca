@@ -6,7 +6,7 @@
 
                 <div class="card-tools">
                     <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">{{ messages.length }}</span>
-                    <button id="btn-contact" type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
+                    <button v-on:click="checkContact" id="btn-contact" type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
                             data-widget="chat-pane-toggle">
                         <i class="fas fa-comments"></i>
                     </button>
@@ -54,7 +54,14 @@
         },
 
         methods: {
+            checkContact(event) {
+                if(!this.selectedContact)
+                    event.stopPropagation();
+            },
+
             startConversationWith(contact) {
+                this.updateUnreadCount(contact, true);
+
                 axios.get(`/api/conversation/${contact.id}`)
                 .then((response) => {
                     this.messages = response.data;
@@ -75,7 +82,21 @@
                     return;
                 }
 
-                alert(message.text);
+                this.updateUnreadCount(message.from_contact, false);
+            },
+
+            updateUnreadCount(contact, reset) {
+                this.contacts = this.contacts.map((single) => {
+                    if (single.id !== contact.id)
+                        return single;
+
+                    if (reset)
+                        single.unread = 0
+                    else
+                        single.unread += 1;
+
+                    return single;
+                });
             }
         }
     }
