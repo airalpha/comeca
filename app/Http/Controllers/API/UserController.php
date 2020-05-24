@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\NewMessage;
 use App\Http\Controllers\Controller;
 use App\Message;
 use App\User;
@@ -51,6 +52,17 @@ class UserController extends Controller
         }
 
         return $datas;
+    }
+
+    public function sendMessage(Request $request)
+    {
+        $message =  Message::create([
+            "from" => auth('api')->user()->id,
+            "to" => $request->contact_id,
+            "text" => $request->text
+        ]);
+        broadcast(new NewMessage($message));
+        return $message;
     }
 
     /**

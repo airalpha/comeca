@@ -25,7 +25,9 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    return \Illuminate\Support\Carbon::createFromTimeString( '2020-05-08T11:16:31.000000Z')->diffForHumans();
+    $a = env('APP_NAME');
+    dd($a);
+    return env('PUSHER_APP_KEY');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

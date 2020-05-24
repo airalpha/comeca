@@ -4,7 +4,7 @@
             <div class="input-group">
                 <textarea name="message" v-model="message" @keydown.enter="send" placeholder="Message ..." class="form-control"></textarea>
                 <span class="input-group-append">
-                      <button type="button" class="btn btn-primary">Send</button>
+                      <button type="button" class="btn btn-primary" @click="send">Send</button>
                     </span>
             </div>
         </form>

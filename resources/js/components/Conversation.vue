@@ -29,6 +29,16 @@
         methods: {
             sendMessage(text) {
                 console.log(text);
+                if(!this.contact)
+                    return;
+                let form = new Form({
+                    contact_id: this.contact.id,
+                    text: text
+                });
+                form.post('/api/conversation/send')
+                .then((response) => {
+                    this.$emit("new", response.data);
+                });
             }
         }
     }

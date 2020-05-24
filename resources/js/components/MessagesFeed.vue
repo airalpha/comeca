@@ -1,5 +1,5 @@
 <template>
-    <div class="direct-chat-messages">
+    <div class="direct-chat-messages" ref="feed">
         <div v-if="contact">
             <!-- Message. Default to the left -->
             <div class="direct-chat-msg mt-3" :class="message.to===contact.id ? 'right' : 'left'" v-for="message in messages" :key="message.id">
@@ -36,7 +36,24 @@
 
         data(){
             return {
-                from: {},
+
+            }
+        },
+
+        methods: {
+            scrollToBottom() {
+                setTimeout(() => {
+                    this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
+                }, 50);
+            }
+        },
+
+        watch: {
+            contact: function() {
+                this.scrollToBottom();
+            },
+            messages: function() {
+                this.scrollToBottom();
             }
         }
     }

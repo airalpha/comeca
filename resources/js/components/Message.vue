@@ -15,7 +15,7 @@
             <!-- /.card-header -->
             <div class="card-body ">
                 <!-- Conversations are loaded here -->
-                <conversation :contact="selectedContact" :messages="messages" />
+                <conversation :contact="selectedContact" :messages="messages" @new="sendNewMessage"/>
                 <!--/.direct-chat-messages-->
 
                 <!-- Contacts are loaded here -->
@@ -40,7 +40,12 @@
         },
 
         mounted() {
-            console.log(user);
+            console.log("Echo", Echo);
+            Echo.private(`messages.${user.id}`)
+                .listen('NewMessage', (e) => {
+                    this.handleIncoming(e.message);
+                });
+
             axios.get("/api/contacts")
             .then((response) => {
                 console.log(response.data);
@@ -57,6 +62,20 @@
                     this.selectedContact = contact;
                     $("#btn-contact").click();
                 })
+            },
+
+            sendNewMessage(message) {
+              this.messages.push(message);
+            },
+
+            handleIncoming(message) {
+                console.log("message", message);
+                if(this.selectedContact &&  message.from === this.selectedContact.id) {
+                    this.sendNewMessage(message);
+                    return;
+                }
+
+                alert(message.text);
             }
         }
     }

@@ -19,9 +19,9 @@
                     <div class="contacts-list-info">
                           <span class="contacts-list-name">
                             {{ contact.name }}
-                            <small class="contacts-list-date float-right">date</small>
+                            <small class="contacts-list-date float-right"><i class="fas fa-circle text-success"></i></small>
                           </span>
-                        <span class="contacts-list-msg">How have you been? I was...</span>
+                        <span class="contacts-list-msg"><span class="text-primary">How have you been? I was...</span></span>
                     </div>
                     <!-- /.contacts-list-info -->
                 </a>

@@ -23,6 +23,8 @@ Route::get('contacts', 'API\UserController@contacts');
 
 Route::get('conversation/{id}', 'API\UserController@getMessagesFor');
 
+Route::post('conversation/send', 'API\UserController@sendMessage');
+
 Route::get('producers', 'API\IndexController@producers');
 
 Route::apiResource('profile', 'API\ProfileController');

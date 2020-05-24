@@ -15,4 +15,9 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function fromContact()
+    {
+        return $this->hasOne(User::class, 'id', 'from');
+    }
+
 }
