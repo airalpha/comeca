@@ -25,7 +25,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    dd(Cart::content());
+    dd(Cart::total());
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -48,7 +48,7 @@ Route::delete('/api/cart/{rowId}', 'CartController@destroy')->name('cart.delete'
 
 Route::post('/api/discount/manage', 'DiscountController@store')->name('discount.store');
 
-Route::delete('/api/discount/manage', 'DiscountController@destroy')->name('discount.delete');
+Route::post('/api/discount/delete', 'DiscountController@destroy')->name('discount.delete');
 
 Route::get('/cart', 'CartController@cart')->name('cart.view');
 

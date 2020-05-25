@@ -51,13 +51,17 @@ class CheckoutController extends Controller
             'order_notes' => 'required|string'
         ]);
 
+        $total = checkSession()
+            ? getDiscountTotalPrice(Cart::subtotal(), request()->session()->get('discount')['remise'])
+            : Cart::total();
+
         try {
             $charge = $stripe->charges()->create([
                 'source' => $request->stripeToken,
                 'description' => 'Comeca Shoping',
                 'receipt_email' => $request->email,
                 'currency' => 'eur',
-                'amount'   => Cart::total(),
+                'amount'   => $total,
             ]);
 
             $order = new Order();

@@ -24,8 +24,10 @@ class DiscountController extends Controller
         return redirect()->back()->with('success', 'Le coupon a été apliqué !');
     }
 
-    public function delete()
+    public function destroy()
     {
+        \request()->session()->forget('discount');
 
+        return redirect()->back()->with('success', 'Le coupon a été retiré');
     }
 }

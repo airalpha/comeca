@@ -74,12 +74,29 @@
                 <div class="col-12 col-lg-6">
                     <div class="coupon-discount mt-70">
                         <h5>COUPON</h5>
-                        <p>Les coupons peuvent être appliqués dans le panier avant le paiement. Ajoutez un article éligible sur le stand du vendeur qui a créé le code promo dans votre panier. Cliquez sur le bouton vert "Appliquer le code" pour ajouter le coupon à votre commande. Le total de la commande sera mis à jour pour indiquer les économies spécifiques au code promo saisi.</p>
+                        @if(checkSession())
+                            <p class="text-primary"> Un coupon est déja appliqué </p>
+                            <form action="{{ route("discount.delete") }}" method="post">
+                                @csrf
+                                <div class="d-flex justify-content-between col-md-10 offset-1 border-top">
+                                    <h5 class="text-success">
+                                        {{ request()->session()->get('discount')['code'] }}<br>
+                                        <span class="text-sm">- {{ getPrice(request()->session()->get('discount')['remise']) . " FCFA" }}</span>
+                                    </h5>
+                                    <button type="submit"><i class="fas fa-trash btn text-danger"></i></button>
+                                </div>
+                            </form>
+                        @else
+                        <p>Les coupons peuvent être appliqués dans le panier avant le paiement.
+                            Ajoutez un article éligible sur le stand du vendeur qui a créé le code promo dans votre panier.
+                            Cliquez sur le bouton vert "Appliquer le code" pour ajouter le coupon à votre commande.
+                            Le total de la commande sera mis à jour pour indiquer les économies spécifiques au code promo saisi.</p>
                         <form action="{{ route("discount.store") }}" method="post">
                             @csrf
                             <input type="text" name="code" placeholder="Entrer votre coupon">
                             <button type="submit">APPLIQUER</button>
                         </form>
+                        @endif
                     </div>
                 </div>
 
@@ -89,7 +106,11 @@
                         <h5 class="title--">Total Panier</h5>
                         <div class="subtotal d-flex justify-content-between">
                             <h5>Sous-total</h5>
-                            <h5>{{ getPrice(Cart::subtotal()) }} FCFA</h5>
+                            <h5>
+                                {{ checkSession()
+                        ? getPrice(getDiscountSubTotalPrice(Cart::subtotal(), request()->session()->get('discount')['remise']))
+                        : getPrice(Cart::subtotal()) }}
+                               FCFA</h5>
                         </div>
                         {{--<div class="shipping d-flex justify-content-between">
                             <h5>Shipping</h5>
@@ -110,11 +131,19 @@
                         </div>--}}
                         <div class="total d-flex justify-content-between">
                             <h5>Tax</h5>
-                            <h5>{{ getPrice(Cart::tax()) }}</h5>
+                            <h5>
+                                {{ checkSession()
+                        ? getPrice(getDiscountTax(Cart::subtotal(), request()->session()->get('discount')['remise']))
+                        : getPrice(Cart::tax()) }}
+                            </h5>
                         </div>
                         <div class="total d-flex justify-content-between">
                             <h5>Total</h5>
-                            <h5>{{ getPrice(Cart::total()) }} FCFA</h5>
+                            <h5>
+                                {{ checkSession()
+                        ? getPrice(getDiscountTotalPrice(Cart::subtotal(), request()->session()->get('discount')['remise']))
+                        : getPrice(Cart::total()) }} FCFA
+                            </h5>
                         </div>
                         @if(Cart::count() > 0)
                         <div class="checkout-btn">

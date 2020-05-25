@@ -113,7 +113,11 @@
 
                 <div class="col-12 col-lg-4">
                     <div class="checkout-content">
-                        <h5 class="title--">Votre Commande</h5>
+                        <h5 class="title--">Votre Commande
+                            @if(checkSession())
+                            <br><span class="text-sm text-primary">
+                                    - {{ getPrice(request()->session()->get('discount')['remise']) . " FCFA de reduction" }}</span></h5>
+                            @endif
                         <div class="products">
                             <div class="products-data">
                                 <h5>Produits:</h5>
@@ -127,7 +131,9 @@
                         </div>
                         <div class="subtotal d-flex justify-content-between align-items-center">
                             <h5>Sous total</h5>
-                            <h5>{{ Cart::subtotal() }} FCFA</h5>
+                            <h5>{{ checkSession()
+                        ? getPrice(getDiscountSubTotalPrice(Cart::subtotal(), request()->session()->get('discount')['remise']))
+                        : Cart::subtotal() }} FCFA</h5>
                         </div>
                         <div class="shipping d-flex justify-content-between align-items-center">
                             <h5>Transport</h5>
@@ -135,7 +141,9 @@
                         </div>
                         <div class="order-total d-flex justify-content-between align-items-center">
                             <h5>Total</h5>
-                            <h5>{{ Cart::total() }} FCFA</h5>
+                            <h5>{{ checkSession()
+                        ? getPrice(getDiscountTotalPrice(Cart::subtotal(), request()->session()->get('discount')['remise']))
+                        : Cart::total() }} FCFA</h5>
                         </div>
                         <div class="checkout-btn mt-30">
                             <a href="#" id="second-submit-btn" class="btn alazea-btn w-100">Payer</a>
