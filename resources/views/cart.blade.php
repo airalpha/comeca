@@ -41,7 +41,7 @@
                             </thead>
                             <tbody>
                             @forelse(Cart::content() as $product)
-                                <tr >
+                                <tr>
                                     <td class="cart_product_img">
                                         <a href="#"><img src="{{ $product->model->images[0]->path }}"></a>
                                         <h5>{{ $product->model->name }}</h5>
@@ -75,8 +75,9 @@
                     <div class="coupon-discount mt-70">
                         <h5>COUPON</h5>
                         <p>Les coupons peuvent être appliqués dans le panier avant le paiement. Ajoutez un article éligible sur le stand du vendeur qui a créé le code promo dans votre panier. Cliquez sur le bouton vert "Appliquer le code" pour ajouter le coupon à votre commande. Le total de la commande sera mis à jour pour indiquer les économies spécifiques au code promo saisi.</p>
-                        <form action="#" method="post">
-                            <input type="text" name="coupon-code" placeholder="Entrer votre coupon">
+                        <form action="{{ route("discount.store") }}" method="post">
+                            @csrf
+                            <input type="text" name="code" placeholder="Entrer votre coupon">
                             <button type="submit">APPLIQUER</button>
                         </form>
                     </div>

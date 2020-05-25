@@ -10,4 +10,8 @@ class Discount extends Model
 
     ];
 
+    public function discount($subTotal) {
+        return ($subTotal * ($this->percent / 100));
+    }
+
 }

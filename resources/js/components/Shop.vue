@@ -289,7 +289,6 @@
         },
 
         mounted() {
-            alert("Sop");
         },
 
         computed: {
