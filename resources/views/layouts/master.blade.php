@@ -105,6 +105,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </router-link>
                             </li>
                             <li class="nav-item">
+                                <router-link to="/discount" class="nav-link">
+                                    <i class="fas fa-percentage nav-icon"></i>
+                                    <p>Coupons</p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
                                 <router-link to="/products" class="nav-link">
                                     <i class="far fa-circle-o nav-icon"></i>
                                     <p>Produits</p>
