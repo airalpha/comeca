@@ -46,6 +46,8 @@ Route::post('/api/cart', 'CartController@store')->name('cart.store');
 
 Route::delete('/api/cart/{rowId}', 'CartController@destroy')->name('cart.delete');
 
+Route::post('/api/cart/{rowId}', 'CartController@update')->name('cart.update');
+
 Route::post('/api/discount/manage', 'DiscountController@store')->name('discount.store');
 
 Route::post('/api/discount/delete', 'DiscountController@destroy')->name('discount.delete');

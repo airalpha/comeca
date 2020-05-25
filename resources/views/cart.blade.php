@@ -48,9 +48,9 @@
                                     </td>
                                     <td class="qty">
                                         <div class="quantity">
-                                            <span class="qty-minus" onclick="var effect = document.getElementById('{{ $product->rowId }}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="{{ $product->rowId }}" step="1" min="1" max="{{ $product->qty }}" name="quantity" value="{{ $product->qty }}">
-                                            <span class="qty-plus" onclick="var effect = document.getElementById('{{ $product->rowId }}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                            {{--<span class="qty-minus" onclick="var effect = document.getElementById('{{ $product->rowId }}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>--}}
+                                            <input type="number" class="qty-text" id="qty" data-id="{{ $product->rowId }}" step="1" min="1" max="{{ $product->model->quantity }}" name="quantity" value="{{ $product->qty }}">
+                                            {{--<span class="qty-plus" onclick="var effect = document.getElementById('{{ $product->rowId }}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>--}}
                                         </div>
                                     </td>
                                     <td class="price"><span>{{ $product->model->price }} FCFA</span></td>
@@ -157,4 +157,36 @@
         </div>
     </div>
     <!-- ##### Cart Area End ##### -->
+@endsection
+
+@section('extra-js')
+    <script>
+        let selects = document.querySelectorAll("#qty");
+        Array.from(selects).forEach((element) => {
+            element.addEventListener('change', function() {
+                let rowId = this.getAttribute("data-id");
+                let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                fetch(
+                    `/api/cart/${rowId}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json, text-plain, */*",
+                            "X-Requested-With": "XMLHttpRequest",
+                            "X-CSRF-TOKEN": token
+                        },
+                        method: 'post',
+                        body: JSON.stringify({
+                            qty: this.value
+                        })
+                    }
+                ).then((data) => {
+                    console.log(data);
+                    location.reload();
+                }).catch((error) => {
+                    console.log(error);
+                });
+            })
+        })
+    </script>
 @endsection
