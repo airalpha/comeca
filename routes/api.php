@@ -39,6 +39,8 @@ Route::apiResource('category', 'API\CategoryController');
 
 Route::apiResource('tag', 'API\TagController');
 
+Route::apiResource('discount', 'API\DiscountController');
+
 //Cart
 //Route::apiResource('cart', 'API\CartController');
 
