@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class CheckoutController extends Controller
         $stripe = new Stripe(config('services.stripe.secret'));
         $stripe = Stripe::make(config('services.stripe.secret'));
 
-        $this->validate($request, [
+        $data = $this->validate($request, [
             'name' => 'required|string|min:3',
             'email' => 'required|string|email',
             'phone' => 'required|integer',
@@ -59,8 +60,30 @@ class CheckoutController extends Controller
                 'amount'   => Cart::total(),
             ]);
 
-            dd($charge);
+            $order = new Order();
+            $order->payment_intent_id = $charge["id"];
+            $order->amount = $charge["amount"];
+            $order->payment_created_at = (new \DateTime())
+                ->setTimestamp($charge["created"])
+                ->format("Y-m-d H:i:s");
 
+            // Enregistrement des produits et quantités
+            $products = [];
+            $i = 0;
+            foreach (Cart::content() as $product) {
+                $products[$i]["id"] = $product->model->id;
+                $products[$i]["qty"] = $product->qty;
+                $i++;
+            }
+
+            $order->products = serialize($products);
+
+            if(auth())
+                $order->user_id = auth()->id();
+
+            $order->user_informations = serialize($data);
+            $order->save();
+            Cart::destroy();
             session()->flash('success', 'Merci pour votre payment !');
             return redirect()->back();
 

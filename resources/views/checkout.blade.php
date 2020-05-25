@@ -39,7 +39,6 @@
                         <form action="{{ route('checkout.store') }}" method="post" id="payment-form">
                             @csrf
                             <div class="row">
-                                {{ $user->profile  }}
                                 <div class="col-md-12 mb-4">
                                     <label for="first_name">Nom *</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ $user ? $user->name : old('name') }}"

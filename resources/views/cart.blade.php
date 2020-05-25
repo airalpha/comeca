@@ -49,7 +49,7 @@
                                     <td class="qty">
                                         <div class="quantity">
                                             <span class="qty-minus" onclick="var effect = document.getElementById('{{ $product->rowId }}'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            <input type="number" class="qty-text" id="{{ $product->rowId }}" step="1" min="1" max="{{ $product->model->quantity }}" name="quantity" value="{{ $product->qty }}">
+                                            <input type="number" class="qty-text" id="{{ $product->rowId }}" step="1" min="1" max="{{ $product->qty }}" name="quantity" value="{{ $product->qty }}">
                                             <span class="qty-plus" onclick="var effect = document.getElementById('{{ $product->rowId }}'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
                                         </div>
                                     </td>

@@ -25,9 +25,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    $a = env('APP_NAME');
-    dd($a);
-    return env('PUSHER_APP_KEY');
+    dd(Cart::content());
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
