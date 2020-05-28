@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -24,9 +25,21 @@ class IndexController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function orders()
     {
-        //
+        $datas = auth('api')->user()->orders;
+        $response = [];
+        $i = 0;
+        foreach ($datas as $data) {
+            $response[$i]['date'] = Carbon::parse($data->payment_created_at)->format('d m. y - H:i');
+            $response[$i]['amount'] = getPrice($data->amount);
+            $response[$i]['notes'] = $data->notes;
+            foreach (unserialize($data->products) as $product) {
+                $response[$i]['products'][] = $product;
+            }
+            $i++;
+        }
+        return $response;
     }
 
     /**

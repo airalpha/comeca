@@ -74,6 +74,7 @@ let routes = [
     {path: '/messages', component: require("./components/Messages").default},
     {path: '/message', component: require("./components/Message").default},
     {path: '/discount', component: require("./components/Discount").default},
+    {path: '/orders', component: require("./components/Order").default},
 ];
 
 const router = new VueRouter({

@@ -67,6 +67,7 @@ class CheckoutController extends Controller
             $order = new Order();
             $order->payment_intent_id = $charge["id"];
             $order->amount = $charge["amount"];
+            $order->notes = $request->order_notes;
             $order->payment_created_at = (new \DateTime())
                 ->setTimestamp($charge["created"])
                 ->format("Y-m-d H:i:s");
@@ -76,6 +77,7 @@ class CheckoutController extends Controller
             $i = 0;
             foreach (Cart::content() as $product) {
                 $products[$i]["id"] = $product->model->id;
+                $products[$i]["name"] = $product->model->name;
                 $products[$i]["qty"] = $product->qty;
                 $i++;
             }

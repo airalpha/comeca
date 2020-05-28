@@ -19,13 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('user', 'API\UserController');
 
-Route::get('contacts', 'API\UserController@contacts');
+//Messages routes
+Route::get('contacts', 'API\MessageController@contacts');
 
-Route::get('conversation/{id}', 'API\UserController@getMessagesFor');
+Route::get('conversation/{id}', 'API\MessageController@getMessagesFor');
 
-Route::post('conversation/send', 'API\UserController@sendMessage');
+Route::post('conversation/send', 'API\MessageController@sendMessage');
 
 Route::get('producers', 'API\IndexController@producers');
+
+Route::get('orders', 'API\IndexController@orders');
 
 Route::apiResource('profile', 'API\ProfileController');
 

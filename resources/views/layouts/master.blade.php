@@ -120,6 +120,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
                     @endcan
                     <li class="nav-item">
+                        <router-link to="/orders" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-basket"></i>
+                            <p>
+                                Commandes
+                            </p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link to="/messages" class="nav-link">
                             <i class="nav-icon fas fa-envelope"></i>
                             <p>

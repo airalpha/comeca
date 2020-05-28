@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('amount');
             $table->dateTime('payment_created_at');
             $table->text('products');
+            $table->longText('notes');
             $table->text("user_informations");
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
