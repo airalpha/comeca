@@ -248,7 +248,7 @@
                                 </div>
                                 <div class="product-meta d-flex">
                                     <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                    <a href="#" class="add-to-cart-btn" @click.stop="addToCart(product)">Add to cart</a>
+                                    <add-to-cart :product="product"></add-to-cart>
                                     <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
                                 </div>
                             </div>
@@ -269,9 +269,10 @@
 </template>
 
 <script>
+    import AddToCart from "./AddToCart";
     export default {
         name: "ShopDetail",
-
+        components: {AddToCart},
         props: {
             product_slug: String,
         },

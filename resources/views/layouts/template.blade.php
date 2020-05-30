@@ -185,14 +185,12 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-footer-widget">
                         <div class="footer-logo mb-30">
-                            <a href="#"><img src="{{ asset("template/img/core-img/logo.png") }}" alt=""></a>
+                            <a href="#"><img src="{{ asset("template/img/core-img/leaf.png") }}" alt="" width="50" height="50"></a>
                         </div>
-                        <p>Lorem ipsum dolor sit samet, consectetur adipiscing elit. India situs atione mantor</p>
+                        <p>Comeca, plateforme pour connecter les producteurs et consomatteur de PFNL</p>
                         <div class="social-info">
                             <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                             <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                         </div>
                     </div>
@@ -202,20 +200,14 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-footer-widget">
                         <div class="widget-title">
-                            <h5>QUICK LINK</h5>
+                            <h5>LIENS RAPIDES</h5>
                         </div>
                         <nav class="widget-nav">
                             <ul>
-                                <li><a href="#">Purchase</a></li>
-                                <li><a href="#">FAQs</a></li>
-                                <li><a href="#">Payment</a></li>
-                                <li><a href="#">News</a></li>
-                                <li><a href="#">Return</a></li>
-                                <li><a href="#">Advertise</a></li>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Career</a></li>
-                                <li><a href="#">Orders</a></li>
-                                <li><a href="#">Policities</a></li>
+                                <li><a href="#">Producteurs</a></li>
+                                <li><a href="#">Boutique</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">L'equipe</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -225,7 +217,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-footer-widget">
                         <div class="widget-title">
-                            <h5>BEST SELLER</h5>
+                            <h5>MEILLEURS VENTES</h5>
                         </div>
 
                         <!-- Single Best Seller Products -->
@@ -236,17 +228,6 @@
                             <div class="product-info">
                                 <a href="shop-details.html">Cactus Flower</a>
                                 <p>$10.99</p>
-                            </div>
-                        </div>
-
-                        <!-- Single Best Seller Products -->
-                        <div class="single-best-seller-product d-flex align-items-center">
-                            <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src=""{{ asset("template/img/bg-img/5.jpg") }} alt=""></a>
-                            </div>
-                            <div class="product-info">
-                                <a href="shop-details.html">Tulip Flower</a>
-                                <p>$11.99</p>
                             </div>
                         </div>
                     </div>
@@ -260,11 +241,9 @@
                         </div>
 
                         <div class="contact-information">
-                            <p><span>Address:</span> 505 Silk Rd, New York</p>
-                            <p><span>Phone:</span> +1 234 122 122</p>
-                            <p><span>Email:</span> info.deercreative@gmail.com</p>
-                            <p><span>Open hours:</span> Mon - Sun: 8 AM to 9 PM</p>
-                            <p><span>Happy hours:</span> Sat: 2 PM to 4 PM</p>
+                            <p><span>Address:</span> Bandjoun, Dja</p>
+                            <p><span>Phone:</span> +237 697 456 833</p>
+                            <p><span>Email:</span> comeca@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -283,7 +262,7 @@
                 <div class="col-12 col-md-6">
                     <div class="copywrite-text">
                         <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="" target="_blank">Comeca</a>
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>

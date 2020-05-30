@@ -15,7 +15,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <empty v-if="!orders.length"></empty>
         <div class="row">
             <div class="col-md-12">
                 <!-- The time line -->
@@ -45,7 +45,7 @@
                                 {{ order.notes }}
                             </div>
                             <div class="timeline-footer">
-                                <a class="btn btn-success btn-sm"><i class="fas fa-check"></i> Validée</a>
+                                <a class="btn btn-success btn-sm disabled"><i class="fas fa-check"></i> Validée</a>
                             </div>
                         </div>
                     </div>
