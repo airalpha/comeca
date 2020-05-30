@@ -38,6 +38,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
             </div>
         </form>
+
+        <!-- Notification elements -->
+        <ul class="navbar-nav ml-auto">
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fas fa-comments fa-2x"></i>
+                    <span class="badge badge-danger navbar-badge">3</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="#" class="dropdown-item">
+                        <!-- Message Start -->
+                        <div class="media">
+                            <div class="media-body">
+                                <p class="text-sm">1 nouveau message</p>
+                                <p class="text-sm text-muted"><i class="fas fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+                        <!-- Message End -->
+                    </a>
+                    <div class="dropdown-divider"></div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li>
+        </ul>
     </nav>
     <!-- /.navbar -->
 
@@ -114,6 +143,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <router-link to="/products" class="nav-link">
                                     <i class="far fa-circle-o nav-icon"></i>
                                     <p>Produits</p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link to="/messages-list" class="nav-link">
+                                    <i class="fas fa-comment-dots nav-icon"></i>
+                                    <p>Messages</p>
                                 </router-link>
                             </li>
                         </ul>

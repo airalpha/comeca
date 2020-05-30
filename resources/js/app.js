@@ -72,6 +72,8 @@ let routes = [
     {path: '/category', component: require("./components/Category").default},
     {path: '/tag', component: require("./components/Tag").default},
     {path: '/messages', component: require("./components/Messages").default},
+    {path: '/messages', component: require("./components/Messages").default},
+    {path: '/messages-list', component: require("./components/MessageContact").default},
     {path: '/message', component: require("./components/Message").default},
     {path: '/discount', component: require("./components/Discount").default},
     {path: '/orders', component: require("./components/Order").default},

@@ -50,6 +50,8 @@ Route::post('/api/discount/manage', 'DiscountController@store')->name('discount.
 
 Route::post('/api/discount/delete', 'DiscountController@destroy')->name('discount.delete');
 
+Route::post('/api/contact/messages', 'IndexController@store')->name('contact.messages.store');
+
 Route::get('/cart', 'CartController@cart')->name('cart.view');
 
 Route::get('{path}', 'HomeController@index')->where('path', '[-a-z0-9_\s]+');

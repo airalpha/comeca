@@ -346,21 +346,22 @@
                     </div>
                     <!-- Contact Form Area -->
                     <div class="contact-form-area mb-100">
-                        <form action="#" method="post">
+                        <form action="{{ route('contact.messages.store') }}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="contact-name" placeholder="Your Name">
+                                        <input type="text" class="form-control" id="contact-name" name="name" placeholder="Votre nom">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="contact-email" placeholder="Your Email">
+                                        <input type="email" class="form-control" id="contact-email" name="email" placeholder="Votre e-mail">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="contact-subject" placeholder="Subject">
+                                        <input type="text" class="form-control" id="contact-subject" name="subject" placeholder="Subject">
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -369,7 +370,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn alazea-btn mt-15">Send Message</button>
+                                    <button type="submit" class="btn alazea-btn mt-15">Envoyer</button>
                                 </div>
                             </div>
                         </form>

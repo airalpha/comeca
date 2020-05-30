@@ -44,6 +44,10 @@ Route::apiResource('tag', 'API\TagController');
 
 Route::apiResource('discount', 'API\DiscountController');
 
+Route::post('contact/messages', 'API\ContactMessageController@store')->name('contact.messages.store');
+
+Route::apiResource('contact/messages', 'API\ContactMessageController');
+
 //Cart
 //Route::apiResource('cart', 'API\CartController');
 

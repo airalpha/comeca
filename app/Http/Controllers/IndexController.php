@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ContactMessage;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,16 @@ class IndexController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|min:3',
+            'email' => 'required|email|min:3',
+            'subject' => 'required|string|min:3',
+            'message' => 'required|string|min:5',
+        ]);
+
+        ContactMessage::create($request->all());
+
+        return redirect()->back()->with('success', 'Message envoyé !');
     }
 
     /**
