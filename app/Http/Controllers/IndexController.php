@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\ContactMessage;
+use App\Notifications\NewContactMessagePosted;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -40,6 +42,7 @@ class IndexController extends Controller
     }
 
     /**
+     * Function pour l'ajout d'un nouveau message de contact (Ca doit pas etre ici)
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -64,7 +67,11 @@ class IndexController extends Controller
             'message' => 'required|string|min:5',
         ]);
 
-        ContactMessage::create($request->all());
+        $contactMessage = ContactMessage::create($request->all());
+
+        $admin = User::where('type', 'admin')->first();
+
+        $admin->notify(new NewContactMessagePosted($contactMessage));
 
         return redirect()->back()->with('success', 'Message envoyé !');
     }

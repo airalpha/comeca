@@ -40,25 +40,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </form>
 
         <!-- Notification elements -->
+        @unless(auth()->user()->unreadNotifications->isEmpty())
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="fas fa-comments fa-2x"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
+                    <span class="badge badge-danger navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="width: max-content;">
+                    @foreach(auth()->user()->unreadNotifications as $notification)
+                    <a href="{{ route('contact.messages.read', ['notification' => $notification->id]) }}" class="dropdown-item">
                         <!-- Message Start -->
                         <div class="media">
                             <div class="media-body">
-                                <p class="text-sm">1 nouveau message</p>
-                                <p class="text-sm text-muted"><i class="fas fa-clock mr-1"></i> 4 Hours Ago</p>
+                                <p class="text-sm">{{ $notification->data['messageTitle'] }}</p>
+                                <p class="text-sm text-muted"><i class="fas fa-clock mr-1"></i> {{ \Carbon\Carbon::parse($notification->data['messageDate'])->diffForHumans() }}</p>
                             </div>
                         </div>
                         <!-- Message End -->
                     </a>
                     <div class="dropdown-divider"></div>
+                    @endforeach
                 </div>
             </li>
             <li class="nav-item">
@@ -67,6 +70,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
             </li>
         </ul>
+        @else
+        <ul class="navbar-nav ml-auto">
+            <!-- Messages Dropdown Menu -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fas fa-comments fa-2x"></i>
+                    <span class="badge badge-danger navbar-badge">0</span>
+                </a>
+            </li>
+        </ul>
+        @endunless
     </nav>
     <!-- /.navbar -->
 

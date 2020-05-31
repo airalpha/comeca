@@ -44,7 +44,7 @@ Route::apiResource('tag', 'API\TagController');
 
 Route::apiResource('discount', 'API\DiscountController');
 
-Route::post('contact/messages', 'API\ContactMessageController@store')->name('contact.messages.store');
+Route::get('contact/messages/notification/{notification}', 'API\ContactMessageController@notificationRead')->name('contact.messages.read');
 
 Route::apiResource('contact/messages', 'API\ContactMessageController');
 

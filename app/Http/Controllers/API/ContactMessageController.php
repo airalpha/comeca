@@ -4,14 +4,17 @@ namespace App\Http\Controllers\API;
 
 use App\ContactMessage;
 use App\Http\Controllers\Controller;
+use App\Notifications\NewContactMessagePosted;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\DatabaseNotification;
 use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 class ContactMessageController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->except('create');
+        $this->middleware('auth:api')->except('store', 'notificationRead');
     }
 
     /**
@@ -40,9 +43,18 @@ class ContactMessageController extends Controller
                 'message' => 'required|string|min:5',
             ]);
 
-            ContactMessage::create($request->all());
+        $contactMessage = ContactMessage::create($request->all());
 
-            return redirect()->back()->with('success', 'Message envoyé !');
+        $admin = User::where('type', 'admin')->first();
+
+        $admin->notify(new NewContactMessagePosted($contactMessage));
+
+        return redirect()->back()->with('success', 'Message envoyé !');
+    }
+
+    public function notificationRead(DatabaseNotification $notification) {
+        $notification->markAsRead();
+        return redirect('/messages-list');
     }
 
 
