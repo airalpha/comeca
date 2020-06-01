@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ContactMessage;
 use App\Notifications\NewContactMessagePosted;
 use App\Product;
+use App\Testimonial;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class IndexController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('welcome', compact('products'));
+        $testimonials = Testimonial::all();
+        return view('welcome', compact('products'), compact('testimonials'));
     }
 
     public function about()
