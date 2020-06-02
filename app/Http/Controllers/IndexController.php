@@ -14,13 +14,16 @@ class IndexController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
         $products = Product::all();
+        $latestProduct = $products->last();
         $testimonials = Testimonial::all();
-        return view('welcome', compact('products'), compact('testimonials'));
+        return view('welcome',
+            compact('products','latestProduct'),
+            compact('testimonials'));
     }
 
     public function about()

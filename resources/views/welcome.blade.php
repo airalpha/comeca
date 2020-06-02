@@ -14,11 +14,11 @@
                         <div class="col-12">
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
-                                <h2>Plants exist in the weather and light rays that surround them</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque ante nec ipsum iaculis, ac iaculis ipsum porttitor. Vivamus cursus nisl lectus, id mattis nisl lobortis eu. Duis diam augue, dapibus ut dolor at, mattis maximus dolor.</p>
+                                <h2>Les plantes existent dans le temps et les rayons lumineux qui les entourent</h2>
+                                <p>Les produits forestiers non ligneux (PFNL), également appelés « produits forestiers autres que le bois », ou bien « produits forestiers secondaires » ou « mineurs », ou « spéciaux », sont, selon la définition de la FAO, des biens d'origine biologique autres que le bois, dérivés des forêts, d'autres terres boisées et des arbres hors forêts1. Ce sont des substances, des matières premières ou des matériaux utiles obtenus des forêts sans exploitation forestière, c'est-à-dire sans qu'il soit nécessaire d'abattre des arbres. Il peut s'agir par exemple d'animaux chassés comme gibier ou pour leur fourrure, ou de poissons, de fruits (baies, noix, etc.), de graines, d'épices, de champignons, de feuilles (fourrage), de plantes médicinales, de tourbe, etc.</p>
                                 <div class="welcome-btn-group">
-                                    <a href="#" class="btn alazea-btn mr-30">GET STARTED</a>
-                                    <a href="#" class="btn alazea-btn active">CONTACT US</a>
+                                    <a href="/shop" class="btn alazea-btn mr-30">COMMENCER</a>
+                                    <a href="/contact" class="btn alazea-btn active">CONTACT</a>
                                 </div>
                             </div>
                         </div>
@@ -35,11 +35,11 @@
                         <div class="col-12">
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
-                                <h2>Plants exist in the weather and light rays that surround them</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pellentesque ante nec ipsum iaculis, ac iaculis ipsum porttitor. Vivamus cursus nisl lectus, id mattis nisl lobortis eu. Duis diam augue, dapibus ut dolor at, mattis maximus dolor.</p>
+                                <h2>Les plantes existent dans le temps et les rayons lumineux qui les entourent</h2>
+                                <p>Les produits forestiers non ligneux (PFNL), également appelés « produits forestiers autres que le bois », ou bien « produits forestiers secondaires » ou « mineurs », ou « spéciaux », sont, selon la définition de la FAO, des biens d'origine biologique autres que le bois, dérivés des forêts, d'autres terres boisées et des arbres hors forêts1. Ce sont des substances, des matières premières ou des matériaux utiles obtenus des forêts sans exploitation forestière, c'est-à-dire sans qu'il soit nécessaire d'abattre des arbres. Il peut s'agir par exemple d'animaux chassés comme gibier ou pour leur fourrure, ou de poissons, de fruits (baies, noix, etc.), de graines, d'épices, de champignons, de feuilles (fourrage), de plantes médicinales, de tourbe, etc.</p>
                                 <div class="welcome-btn-group">
-                                    <a href="#" class="btn alazea-btn mr-30">GET STARTED</a>
-                                    <a href="#" class="btn alazea-btn active">CONTACT US</a>
+                                    <a href="/shop" class="btn alazea-btn mr-30">COMMENCER</a>
+                                    <a href="/contact" class="btn alazea-btn active">CONTACT</a>
                                 </div>
                             </div>
                         </div>
@@ -58,16 +58,16 @@
                 <div class="col-12 col-lg-5">
                     <!-- Section Heading -->
                     <div class="section-heading">
-                        <h2>ABOUT US</h2>
-                        <p>We are leading in the plants service fields.</p>
+                        <h2>À PROPOS DE NOUS</h2>
+                        <p>Nous sommes leader dans le domaine des ventes des PFNL.</p>
                     </div>
-                    <p>Quisque orci quam, vulputate non commodo finibus, molestie ac ante. Duis in sceleri quesem. Nulla sit amet varius nunc. Maecenas dui, tempeu ullam corper in.</p>
+                    <p>Regarder les différents type de produits que nous proposons.</p>
 
                     <!-- Progress Bar Content Area -->
                     <div class="alazea-progress-bar mb-50">
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Office plants</p>
+                            <p>Origine végétale</p>
                             <div id="bar1" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -78,7 +78,7 @@
 
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Field manager</p>
+                            <p>Origine animale</p>
                             <div id="bar2" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -89,7 +89,7 @@
 
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Landscape design</p>
+                            <p>Cosmétiques</p>
                             <div id="bar3" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -100,7 +100,7 @@
 
                         <!-- Single Progress Bar -->
                         <div class="single_progress_bar">
-                            <p>Garden Care</p>
+                            <p>Touristiques</p>
                             <div id="bar4" class="barfiller">
                                 <div class="tipWrap">
                                     <span class="tip"></span>
@@ -118,8 +118,8 @@
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
                                     <img src="{{ asset("template/img/core-img/b1.png") }}" alt="">
-                                    <h5>Quality Products</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <h5>Produits de qualité</h5>
+                                    <p></p>
                                 </div>
                             </div>
 
@@ -127,8 +127,8 @@
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
                                     <img src="{{ asset("template/img/core-img/b2.png") }}" alt="">
-                                    <h5>Perfect Service</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <h5>Service parfait</h5>
+                                    <p></p>
                                 </div>
                             </div>
 
@@ -136,8 +136,8 @@
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
                                     <img src="{{ asset("template/img/core-img/b3.png") }}" alt="">
-                                    <h5>100% Natural</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <h5>100% Naturel</h5>
+                                    <p></p>
                                 </div>
                             </div>
 
@@ -145,8 +145,8 @@
                             <div class="col-12 col-sm-6">
                                 <div class="single-benefits-area">
                                     <img src="{{ asset("template/img/core-img/b4.png") }}" alt="">
-                                    <h5>Environmentally friendly</h5>
-                                    <p>Intiam eu sagittis est, at commodo lacini libero. Praesent dignissim sed odio vel aliquam manta lagorn.</p>
+                                    <h5>Écologique</h5>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -185,8 +185,8 @@
                                     <div class="testimonial-content">
                                         <!-- Section Heading -->
                                         <div class="section-heading">
-                                            <h2>TESTIMONIAL</h2>
-                                            <p>Some kind words from clients about Alazea</p>
+                                            <h2>TÉMOIGNAGE</h2>
+                                            <p>Quelques mots aimables de clients sur COMECA</p>
                                         </div>
                                         <p>“{{ $testimonial->text }}”</p>
                                         <div class="testimonial-author-info">
@@ -213,7 +213,7 @@
                     <!-- Section Heading -->
                     <div class="section-heading text-center">
                         <h2>NOUVEAU PRODUITS</h2>
-                        <p>We have the latest products, it must be exciting for you</p>
+                        <p>Nous avons les derniers produits, ça doit être passionnant pour vous</p>
                     </div>
                 </div>
             </div>
@@ -263,8 +263,8 @@
                 <div class="col-12 col-lg-5">
                     <!-- Section Heading -->
                     <div class="section-heading mb-0">
-                        <h2>Join the Newsletter</h2>
-                        <p>Subscribe to our newsletter and get 10% off your first purchase</p>
+                        <h2>Rejoignez la newsletter</h2>
+                        <p>Abonnez-vous à notre newsletter et recevez les informations sur nos differents produits</p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -292,8 +292,8 @@
                 <div class="col-12 col-lg-5">
                     <!-- Section Heading -->
                     <div class="section-heading">
-                        <h2>GET IN TOUCH</h2>
-                        <p>Send us a message, we will call back later</p>
+                        <h2>ENTRER EN CONTACT</h2>
+                        <p>Envoyez-nous un message, nous vous rappellerons plus tard</p>
                     </div>
                     <!-- Contact Form Area -->
                     <div class="contact-form-area mb-100">

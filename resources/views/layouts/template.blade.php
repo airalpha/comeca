@@ -204,10 +204,10 @@
                         </div>
                         <nav class="widget-nav">
                             <ul>
-                                <li><a href="#">Producteurs</a></li>
-                                <li><a href="#">Boutique</a></li>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">L'equipe</a></li>
+                                <li><a href="{{ route('producers') }}">Producteurs</a></li>
+                                <li><a href="{{ route('shop') }}">Boutique</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                <li><a href="{{ route('about') }}">L'equipe</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -223,11 +223,13 @@
                         <!-- Single Best Seller Products -->
                         <div class="single-best-seller-product d-flex align-items-center">
                             <div class="product-thumbnail">
-                                <a href="shop-details.html"><img src="{{ asset("template/img/bg-img/4.jpg") }}" alt=""></a>
+                                <a href="{{ route('shop-detail', ['slug' => $latestProduct->slug]) }}">
+                                    <img src="{{ $latestProduct->images->first()->path }}" alt="">
+                                </a>
                             </div>
                             <div class="product-info">
-                                <a href="shop-details.html">Cactus Flower</a>
-                                <p>$10.99</p>
+                                <a href="{{ route('shop-detail', ['slug' => $latestProduct->slug]) }}">{{ $latestProduct->name }}</a>
+                                <p>{{ $latestProduct->price }} FCFA</p>
                             </div>
                         </div>
                     </div>
@@ -272,12 +274,11 @@
                     <div class="footer-nav">
                         <nav>
                             <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">About</a></li>
-                                <li><a href="#">Service</a></li>
-                                <li><a href="#">Portfolio</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Accueil</a></li>
+                                <li><a href="{{ route('about') }}">Apropos</a></li>
+                                <li><a href="{{ route('shop') }}">Boutique</a></li>
+                                <li><a href="{{ route('producers') }}">Producteurs</a></li>
+                                <li><a href="/contact">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
