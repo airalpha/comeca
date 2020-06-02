@@ -4,7 +4,7 @@
         <div class="breadcrumb-area">
             <!-- Top Breadcrumb Area -->
             <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center" style="background-image: url(/template/img/bg-img/24.jpg);">
-                <h2>Shop</h2>
+                <h2>Boutique</h2>
             </div>
 
             <div class="container">

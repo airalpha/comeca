@@ -28,7 +28,7 @@
                 <div class="card-body pb-0">
                     <div class="row d-flex align-items-stretch">
                         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch" v-for="producer in producers" :key="producer.id">
-                            <div class="card bg-light">
+                            <div class="card border-success shadow-sm p-3 mb-1 bg-success rounded">
                                 <div class="card-header text-muted border-bottom-0">
                                     Producteur Pro
                                 </div>

@@ -34,12 +34,20 @@ class IndexController extends Controller
 
     public function shop()
     {
-        return view('shop');
+        $latestProduct = Product::all()->last();
+        return view('shop', compact('latestProduct'));
     }
 
     public function producer()
     {
-        return view('producer');
+        $latestProduct = Product::all()->last();
+        return view('producer', compact('latestProduct'));
+    }
+
+    public function contact()
+    {
+        $latestProduct = Product::all()->last();
+        return view('contact', compact('latestProduct'));
     }
 
     public function shopDetail($slug)
