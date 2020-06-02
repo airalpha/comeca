@@ -22,13 +22,14 @@ class IndexController extends Controller
         $latestProduct = $products->last();
         $testimonials = Testimonial::all();
         return view('welcome',
-            compact('products','latestProduct'),
-            compact('testimonials'));
+            compact('products','latestProduct', 'testimonials'));
     }
 
     public function about()
     {
-        return view('about');
+        $products = Product::all();
+        $latestProduct = $products->last();
+        return view('about', compact('latestProduct'));
     }
 
     public function shop()
