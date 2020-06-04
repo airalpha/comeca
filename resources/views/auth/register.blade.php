@@ -34,6 +34,18 @@
                     @enderror
                 </div>
                 <div class="input-group mb-3">
+                    <select name="type" id="type" class="form-control @error('type') is-invalid @enderror" name="type">
+                        <option value="customer">Client</option>
+                        <option value="producer">Producteur</option>
+                    </select>
+
+                    @error('type')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="input-group mb-3">
                     <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Votre mot de passe">
                     <div class="input-group-append">
                         <div class="input-group-text">
