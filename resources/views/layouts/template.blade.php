@@ -99,7 +99,11 @@
                             </div>
                             <!-- Login -->
                             <div class="login">
+                                @guest
                                 <a href="{{ route('login') }}"><i class="fa fa-user" aria-hidden="true"></i> <span>Login</span></a>
+                                @else
+                                    <a href="/dashboard"><i class="fa fa-user" aria-hidden="true"></i> <span>{{ Auth::user()->name }}</span></a>
+                                @endguest
                             </div>
                             <!-- Cart -->
                             <div class="cart">
