@@ -52,7 +52,8 @@ class IndexController extends Controller
 
     public function shopDetail($slug)
     {
-        return view('shop-detail', compact('slug'));
+        $latestProduct = Product::all()->last();
+        return view('shop-detail', compact('slug', 'latestProduct'));
     }
 
     /**
