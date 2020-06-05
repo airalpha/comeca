@@ -28,7 +28,7 @@
                         <i class="ion ion-bag"></i>
                         <i class="fas fa-shopping-bag"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/products" class="small-box-footer">Voir <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -36,15 +36,15 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h3>{{ infos.orders }}<sup style="font-size: 20px"></sup></h3>
 
-                        <p>Bounce Rate</p>
+                        <p>Commandes</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/orders" class="small-box-footer">Voir <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -54,13 +54,13 @@
                     <div class="inner">
                         <h3>{{ infos.users }}</h3>
 
-                        <p>User Registrations</p>
+                        <p>Utilisateurs</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                         <i class="fas fa-person-booth"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/users" class="small-box-footer" v-if="$gate.isAdmin()">Voir <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -88,7 +88,7 @@
                         <!-- PIE CHART -->
                         <div class="card card-danger">
                             <div class="card-header">
-                                <h3 class="card-title">Pie Chart</h3>
+                                <h3 class="card-title">Produit/Categorie</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -96,8 +96,17 @@
                                     <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                                 </div>
                             </div>
-                            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 488px;" width="488" height="250" class="chartjs-render-monitor"></canvas>
+                            <div class="card-body">
+                                <div class="chartjs-size-monitor">
+                                    <div class="chartjs-size-monitor-expand">
+                                        <div class=""></div>
+                                    </div>
+                                    <div class="chartjs-size-monitor-shrink">
+                                        <div class=""></div>
+                                    </div>
+                                </div>
+                                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 488px;" width="488" height="250" class="chartjs-render-monitor">
+                                </canvas>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -138,6 +147,7 @@
         data() {
             return {
                 infos: {},
+                categories: []
             }
         },
 
@@ -152,16 +162,54 @@
                     });
                 this.$Progress.finish();
             },
-        },
 
-        mounted() {
-            console.log('Component mounted.');
-        },
+            loadCategories() {
+                this.$Progress.start();
+                axios.get('api/category')
+                    .then((data) => {
+                        this.categories = data.data;
+                        console.log(this.categories);
+                        this.pieGraph();
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+                this.$Progress.finish();
+            },
 
+            pieGraph() {
+                //-------------
+                //- DONUT CHART -
+                //-------------
+                console.log("okk", this.categories);
+                var donutData = {
+                    labels: this.categories.map(category => category.name),
+                    datasets: [
+                        {
+                            data: this.categories.map(category => category.products).map(product => product.length),
+                            backgroundColor : this.generateColors(this.categories.length),//['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                        }
+                    ]
+                }
+                //-------------
+                //- PIE CHART -
+                //-------------
+                // Get context with jQuery - using jQuery's .get() method.
+                var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+                var pieData        = donutData;
+                var pieOptions     = {
+                    maintainAspectRatio : false,
+                    responsive : true,
+                }
+                //Create pie or douhnut chart
+                // You can switch between pie and douhnut using the method below.
+                var pieChart = new Chart(pieChartCanvas, {
+                    type: 'pie',
+                    data: pieData,
+                    options: pieOptions
+                })
+            },
 
-        created() {
-            $(function () {
-
+            linearGraph() {
                 //--------------
                 //- AREA CHART -
                 //--------------
@@ -229,45 +277,30 @@
                     data: lineChartData,
                     options: lineChartOptions
                 })
+            },
 
-                //-------------
-                //- DONUT CHART -
-                //-------------
-                var donutData = {
-                    labels: [
-                        'Chrome',
-                        'IE',
-                        'FireFox',
-                        'Safari',
-                        'Opera',
-                        'Navigator',
-                    ],
-                    datasets: [
-                        {
-                            data: [700,500,400,600,300,100],
-                            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-                        }
-                    ]
-                }
-                //-------------
-                //- PIE CHART -
-                //-------------
-                // Get context with jQuery - using jQuery's .get() method.
-                var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-                var pieData        = donutData;
-                var pieOptions     = {
-                    maintainAspectRatio : false,
-                    responsive : true,
-                }
-                //Create pie or douhnut chart
-                // You can switch between pie and douhnut using the method below.
-                var pieChart = new Chart(pieChartCanvas, {
-                    type: 'pie',
-                    data: pieData,
-                    options: pieOptions
-                })
-            })
+            generateColors(number) {
+                let color = [];
+                for(let i = 0; i <= number; i++)
+                    color.push('#'+Math.floor(Math.random()*16777215).toString(16));
+                return color;
+            }
+        },
+
+
+
+        created() {
             this.loadDatas();
+        },
+
+
+        mounted() {
+            this.loadCategories();
+            this.linearGraph();
+            //$(function () {
+
+
+            //})
         }
     }
 </script>

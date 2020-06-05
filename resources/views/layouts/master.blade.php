@@ -155,7 +155,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                             <li class="nav-item">
                                 <router-link to="/products" class="nav-link">
-                                    <i class="far fa-circle-o nav-icon"></i>
+                                    <i class="fab fa-product-hunt nav-icon"></i>
                                     <p>Produits</p>
                                 </router-link>
                             </li>
@@ -171,10 +171,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     @can('isProducer')
                     <li class="nav-item">
                         <router-link to="/products" class="nav-link">
-                            <i class="far fa-circle-o nav-icon"></i>
+                            <i class="fab fa-product-hunt nav-icon"></i>
                             <p>Produits</p>
                         </router-link>
-                    </li>    
+                    </li>
                     @endcan
                     <li class="nav-item">
                         <router-link to="/orders" class="nav-link">

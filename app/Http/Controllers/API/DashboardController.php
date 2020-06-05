@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,16 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $products = Product::all()->count();
+        $user = auth('api')->user();
+        if($user->isAdmin()) {
+            $products = Product::all()->count();
+            $orders = Order::all()->count();
+        }
+        else {
+            $products = Product::where('user_id', $user->id)->count();
+            $orders = Order::where('user_id', $user->id)->count();
+        }
+
         $users = User::all()->count();
         $category = Category::all()->count();
 
@@ -25,6 +35,7 @@ class DashboardController extends Controller
             'products' => $products,
             'users' => $users,
             'category' => $category,
+            'orders' => $orders,
         ]);
     }
 

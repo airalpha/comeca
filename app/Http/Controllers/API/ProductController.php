@@ -156,7 +156,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('isAdmin');
+        //$this->authorize('isAdmin');
 
         $product = Product::findOrFail($id);
 
