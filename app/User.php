@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class, 'to');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->type === "admin";
+    }
 }

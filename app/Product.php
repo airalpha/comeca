@@ -25,4 +25,9 @@ class Product extends Model
     public function raitings() {
         return $this->hasMany(Raiting::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

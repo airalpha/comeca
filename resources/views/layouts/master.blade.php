@@ -168,6 +168,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
                     @endcan
+                    @can('isProducer')
+                    <li class="nav-item">
+                        <router-link to="/products" class="nav-link">
+                            <i class="far fa-circle-o nav-icon"></i>
+                            <p>Produits</p>
+                        </router-link>
+                    </li>    
+                    @endcan
                     <li class="nav-item">
                         <router-link to="/orders" class="nav-link">
                             <i class="nav-icon fas fa-shopping-basket"></i>

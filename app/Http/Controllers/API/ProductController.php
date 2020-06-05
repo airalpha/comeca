@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
@@ -19,11 +21,16 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
     public function index()
     {
-        return Product::with('Category', 'Images', 'Tags')->get();
+        if(Str::contains(URL::previous(), 'shop'))
+            return Product::with('Category', 'Images', 'Tags')->get();
+        $user = auth('api')->user();
+        if($user->isAdmin())
+            return Product::with('Category', 'Images', 'Tags')->get();
+        return Product::where('user_id', auth('api')->id())->with('Category', 'Images', 'Tags')->get();
     }
 
     public function slug($slug)
