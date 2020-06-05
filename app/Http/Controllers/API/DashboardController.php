@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Order;
 use App\Product;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use function foo\func;
 
 class DashboardController extends Controller
 {
@@ -28,14 +31,31 @@ class DashboardController extends Controller
             $orders = Order::where('user_id', $user->id)->count();
         }
 
-        $users = User::all()->count();
+        $datas = DB::table('orders')
+            ->select(DB::raw('MONTH(created_at) as month, count(*) as total'))
+            ->groupBy('month')
+            ->get()
+            ->sortBy('month');
+
+        $results = [];
+        $i = 0;
+        foreach ($datas as $data) {
+            $results[$i]['month'] = \DateTime::createFromFormat('!m', $data->month)->format('F');
+            $results[$i]['total'] = $data->total;
+            $i++;
+        }
+
+        //$datas = array_values($datas);
+
         $category = Category::all()->count();
+        $users = User::all()->count();
 
         return response()->json([
             'products' => $products,
             'users' => $users,
             'category' => $category,
             'orders' => $orders,
+            'datas' => $results,
         ]);
     }
 

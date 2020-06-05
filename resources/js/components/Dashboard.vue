@@ -117,7 +117,7 @@
                         <!-- LINE CHART -->
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Line Chart</h3>
+                                <h3 class="card-title">Vente/Mois</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -147,7 +147,7 @@
         data() {
             return {
                 infos: {},
-                categories: []
+                categories: [],
             }
         },
 
@@ -157,6 +157,8 @@
                 axios.get('api/dashboard')
                     .then((data) => {
                         this.infos = data.data;
+                        console.log(this.infos);
+                        this.linearGraph();
                     }, (error) => {
                         this.$Progress.fail();
                     });
@@ -168,7 +170,6 @@
                 axios.get('api/category')
                     .then((data) => {
                         this.categories = data.data;
-                        console.log(this.categories);
                         this.pieGraph();
                     }, (error) => {
                         this.$Progress.fail();
@@ -180,7 +181,6 @@
                 //-------------
                 //- DONUT CHART -
                 //-------------
-                console.log("okk", this.categories);
                 var donutData = {
                     labels: this.categories.map(category => category.name),
                     datasets: [
@@ -215,10 +215,10 @@
                 //--------------
 
                 var areaChartData = {
-                    labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                    labels  : this.infos.datas.map(data => data.month), //['January', 'February', 'March', 'April', 'May', 'June', 'July'],
                     datasets: [
                         {
-                            label               : 'Digital Goods',
+                            label               : 'Produits',
                             backgroundColor     : 'rgba(60,141,188,0.9)',
                             borderColor         : 'rgba(60,141,188,0.8)',
                             pointRadius          : false,
@@ -226,9 +226,9 @@
                             pointStrokeColor    : 'rgba(60,141,188,1)',
                             pointHighlightFill  : '#fff',
                             pointHighlightStroke: 'rgba(60,141,188,1)',
-                            data                : [28, 48, 40, 19, 86, 27, 90]
+                            data                : this.infos.datas.map(data => data.total), //[28, 0, 40, 19, 86, 27, 90]
                         },
-                        {
+                        /*{
                             label               : 'Electronics',
                             backgroundColor     : 'rgba(210, 214, 222, 1)',
                             borderColor         : 'rgba(210, 214, 222, 1)',
@@ -238,7 +238,7 @@
                             pointHighlightFill  : '#fff',
                             pointHighlightStroke: 'rgba(220,220,220,1)',
                             data                : [65, 59, 80, 81, 56, 55, 40]
-                        },
+                        },*/
                     ]
                 }
 
@@ -246,12 +246,12 @@
                     maintainAspectRatio : false,
                     responsive : true,
                     legend: {
-                        display: false
+                        display: true
                     },
                     scales: {
                         xAxes: [{
                             gridLines : {
-                                display : false,
+                                display : true,
                             }
                         }],
                         yAxes: [{
@@ -269,7 +269,7 @@
                 var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
                 var lineChartData = jQuery.extend(true, {}, areaChartData)
                 lineChartData.datasets[0].fill = false;
-                lineChartData.datasets[1].fill = false;
+                //lineChartData.datasets[1].fill = false;
                 lineChartOptions.datasetFill = false
 
                 var lineChart = new Chart(lineChartCanvas, {
@@ -290,13 +290,13 @@
 
 
         created() {
-            this.loadDatas();
         },
 
 
         mounted() {
+            this.loadDatas();
             this.loadCategories();
-            this.linearGraph();
+            //this.linearGraph();
             //$(function () {
 
 
