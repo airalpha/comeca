@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
 use Cartalyst\Stripe\Exception\CardErrorException;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
@@ -19,7 +20,8 @@ class CheckoutController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('checkout', compact('user'));
+        $latestProduct = Product::all()->last();
+        return view('checkout', compact('user', 'latestProduct'));
     }
 
     /**

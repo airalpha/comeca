@@ -25,7 +25,8 @@ class CartController extends Controller
 
     public function cart()
     {
-        return view('cart');
+        $latestProduct = Product::all()->last();
+        return view('cart', compact('latestProduct'));
     }
 
     /**

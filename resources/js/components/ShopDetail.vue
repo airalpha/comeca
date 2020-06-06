@@ -81,7 +81,7 @@
                                     <p><span>SKU:</span> <span>CT201807</span></p>
                                     <p v-if="product.category"><span>Category:</span>
                                         <span>{{ product.category.name }}</span></p>
-                                    <p><span>Tags:</span> <span v-for="tag in product.tags">{{ tag.name }}</span></p>
+                                    <p><span>Tags:</span> <span v-for="tag in product.tags">{{ tag.name }} &nbsp;</span></p>
                                     <p>
                                         <span>Share on:</span>
                                         <span>

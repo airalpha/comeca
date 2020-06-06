@@ -133,12 +133,12 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="tags">Tags</label>
-                                    <select class="select2" v-model="form.tags" multiple="multiple" id="tags" data-placeholder="Un ou plusieurs tags" >
-                                        <option :value="tag.id" v-for="tag in tags" :key="tag.id">
+                                    <select class="select2" :class="{ 'is-invalid': form.errors.has('tags') }" name="tags" v-model="form.tags" multiple="multiple" id="tags" data-placeholder="Un ou plusieurs tags">
+                                        <option :value="tag.id" name="tags[]" v-for="tag in tags" :key="tag.id">
                                             {{ tag.name }}
                                         </option>
                                     </select>
-                                    <has-error :form="form" field="tags"></has-error>
+                                    <!--<has-error :form="form" field="tags"></has-error>-->
                                 </div>
                             </div>
 
@@ -170,6 +170,7 @@
                 products: [],
                 categories: [],
                 tags: [],
+                tas: [],
                 form: new Form({
                     id: '',
                     name: '',
@@ -186,6 +187,7 @@
 
         methods: {
             createProduct() {
+                this.form.tags = $(".select2").val();
                 this.form.user_id = user.id;
                 this.$Progress.start();
                 this.form.post('/api/product')
@@ -205,6 +207,7 @@
             },
 
             updateProduct() {
+                this.form.tags = $(".select2").val();
                 this.$Progress.start();
                 this.form.put('/api/product/' + this.form.id)
                     .then((data) => {

@@ -123,6 +123,7 @@ class ProductController extends Controller
             'quantity' => 'required|integer',
         ]);
 
+
         if ($request->hasFile('image')) {
             $name = time() . '.' . explode('/',
                     explode(':',
@@ -143,7 +144,8 @@ class ProductController extends Controller
 
         $product->update($request->all());
 
-        $product->tags()->sync($tags);
+        if(!empty($tags))
+            $product->tags()->sync($tags);
 
         return response()->json(["message" => "Produit modifié !"]);
     }
@@ -160,7 +162,12 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        //Delete the user
+        //Delete the product
+        $c = Str::after($product->images->first()->path, '/images/');
+        $path = "/uploads/products/images/" . Str::before($c, '/');
+        $folder = public_path($path);
+        File::deleteDirectory($folder);
+        $product->images()->delete();
         $product->delete();
 
         //Return message
