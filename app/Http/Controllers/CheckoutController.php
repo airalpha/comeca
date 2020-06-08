@@ -42,6 +42,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+
         $stripe = new Stripe(config('services.stripe.secret'));
         $stripe = Stripe::make(config('services.stripe.secret'));
 

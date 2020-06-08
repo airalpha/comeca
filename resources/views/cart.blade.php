@@ -104,6 +104,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="cart-totals-area mt-70">
                         <h5 class="title--">Total Panier</h5>
+
                         <div class="subtotal d-flex justify-content-between">
                             <h5>Sous-total</h5>
                             <h5>
@@ -175,7 +176,7 @@
                             "X-Requested-With": "XMLHttpRequest",
                             "X-CSRF-TOKEN": token
                         },
-                        method: 'post',
+                        method: 'PATCH',
                         body: JSON.stringify({
                             qty: this.value
                         })
