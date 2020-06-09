@@ -47,6 +47,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $duplicata = Cart::search(function ($cardItem, $rowId) use ($request) {
             return $cardItem->id == $request->id;
         });
@@ -60,6 +61,7 @@ class CartController extends Controller
 
         $product = Product::find($request->id);
         $qte = intval($request->qte) ? intval($request->qte) : 1;
+
         Cart::add($request->id, $request->name, $qte, $request->price)
             ->associate(Product::class);
 

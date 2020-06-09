@@ -27,13 +27,15 @@ class CartUpdatedListener
      */
     public function handle($event)
     {
-        $code = request()->session()->get("discount")["code"];
-        $discount = Discount::where("code", $code)->first();
-        if ($discount) {
-            request()->session()->put('discount', [
-                'code' => $discount->code,
-                'remise' => $discount->discount(Cart::subtotal())
-            ]);
+        if(request()->session()->has("discount")) {
+            $code = request()->session()->get("discount")["code"];
+            $discount = Discount::where("code", $code)->first();
+            if ($discount) {
+                request()->session()->put('discount', [
+                    'code' => $discount->code,
+                    'remise' => $discount->discount(Cart::subtotal())
+                ]);
+            }
         }
     }
 }
