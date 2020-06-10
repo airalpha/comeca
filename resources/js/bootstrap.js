@@ -17,6 +17,8 @@ try {
     require('admin-lte/plugins/select2/js/select2.full.min.js');
     require('dropzone/dist/dropzone');
     require('admin-lte/plugins/chart.js/Chart.min.js');
+    require('admin-lte/plugins/bootstrap-slider/bootstrap-slider.min.js');
+    require('admin-lte/plugins/ion-rangeslider/js/ion.rangeSlider.min.js');
 } catch (e) {}
 
 /**

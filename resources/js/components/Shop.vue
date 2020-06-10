@@ -26,51 +26,17 @@
         <section class="shop-page section-padding-0-100">
             <div class="container">
                 <div class="row">
-                    <!-- Shop Sorting Data -->
-                    <div class="col-12">
-                        <div class="shop-sorting-data d-flex flex-wrap align-items-center justify-content-between">
-                            <!-- Shop Page Count -->
-                            <div class="shop-page-count">
-                                <p>Showing 1–9 of 72 results</p>
-                            </div>
-                            <!-- Search by Terms -->
-                            <div class="search_by_terms">
-                                <form action="#" method="post" class="form-inline">
-                                    <select class="custom-select widget-title">
-                                        <option selected>Short by Popularity</option>
-                                        <option value="1">Short by Newest</option>
-                                        <option value="2">Short by Sales</option>
-                                        <option value="3">Short by Ratings</option>
-                                    </select>
-                                    <select class="custom-select widget-title">
-                                        <option selected>Show: 9</option>
-                                        <option value="1">12</option>
-                                        <option value="2">18</option>
-                                        <option value="3">24</option>
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
                     <!-- Sidebar Area -->
                     <div class="col-12 col-md-4 col-lg-3">
                         <div class="shop-sidebar-area">
 
                             <!-- Shop Widget -->
                             <div class="shop-widget price mb-50">
-                                <h4 class="widget-title">Prices</h4>
-                                <div class="widget-desc">
-                                    <div class="slider-range">
-                                        <div data-min="1" data-max="30000" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="1" data-value-max="30000" data-label-result="Price:">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all first-handle" tabindex="0"></span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
-                                        </div>
-                                        <div class="range-price">Price: $8 - $30</div>
-                                    </div>
+                                <h4 class="widget-title">Prix</h4>
+                                <div class="slider-green">
+                                    <input id="slider-input" type="text" value="" class="slider form-control" data-slider-min="100" data-slider-max="50000"
+                                           data-slider-step="5" data-slider-value="[-100,100]" data-slider-orientation="horizontal"
+                                           data-slider-selection="before" data-slider-tooltip="show">
                                 </div>
                             </div>
 
@@ -92,28 +58,13 @@
                                 <div class="widget-desc">
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="news" value="news" v-model="others">
+                                        <input type="checkbox" class="custom-control-input" id="news" value="news" v-model="others.recent">
                                         <label class="custom-control-label" for="news">Récents</label>
                                     </div>
                                     <!-- Single Checkbox -->
                                     <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="az" value="az" v-model="others">
+                                        <input type="checkbox" class="custom-control-input" id="az" value="az" v-model="others.az">
                                         <label class="custom-control-label" for="az">A-Z</label>
-                                    </div>
-                                    <!-- Single Checkbox -->
-                                    <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck9">
-                                        <label class="custom-control-label" for="customCheck9">Z-A</label>
-                                    </div>
-                                    <!-- Single Checkbox -->
-                                    <div class="custom-control custom-checkbox d-flex align-items-center mb-2">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck10">
-                                        <label class="custom-control-label" for="customCheck10">Prix bas</label>
-                                    </div>
-                                    <!-- Single Checkbox -->
-                                    <div class="custom-control custom-checkbox d-flex align-items-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck11">
-                                        <label class="custom-control-label" for="customCheck11">Prix élévé</label>
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +183,12 @@
 
         data(){
             return {
-                others: [],
+                min: 0,
+                max:0,
+                others: {
+                    recent: null,
+                    az: null,
+                },
                 selectedCategory: [],
                 products: [],
                 categories: [],
@@ -266,9 +222,17 @@
                 axios.get('api/product')
                     .then((data) => {
                         this.products = data.data;
+                        this.max = _.maxBy(this.products, 'price').price;
+                        this.min = _.minBy(this.products, 'price').price;
+                        console.log(this.min, this.max);
+                        this.$nextTick(() => {
+                            $("#slider-input").attr('data-slider-min', this.min)
+                            $("#slider-input").attr('data-slider-max', this.max)
+                        })
                     }, (error) => {
                         this.$Progress.fail();
                     });
+                console.log(this.min, this.max);
                 this.$Progress.finish();
             },
 
@@ -289,11 +253,31 @@
         },
 
         mounted() {
+            this.loadCategories();
+            this.loadProducts();
+            $('.slider').bootstrapSlider()
         },
 
         computed: {
-            filterProtuct: {
-              get: function () {
+            filterProtuct: function () {
+                let result1 = this.products.filter((product) => {
+                    let cats = this.selectedCategory.length ? -1 !== _.indexOf(this.selectedCategory, product.category.name) : true;
+                    return cats;
+                })
+                if(this.others.recent) {
+                    result1 =  result1.sort(function (product1, product2) {
+                        return new Date(product2.created_at) - new Date(product1.created_at);
+                    })
+                }
+                if(this.others.az) {
+                    console.log("az")
+                    result1 =  result1.sort(function (product1, product2) {
+                        return product1.name.localeCompare(product2.name);
+                    })
+                }
+
+                return result1;
+              /*get: function () {
                   let cats = this.selectedCategory;
                   let oths = this.others;
                   if(-1 !== _.indexOf(oths, "news")) {
@@ -308,17 +292,17 @@
                           return -1 !== _.indexOf(cats, product.category.name);
                       });
                   }
-              },
+              },*/
             },
         },
 
         created() {
-            this.loadCategories();
-            this.loadProducts();
         }
     }
 </script>
 
 <style scoped>
-
+    .irs--flat .irs-bar {
+        background-color: #70c745 !important;
+    }
 </style>
