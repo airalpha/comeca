@@ -15,7 +15,13 @@
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
                                 <h2>Les plantes existent dans le temps et les rayons lumineux qui les entourent</h2>
-                                <p>Les produits forestiers non ligneux (PFNL), également appelés « produits forestiers autres que le bois », ou bien « produits forestiers secondaires » ou « mineurs », ou « spéciaux », sont, selon la définition de la FAO, des biens d'origine biologique autres que le bois, dérivés des forêts, d'autres terres boisées et des arbres hors forêts1. Ce sont des substances, des matières premières ou des matériaux utiles obtenus des forêts sans exploitation forestière, c'est-à-dire sans qu'il soit nécessaire d'abattre des arbres. Il peut s'agir par exemple d'animaux chassés comme gibier ou pour leur fourrure, ou de poissons, de fruits (baies, noix, etc.), de graines, d'épices, de champignons, de feuilles (fourrage), de plantes médicinales, de tourbe, etc.</p>
+                                <p>Les produits forestiers non ligneux (PFNL),
+                                    sont, selon la définition de la FAO,
+                                    des biens d'origine biologique autres que le bois,
+                                    dérivés des forêts, d'autres terres boisées et des arbres hors forêts.
+                                    Ce sont des substances, des matières premières ou des
+                                    matériaux utiles obtenus des forêts sans exploitation forestière,
+                                    c'est-à-dire sans qu'il soit nécessaire d'abattre des arbres.</p>
                                 <div class="welcome-btn-group">
                                     <a href="/shop" class="btn alazea-btn mr-30">COMMENCER</a>
                                     <a href="/contact" class="btn alazea-btn active">CONTACT</a>
@@ -36,7 +42,13 @@
                             <!-- Post Content -->
                             <div class="hero-slides-content text-center">
                                 <h2>Les plantes existent dans le temps et les rayons lumineux qui les entourent</h2>
-                                <p>Les produits forestiers non ligneux (PFNL), également appelés « produits forestiers autres que le bois », ou bien « produits forestiers secondaires » ou « mineurs », ou « spéciaux », sont, selon la définition de la FAO, des biens d'origine biologique autres que le bois, dérivés des forêts, d'autres terres boisées et des arbres hors forêts1. Ce sont des substances, des matières premières ou des matériaux utiles obtenus des forêts sans exploitation forestière, c'est-à-dire sans qu'il soit nécessaire d'abattre des arbres. Il peut s'agir par exemple d'animaux chassés comme gibier ou pour leur fourrure, ou de poissons, de fruits (baies, noix, etc.), de graines, d'épices, de champignons, de feuilles (fourrage), de plantes médicinales, de tourbe, etc.</p>
+                                <p>Les produits forestiers non ligneux (PFNL),
+                                    sont, selon la définition de la FAO,
+                                    des biens d'origine biologique autres que le bois,
+                                    dérivés des forêts, d'autres terres boisées et des arbres hors forêts.
+                                    Ce sont des substances, des matières premières ou des
+                                    matériaux utiles obtenus des forêts sans exploitation forestière,
+                                    c'est-à-dire sans qu'il soit nécessaire d'abattre des arbres.</p>
                                 <div class="welcome-btn-group">
                                     <a href="/shop" class="btn alazea-btn mr-30">COMMENCER</a>
                                     <a href="/contact" class="btn alazea-btn active">CONTACT</a>

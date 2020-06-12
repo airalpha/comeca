@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href=""><b>CO</b>MECA</a>
+        <a href="/"><b>CO</b>MECA</a>
     </div>
     <!-- /.login-logo -->
     @yield('content')

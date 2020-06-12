@@ -32,6 +32,8 @@ Route::get('/about', 'IndexController@about')->name('about');
 
 Route::get('/shop', 'IndexController@shop')->name('shop');
 
+Route::get('/search', 'IndexController@search')->name('search');
+
 Route::get('/contact', 'IndexController@contact')->name('contact');
 
 Route::get('/producers', 'IndexController@producer')->name('producers');

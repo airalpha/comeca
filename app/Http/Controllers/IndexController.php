@@ -18,7 +18,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::all()->take(4);
         $latestProduct = $products->last();
         $testimonials = Testimonial::all();
         return view('welcome',
@@ -89,6 +89,18 @@ class IndexController extends Controller
         $admin->notify(new NewContactMessagePosted($contactMessage));
 
         return redirect()->back()->with('success', 'Message envoyé !');
+    }
+
+    public function search(Request $request)
+    {
+        $q = $request->input('search');
+        $products = Product::where('name', 'like', "%$q%")
+            ->orWhere('description', 'like', "%$q%")
+            ->paginate(1);
+
+        return view('search')
+            ->with('products', $products)
+            ->with('latestProduct', Product::all()->last());
     }
 
     /**

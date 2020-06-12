@@ -54,6 +54,18 @@
         #card-errors {
             color: #fa755a;
         }
+
+        .social-info > a {
+            width: 40px;
+            text-align: center;
+            height: 40px;
+            line-height: 38px;
+        }
+
+        .social-info > a > i {
+            text-align: center;
+            line-height: inherit;
+        }
     </style>
 
     @yield('extra-script')
@@ -159,15 +171,7 @@
                     </div>
                 </nav>
 
-                <!-- Search Form -->
-                <div class="search-form">
-                    <form action="#" method="get">
-                        <input type="search" name="search" id="search" placeholder="Type keywords &amp; press enter...">
-                        <button type="submit" class="d-none"></button>
-                    </form>
-                    <!-- Close Icon -->
-                    <div class="closeIcon"><i class="fa fa-times" aria-hidden="true"></i></div>
-                </div>
+               @include('partials.search')
             </div>
         </div>
     </div>
@@ -189,7 +193,7 @@
                 <div class="col-12 col-sm-6 col-lg-3">
                     <div class="single-footer-widget">
                         <div class="footer-logo mb-30">
-                            <a href="#"><img src="{{ asset("template/img/core-img/leaf.png") }}" alt="" width="50" height="50"></a>
+                            <a href="#"><img src="{{ asset("template/img/core-img/leaf.png") }}" alt="" width="100" height="100"></a>
                         </div>
                         <p>Comeca, plateforme pour connecter les producteurs et consomatteur de PFNL</p>
                         <div class="social-info">
