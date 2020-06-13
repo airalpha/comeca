@@ -15,6 +15,11 @@ class CreateRaitingsTable extends Migration
     {
         Schema::create('raitings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('product_id');
+            $table->string('type');
+            $table->string('message');
+            $table->string('user_name');
+            $table->integer('stars');
             $table->timestamps();
         });
     }

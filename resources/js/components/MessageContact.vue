@@ -110,7 +110,7 @@
 
                             <!-- message Input -->
                             <div class="form-group">
-                                <label for="message">Nom</label>
+                                <label for="message">Message</label>
                                 <textarea v-model="form.message" type="text" name="message" id="message"
                                           class="form-control" disabled></textarea>
                             </div>
@@ -141,24 +141,6 @@
         },
 
         methods: {
-            createTag() {
-                this.$Progress.start();
-                this.form.post('/api/tag')
-                    .then((data) => {
-                        Fire.$emit('Aftercreate');
-                        $('#messageModal').modal('hide');
-
-                        Toast.fire({
-                            icon: 'success',
-                            title: data.data.message
-                        });
-
-                        this.$Progress.finish();
-                    }, (error) => {
-                        this.$Progress.fail();
-                    });
-            },
-
             loadMessages() {
                 this.$Progress.start();
                 axios.get('/api/contact/messages')

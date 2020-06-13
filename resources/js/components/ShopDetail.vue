@@ -5,7 +5,7 @@
             <!-- Top Breadcrumb Area -->
             <div class="top-breadcrumb-area bg-img bg-overlay d-flex align-items-center justify-content-center"
                  style="background-image: url(/template/img/bg-img/24.jpg);">
-                <h2>SHOP DETAILS</h2>
+                <h2>{{ product.name }}</h2>
             </div>
 
             <div class="container">
@@ -13,9 +13,9 @@
                     <div class="col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Shop Details</li>
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                                <li class="breadcrumb-item"><a href="/shop">Boutique</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
                             </ol>
                         </nav>
                     </div>
@@ -143,15 +143,14 @@
                                 <div role="tabpanel" class="tab-pane fade" id="reviews">
                                     <div class="reviews_area">
                                         <ul class="d-flex">
-                                            <li>
+                                            <li v-for="raiting in product.raitings">
                                                 <div class="single_user_review mb-15">
                                                     <div class="review-rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        <span>Qualité</span>
+                                                        <i v-for="star in raiting.stars" class="fa fa-star" aria-hidden="true"></i>
+                                                        <span>&nbsp;{{ raiting.type.toUpperCase() }}</span>
                                                     </div>
                                                     <div class="review-details">
-                                                        <p>Par <a href="#">Alpha</a> on <span>12 Sep 2018</span></p>
+                                                        <p>Par <a href="#">{{ raiting.user_name }}</a> le <span>{{ raiting.created_at.split(' ')[0] }}</span></p>
                                                     </div>
                                                 </div>
                                             </li>
@@ -164,7 +163,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group d-flex align-items-center">
-                                                        <span class="mr-15">Your Ratings:</span>
+                                                        <span class="mr-15">Votre note:</span>
                                                         <div class="stars">
                                                             <input value="1" v-model="raiting.stars" type="radio" name="star"
                                                                    class="star-1" id="star-1">
@@ -190,23 +189,22 @@
                                                 </div>
                                                 <div class="col-12 col-md-6">
                                                     <div class="form-group">
-                                                        <label for="options">Reason for your rating</label>
+                                                        <label for="options">Raison de votre note</label>
                                                         <select class="form-control" id="options" v-model="raiting.type">
-                                                            <option value="quality">Qualité</option>
-                                                            <option value="price">Prix</option>
+                                                            <option value="qualité">Qualité</option>
+                                                            <option value="prix">Prix</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="comments">Comments</label>
+                                                        <label for="comments">Commentaire</label>
                                                         <textarea class="form-control" id="comments" rows="5"
                                                                   data-max-length="150" v-model="raiting.message"></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
-                                                    <button type="submit" @click.prevent="sendReview" class="btn alazea-btn">Submit Your Review
-                                                    </button>
+                                                    <button type="submit" @click.prevent="sendReview" class="btn alazea-btn">Envoyer votre vote</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -240,11 +238,11 @@
                         <div class="single-product-area mb-100">
                             <!-- Product Image -->
                             <div class="product-img">
-                                <a :href="route('shop-detail', {slug: product.slug})"><img :src="product.images[0].path"
-                                                                                           alt=""></a>
+                                <a :href="route('shop-detail', {slug: product.slug})">
+                                    <img :src="product.images[0].path" alt=""></a>
                                 <!-- Product Tag -->
                                 <div class="product-tag">
-                                    <a href="#">Hot</a>
+                                    <a href="#">Hot</a><a href="#">Hot</a><a href="#">Hot</a>
                                 </div>
                                 <div class="product-meta d-flex">
                                     <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
@@ -281,6 +279,7 @@
             return {
                 products: [],
                 product: {},
+                raitings: [],
                 form: new Form({
                     id: '',
                     name: '',
@@ -306,7 +305,6 @@
                 this.form.post('/api/cart')
                     .then((data) => {
                         Fire.$emit('Aftercreate');
-                        console.log(data);
                         Toast.fire({
                             icon: data.data.type,
                             title: data.data.message
@@ -318,14 +316,21 @@
             },
 
             sendReview() {
-                console.log(this.raiting);
+                this.raiting.product_id = this.product.id;
+                this.$Progress.start();
+                this.raiting.post('/api/raitings')
+                    .then((response) => {
+                        console.log(response.data)
+                    }, (error) => {
+                        this.$Progress.fail();
+                    });
+                this.$Progress.finish();
             },
 
             loadProduct() {
                 this.$Progress.start();
                 axios.get('/api/product/slug/' + this.product_slug)
                     .then((data) => {
-                        console.log(data);
                         this.product = data.data;
                     }, (error) => {
                         this.$Progress.fail();

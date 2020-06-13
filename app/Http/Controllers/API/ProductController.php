@@ -35,7 +35,7 @@ class ProductController extends Controller
 
     public function slug($slug)
     {
-        return Product::with('Category', 'Images', 'Tags')->get()->where('slug', $slug)->first();
+        return Product::with('Category', 'Images', 'Tags', 'Raitings')->get()->where('slug', $slug)->first();
     }
 
     /**

@@ -96,7 +96,7 @@ class IndexController extends Controller
         $q = $request->input('search');
         $products = Product::where('name', 'like', "%$q%")
             ->orWhere('description', 'like', "%$q%")
-            ->paginate(1);
+            ->paginate(5);
 
         return view('search')
             ->with('products', $products)

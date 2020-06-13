@@ -30,6 +30,8 @@ Route::get('producers', 'API\IndexController@producers');
 
 Route::get('orders', 'API\IndexController@orders');
 
+Route::apiResource('raitings', 'API\RaitingController');
+
 Route::apiResource('profile', 'API\ProfileController');
 
 Route::apiResource('product', 'API\ProductController');
