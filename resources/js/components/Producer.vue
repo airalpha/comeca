@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 d-flex align-items-stretch" v-if="producers.length === 0">
-                        <empty></empty>
+                        <empty :message="'Aucun producteurs'"></empty>
                     </div>
                 </div>
             </div>

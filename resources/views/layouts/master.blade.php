@@ -185,33 +185,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <li class="nav-item">
                         <router-link to="/orders" class="nav-link">
                             <i class="nav-icon fas fa-shopping-basket"></i>
-                            <p>
-                                Commandes
-                            </p>
+                            <p>Commandes</p>
                         </router-link>
                     </li>
-                    <li class="nav-item">
+                    {{--<li class="nav-item">
                         <router-link to="/messages" class="nav-link">
                             <i class="nav-icon fas fa-envelope"></i>
-                            <p>
-                                Chat
-                            </p>
+                            <p>Chat</p>
                         </router-link>
-                    </li>
+                    </li>--}}
                     <li class="nav-item">
                         <router-link to="/message" class="nav-link">
                             <i class="nav-icon fas fa-inbox"></i>
-                            <p>
-                                Inbox
-                            </p>
+                            <p>Inbox</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
                         <router-link to="/profile" class="nav-link">
                             <i class="nav-icon fas fa-user-alt"></i>
-                            <p>
-                                Profile
-                            </p>
+                            <p>Profile</p>
                         </router-link>
                     </li>
                     <li class="nav-item">
@@ -219,9 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i class="nav-icon fas fa-power-off"></i>
-                            <p>
-                                Deconnexion
-                            </p>
+                            <p>Deconnexion</p>
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

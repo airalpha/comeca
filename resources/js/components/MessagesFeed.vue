@@ -1,8 +1,11 @@
 <template>
     <div class="direct-chat-messages" ref="feed">
+        <div v-if="!messages.length">
+            <empty :message="'Aucun message'"></empty>
+        </div>
         <div v-if="contact">
             <!-- Message. Default to the left -->
-            <div class="direct-chat-msg mt-3" :class="message.to===contact.id ? 'right' : 'left'" v-for="message in messages" :key="message.id">
+            <div class="direct-chat-msg mt-3 mb-2" :class="message.to===contact.id ? 'right' : 'left'" v-for="message in messages" :key="message.id">
                 <div class="direct-chat-infos clearfix">
                     <span class="direct-chat-name" :class="message.to===contact.id ? 'float-right' : 'float-left'">{{ message.to !== contact.id ? contact.name : $gate.user.name }}</span>
                     <span class="direct-chat-timestamp" :class="message.to===contact.id ? 'float-left' : 'float-right'">{{ message.date }}</span>
@@ -21,9 +24,11 @@
 </template>
 
 <script>
+    import NotFound from "./NotFound";
+    import Empty from "./Empty";
     export default {
         name: "MessagesFeed",
-
+        components: {Empty, NotFound},
         props: {
             contact: {
                 type: Object

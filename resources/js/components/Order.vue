@@ -15,7 +15,7 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-        <empty v-if="!orders.length"></empty>
+        <empty :message="'Aucune commande'" v-if="!orders.length"></empty>
         <div class="row">
             <div class="col-md-12">
                 <!-- The time line -->

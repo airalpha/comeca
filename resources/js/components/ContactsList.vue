@@ -21,7 +21,9 @@
                             {{ contact.name }}
                             <small class="contacts-list-date float-right"><span class="badge badge-danger">{{ contact.unread }}</span></small>
                           </span>
-                        <span class="contacts-list-msg"><span class="text-primary">How have you been? I was...</span></span>
+                        <span class="contacts-list-msg">
+                            <span class="text-primary">{{ contact.email }}</span>
+                        </span>
                     </div>
                     <!-- /.contacts-list-info -->
                 </a>
