@@ -66,7 +66,7 @@
                 if(this.search === '')
                     return _.sortBy(this.contacts, [(contact) => {
                         return contact.unread;
-                    }]).reverse();
+                    }]);
 
                 return this.contacts.filter(
                     contact => {

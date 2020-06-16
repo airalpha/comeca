@@ -42,7 +42,7 @@
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-shopping-cart"></i>
                     </div>
                     <a href="/orders" class="small-box-footer">Voir <i class="fas fa-arrow-circle-right"></i></a>
                 </div>

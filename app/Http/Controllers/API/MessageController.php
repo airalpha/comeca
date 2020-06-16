@@ -38,6 +38,7 @@ class MessageController extends Controller
         Message::where('from', $id)->where('to', auth('api')->id())->update(['read' => true]);
 
         $user_id = auth('api')->user()->id;
+
         $messages = Message::where(function($q) use($id, $user_id) {
             $q->where('from', $id);
             $q->where('to', $user_id);
@@ -46,9 +47,14 @@ class MessageController extends Controller
             $q->where('to', $id);
         })->get();
 
+        if ($id === "0")
+            $messages = Message::with('fromContact')->where('to', null)->get();
+
+
         $datas = [];
         foreach ($messages as $message) {
             $message->date = $message->created_at->diffForHumans();//Carbon::createFromTimeString( $message->created_at)->diffForHumans();
+            $message->fromContact->load('Profile');
             $datas[] = $message;
         }
 
@@ -57,6 +63,7 @@ class MessageController extends Controller
 
     public function sendMessage(Request $request)
     {
+
         $message =  Message::create([
             "from" => auth('api')->user()->id,
             "to" => $request->contact_id,
