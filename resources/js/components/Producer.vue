@@ -12,7 +12,7 @@
                     <div class="col-12">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Producteurs</li>
                             </ol>
                         </nav>
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="text-right">
-                                        <a href="#" class="btn btn-sm bg-teal">
+                                        <a href="#" class="btn btn-sm bg-teal" @click.stop.prevent="setItem(producer)">
                                             <i class="fas fa-comments"></i>
                                         </a>
                                         <a href="#" class="btn btn-sm btn-primary">
@@ -95,6 +95,13 @@
 
             getImageP(image) {
                 return image;
+            },
+
+            setItem(producer) {
+                const parsed = JSON.stringify(producer);
+                localStorage.setItem('contact', parsed);
+                this.$router.replace('/message')
+                location.reload();
             }
         },
 

@@ -31,7 +31,7 @@ class IndexController extends Controller
         $response = [];
         $i = 0;
         foreach ($datas as $data) {
-            $response[$i]['date'] = Carbon::parse($data->payment_created_at)->format('d m. y - H:i');
+            $response[$i]['date'] = Carbon::parse($data->payment_created_at)->format('d M. y - H:i');
             $response[$i]['amount'] = getPrice($data->amount);
             $response[$i]['notes'] = $data->notes;
             foreach (unserialize($data->products) as $product) {

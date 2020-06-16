@@ -40,7 +40,16 @@
         },
 
         mounted() {
-            console.log("Echo", Echo);
+            if (localStorage.getItem('contact')) {
+                try {
+                    this.startConversationWith(JSON.parse(localStorage.getItem('contact')))
+                    localStorage.removeItem('contact');
+                } catch(e) {
+                    localStorage.removeItem('contact');
+                }
+            }
+
+
             Echo.private(`messages.${user.id}`)
                 .listen('NewMessage', (e) => {
                     this.handleIncoming(e.message);
@@ -65,8 +74,8 @@
                 axios.get(`/api/conversation/${contact.id}`)
                 .then((response) => {
                     this.messages = response.data;
-                    console.log(response.data);
                     this.selectedContact = contact;
+                    console.log(this.selectedContact);
                     $("#btn-contact").click();
                 })
             },

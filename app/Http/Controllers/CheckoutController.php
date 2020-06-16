@@ -69,7 +69,7 @@ class CheckoutController extends Controller
 
             $order = new Order();
             $order->payment_intent_id = $charge["id"];
-            $order->amount = $charge["amount"];
+            $order->amount = $total;
             $order->notes = $request->order_notes;
             $order->payment_created_at = (new \DateTime())
                 ->setTimestamp($charge["created"])
@@ -94,7 +94,7 @@ class CheckoutController extends Controller
             $order->save();
             Cart::destroy();
             session()->flash('success', 'Merci pour votre payment !');
-            return redirect()->back();
+            return redirect()->route('shop');
 
         } catch (CardErrorException $e) {
             session()->flash('error', 'Erreur : '.$e->getMessage());
