@@ -27,21 +27,21 @@
 
                         <h3 class="profile-username text-center">{{ this.form.name }}</h3>
 
-                        <p class="text-muted text-center">Software Engineer</p>
+                        <p class="text-muted text-center">{{ this.form.email }}</p>
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b>Produits</b> <a class="float-right">1,322</a>
+                                <b>Produits</b> <a class="float-right">{{ this.form.products.length }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Achats</b> <a class="float-right">1,322</a>
+                                <b>Achats</b> <a class="float-right">{{ this.form.orders.length }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Produits vendus</b> <a class="float-right">543</a>
+                                <!--<b>Produits vendus</b> <a class="float-right">543</a>-->
                             </li>
                         </ul>
 
-                        <a href="#" class="btn btn-primary btn-block"><b>{{ form.type }}</b></a>
+                        <a href="#" class="btn btn-outline-success btn-block text-uppercase"><b>{{ form.type.toLowerCase() }}</b></a>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -153,7 +153,9 @@
                         bio: '',
                         city: '',
                         phone: ''
-                    }
+                    },
+                    orders: [],
+                    products: [],
                 }),
             }
         },
@@ -202,6 +204,7 @@
             this.$Progress.start();
             axios.get("/api/profile").then((data) => {
                 this.form.fill(data.data);
+                console.log(data.data);
                 this.$Progress.finish();
             }, (error) => {
                 this.$Progress.fail();

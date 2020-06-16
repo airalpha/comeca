@@ -27,7 +27,7 @@ class ProfileController extends Controller
     public function index()
     {
         $id = auth('api')->user()->id;
-        $user = User::with('Profile')->get()->find($id);
+        $user = User::with('Profile', 'Orders', 'Products')->get()->find($id);
         return $user;
     }
 
