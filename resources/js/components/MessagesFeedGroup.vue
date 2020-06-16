@@ -7,7 +7,9 @@
             <!-- Message. Default to the left -->
             <div class="direct-chat-msg mt-3 mb-2" :class="message.from===$gate.user.id ? 'right' : 'left'" v-for="message in messages" :key="message.id">
                 <div class="direct-chat-infos clearfix">
-                    <span class="direct-chat-name" :class="message.from===$gate.user.id ? 'float-right' : 'float-left'">{{ message.from !== $gate.user.id ? message.from_contact.name : $gate.user.name }}</span>
+                    <span class="direct-chat-name" :class="message.from===$gate.user.id ? 'float-right' : 'float-left'">
+                        <a href="" @click.stop.prevent="setItem(message.from_contact)">{{ message.from !== $gate.user.id ? message.from_contact.name : $gate.user.name }}</a>
+                    </span>
                     <span class="direct-chat-timestamp" :class="message.from===$gate.user.id ? 'float-left' : 'float-right'">{{ message.date }}</span>
                 </div>
                 <!-- /.direct-chat-infos -->
@@ -47,6 +49,13 @@
                 setTimeout(() => {
                     this.$refs.feed.scrollTop = this.$refs.feed.scrollHeight;
                 }, 50);
+            },
+
+            setItem(producer) {
+                console.log(producer)
+                const parsed = JSON.stringify(producer);
+                localStorage.setItem('contact', parsed);
+                this.$router.replace('/message')
             }
         },
 
