@@ -28,8 +28,9 @@
         },
 
         mounted() {
-            Echo.private(`messages.${user.id}`)
-                .listen('NewMessage', (e) => {
+            Echo.channel(`messages`)
+                .listen('NewMessageGroup', (e) => {
+                    console.log(e);
                     this.handleIncoming(e.message);
                 });
 
@@ -46,8 +47,10 @@
             },
 
             handleIncoming(message) {
+                console.log(message);
+                if(message.from === user.id)
+                    return;
                 this.sendNewMessage(message);
-                return;
             },
         }
     }

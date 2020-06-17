@@ -24,7 +24,6 @@
 
         methods: {
             sendMessage(text) {
-                console.log(text);
                 let form = new Form({
                     contact_id: null,
                     text: text

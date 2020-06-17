@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Events\NewMessage;
+use App\Events\NewMessageGroup;
 use App\Http\Controllers\Controller;
 use App\Message;
 use App\User;
@@ -69,7 +70,11 @@ class MessageController extends Controller
             "to" => $request->contact_id,
             "text" => $request->text
         ]);
-        broadcast(new NewMessage($message));
+        if($message->to)
+            broadcast(new NewMessage($message));
+        else
+            broadcast(new NewMessageGroup($message));
+
         return $message;
     }
 }
