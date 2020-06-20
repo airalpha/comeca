@@ -26,9 +26,13 @@ Route::get('conversation/{id}', 'API\MessageController@getMessagesFor');
 
 Route::post('conversation/send', 'API\MessageController@sendMessage');
 
+Route::get('orders/mark-validate/{order}', 'API\IndexController@markValidate');
+
 Route::get('producers', 'API\IndexController@producers');
 
 Route::get('orders', 'API\IndexController@orders');
+
+Route::get('all-orders', 'API\IndexController@allOrders');
 
 Route::apiResource('raitings', 'API\RaitingController');
 

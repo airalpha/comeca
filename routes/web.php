@@ -11,8 +11,6 @@
 |
 */
 
-use App\Product;
-
 Route::get('/', 'IndexController@index')->name('welcome');
 
 Auth::routes();
@@ -23,7 +21,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-    dd(Cart::total());
+
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

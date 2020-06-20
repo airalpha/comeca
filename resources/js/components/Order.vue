@@ -45,7 +45,8 @@
                                 {{ order.notes }}
                             </div>
                             <div class="timeline-footer">
-                                <a class="btn btn-success btn-sm disabled"><i class="fas fa-check"></i> Validée</a>
+                                <a v-if="order.state === 2" class="btn btn-success btn-sm disabled"><i class="fas fa-check"></i> Validée</a>
+                                <a v-if="order.state === 1" class="btn btn-primary btn-sm disabled"><i class="fas fa-bars"></i> En cours</a>
                             </div>
                         </div>
                     </div>

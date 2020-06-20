@@ -77,6 +77,7 @@ let routes = [
     {path: '/message', component: require("./components/Message").default},
     {path: '/discount', component: require("./components/Discount").default},
     {path: '/orders', component: require("./components/Order").default},
+    {path: '/all-orders', component: require("./components/Orders").default},
     {path: '/raiting', component: require("./components/Raitings").default},
 ];
 

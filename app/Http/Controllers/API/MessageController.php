@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 class MessageController extends Controller
 {
     public function contacts() {
-        $contacts =  User::with("Profile")->where('id', '!=', auth('api')->id())->get();
+        $contacts =  User::with("Profile")
+            ->where('id', '!=', auth('api')->id())->get();
 
         //On selectione d'abord le nombre de messages non lus
         $unreadIds = Message::select(DB::raw('`from` as sender_id, count(`from`) as messages_count'))
@@ -47,6 +48,7 @@ class MessageController extends Controller
             $q->where('from', $user_id);
             $q->where('to', $id);
         })->get();
+
 
         if ($id === "0")
             $messages = Message::with('fromContact')->where('to', null)->get();
