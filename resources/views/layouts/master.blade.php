@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </li>
                             <li class="nav-item">
                                 <router-link to="/all-orders" class="nav-link">
-                                    <i class="fas fa-comment-dots nav-icon"></i>
+                                    <i class="fab fa-first-order-alt nav-icon"></i>
                                     <p>All Commandes</p>
                                 </router-link>
                             </li>
