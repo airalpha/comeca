@@ -37,9 +37,7 @@ class RaitingController extends Controller
             'stars' => 'required|integer'
         ]);
 
-        Raiting::create($data);
-
-        return response()->json(["message" => "Note ajoutée !"]);
+        return Raiting::create($data);
     }
 
     /**

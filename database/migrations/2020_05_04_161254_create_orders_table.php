@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->text('products');
             $table->longText('notes');
             $table->text("user_informations");
-            $table->text("state");
+            $table->integer("state")->default(1);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });

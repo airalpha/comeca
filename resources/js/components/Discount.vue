@@ -24,7 +24,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="discountTable" class="table table-bordered table-striped">
+                <table id="discountTable" class="table table-responsive-md table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>ID</th>

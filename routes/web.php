@@ -21,7 +21,7 @@ Route::get('/vide-panier', function (){
 });
 
 Route::get('/test', function (){
-
+    dd(auth()->user()->products);
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

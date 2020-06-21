@@ -109,12 +109,8 @@
                                     <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#addi-info" class="nav-link" data-toggle="tab" role="tab">Additional
-                                        Information</a>
-                                </li>
-                                <li class="nav-item">
                                     <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span
-                                        class="text-muted">(1)</span></a>
+                                        class="text-muted">({{ product.raitings.length }})</span></a>
                                 </li>
                             </ul>
                             <!-- Tab Content -->
@@ -124,25 +120,9 @@
                                         <p>{{ product.description }}</p>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane fade" id="addi-info">
-                                    <div class="additional_info_area">
-                                        <p>What should I do if I receive a damaged parcel?
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit impedit similique qui, itaque delectus labore.</span>
-                                        </p>
-                                        <p>I have received my order but the wrong item was delivered to me.
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis quam voluptatum beatae harum tempore, ab?</span>
-                                        </p>
-                                        <p>Product Receipt and Acceptance Confirmation Process
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus, temporibus soluta impedit minus rerum?</span>
-                                        </p>
-                                        <p>How do I cancel my order?
-                                            <br> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum eius eum, minima!</span>
-                                        </p>
-                                    </div>
-                                </div>
                                 <div role="tabpanel" class="tab-pane fade" id="reviews">
                                     <div class="reviews_area">
-                                        <ul class="d-flex">
+                                        <ul class="d-flex justify-content-between">
                                             <li v-for="raiting in product.raitings">
                                                 <div class="single_user_review mb-15">
                                                     <div class="review-rating">
@@ -153,6 +133,7 @@
                                                         <p>Par <a href="#">{{ raiting.user_name }}</a> le <span>{{ raiting.created_at.split(' ')[0] }}</span></p>
                                                     </div>
                                                 </div>
+                                                <br>
                                             </li>
                                         </ul>
                                     </div>
@@ -320,7 +301,8 @@
                 this.$Progress.start();
                 this.raiting.post('/api/raitings')
                     .then((response) => {
-                        console.log(response.data)
+                        this.product.raitings.push(response.data);
+                        console.log(this.product.raitings)
                     }, (error) => {
                         this.$Progress.fail();
                     });
@@ -361,11 +343,12 @@
         },
 
         mounted() {
+            this.loadProduct();
+            this.loadProducts();
         },
 
         created() {
-            this.loadProduct();
-            this.loadProducts();
+
         }
     }
 </script>

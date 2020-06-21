@@ -21,7 +21,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="raitingTable" class="table table-bordered table-striped">
+                <table id="raitingTable" class="table table-responsive-md table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>ID</th>
