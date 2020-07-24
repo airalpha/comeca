@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -185,6 +181,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <router-link to="/products" class="nav-link">
                             <i class="fab fa-product-hunt nav-icon"></i>
                             <p>Produits</p>
+                        </router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/producer-orders" class="nav-link">
+                            <i class="fab fa-first-order-alt nav-icon"></i>
+                            <p>Les commandes</p>
                         </router-link>
                     </li>
                     @endcan

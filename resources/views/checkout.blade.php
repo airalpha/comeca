@@ -59,8 +59,8 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 mb-4">
-                                    <label for="phone_number">Phone Number *</label>
-                                    <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone_number" min="0"
+                                    <label for="phone_number">Phone Number * {{ $user->profile->phone }}</label>
+                                    <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone_number" min="0"
                                            value="{{ $user ? $user->profile->phone : old('phone') }}">
                                     @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -70,7 +70,8 @@
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <label for="city">Ville *</label>
-                                    <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ $user ? $user->profile->city : old('city') }}">
+                                    <input type="text"
+                                           class="form-control @error('city') is-invalid @enderror" name="city" id="city" value="{{ $user ? $user->profile->city : old('city') }}">
                                     @error('city')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

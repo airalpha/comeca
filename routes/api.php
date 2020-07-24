@@ -34,6 +34,8 @@ Route::get('orders', 'API\IndexController@orders');
 
 Route::get('all-orders', 'API\IndexController@allOrders');
 
+Route::get('all-ordersP', 'API\IndexController@ordersP');
+
 Route::apiResource('raitings', 'API\RaitingController');
 
 Route::apiResource('profile', 'API\ProfileController');

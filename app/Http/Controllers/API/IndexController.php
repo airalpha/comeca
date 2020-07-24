@@ -44,6 +44,38 @@ class IndexController extends Controller
         return $response;
     }
 
+    public function ordersP()
+    {
+        $productIds = auth('api')->user()->products->pluck("id")->toArray();
+        $datas = Order::all();
+        $response = [];
+        $i = 0;
+        foreach ($datas as $data) {
+            foreach (unserialize($data->products) as $product) {
+                $ordersProductIds[] = $product['id'];
+                $response[$i]['products'][] = $product;
+            }
+
+            $response[$i]['date'] = Carbon::parse($data->payment_created_at)->format('d M. y - H:i');
+            $response[$i]['amount'] = getPrice($data->amount);
+            $response[$i]['notes'] = $data->notes;
+            $response[$i]['state'] = $data->state;
+            $dataser = preg_replace_callback(
+                '!s:(\d+):"(.*?)";!',
+                function($m) {
+                    return 's:'.strlen($m[2]).':"'.$m[2].'";';
+                },
+                $data->user_informations);
+            $response[$i]['user'] = unserialize($dataser);
+            $response[$i]['id'] = $data->id;
+
+            $i++;
+        }
+        $ordersProductIds = array_values(collect($response)->pluck("products")->pluck("0")->pluck("id")->toArray());
+        $response = collect($response);
+        return $response;
+    }
+
 
     public function allOrders()
     {

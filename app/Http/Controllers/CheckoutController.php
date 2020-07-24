@@ -12,6 +12,11 @@ use Cartalyst\Stripe\Stripe;
 
 class CheckoutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,6 +64,7 @@ class CheckoutController extends Controller
             : Cart::total();
 
         try {
+            $total /= 656;
             $charge = $stripe->charges()->create([
                 'source' => $request->stripeToken,
                 'description' => 'Comeca Shoping',
@@ -82,6 +88,7 @@ class CheckoutController extends Controller
                 $products[$i]["id"] = $product->model->id;
                 $products[$i]["name"] = $product->model->name;
                 $products[$i]["qty"] = $product->qty;
+                $this->updateQte($product->model->id, $product->qty);
                 $i++;
             }
 
@@ -100,6 +107,12 @@ class CheckoutController extends Controller
             session()->flash('error', 'Erreur : '.$e->getMessage());
             return redirect()->back();
         }
+    }
+
+    public function updateQte($id, $qte){
+        $product = Product::find($id);
+        $product->quantity -= $qte;
+        $product->save();
     }
 
     /**
