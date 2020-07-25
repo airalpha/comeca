@@ -68,15 +68,14 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3>{{ infos.reviews }}</h3>
 
-                        <p>Unique Visitors</p>
+                        <p>Review des produits</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
-                        <i class="fas fa-chart-pie"></i>
+                        <i class="fas fa-file-alt"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="/raiting" class="small-box-footer" v-if="$gate.isAdmin()">Voir <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

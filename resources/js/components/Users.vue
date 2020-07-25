@@ -40,7 +40,7 @@
                         <td>{{ user.id }}</td>
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
-                        <td>{{ user.type }}</td>
+                        <td><span class="badge badge-success">{{ user.type }}</span></td>
                         <td class="project-actions text-right" v-if="!$gate.isMe(user)">
                             <a class="btn btn-info btn-sm" @click="editModal(user)">
                                 <i class="fas fa-pencil-alt white">

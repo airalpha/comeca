@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Order;
 use App\Product;
+use App\Raiting;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -49,10 +50,12 @@ class DashboardController extends Controller
 
         $category = Category::all()->count();
         $users = User::all()->count();
+        $reviews = Raiting::all()->count();
 
         return response()->json([
             'products' => $products,
             'users' => $users,
+            'reviews' => $reviews,
             'category' => $category,
             'orders' => $orders,
             'datas' => $results,

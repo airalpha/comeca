@@ -16,8 +16,8 @@
                 <!-- /.direct-chat-infos -->
                 <img class="direct-chat-img" :src="message.from!==$gate.user.id ?  message.from_contact.profile.avatar : $gate.user.profile.avatar" alt="message user image">
                 <!-- /.direct-chat-img -->
-                <div class="direct-chat-text">
-                    {{ message.text }}
+                <div class="direct-chat-text" v-html="message.text">
+
                 </div>
                 <!-- /.direct-chat-text -->
             </div>

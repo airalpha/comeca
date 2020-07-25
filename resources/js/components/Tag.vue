@@ -35,7 +35,7 @@
                     <tbody>
                     <tr v-for="tag in tags" :key="tag.id">
                         <td>{{ tag.id }}</td>
-                        <td>{{ tag.name }}</td>
+                        <td><span class="btn badge-primary">{{ tag.name }}</span></td>
                         <td class="project-actions text-right">
                             <a class="btn btn-info btn-sm" @click="editModal(tag)">
                                 <i class="fas fa-pencil-alt white">

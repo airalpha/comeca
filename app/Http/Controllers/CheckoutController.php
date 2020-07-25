@@ -64,13 +64,13 @@ class CheckoutController extends Controller
             : Cart::total();
 
         try {
-            $total /= 656;
+            $tt = $total / 656;
             $charge = $stripe->charges()->create([
                 'source' => $request->stripeToken,
                 'description' => 'Comeca Shoping',
                 'receipt_email' => $request->email,
                 'currency' => 'eur',
-                'amount'   => $total,
+                'amount'   => $tt,
             ]);
 
             $order = new Order();

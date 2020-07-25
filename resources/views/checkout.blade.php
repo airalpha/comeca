@@ -59,7 +59,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-12 mb-4">
-                                    <label for="phone_number">Phone Number * {{ $user->profile->phone }}</label>
+                                    <label for="phone_number">Phone Number *</label>
                                     <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone_number" min="0"
                                            value="{{ $user ? $user->profile->phone : old('phone') }}">
                                     @error('phone')
