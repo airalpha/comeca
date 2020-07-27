@@ -317,6 +317,12 @@
                 this.editMode = true;
                 this.form.reset();
                 $('#productModal').modal('show');
+                let tags = [];
+                product.tags.forEach((tag) => {
+                    tags.push(tag.id.toString());
+                });
+                $('.select2').val(tags);
+                $('.select2').trigger('change');
                 this.form.fill(product);
             },
 

@@ -8,7 +8,8 @@
             <!-- Single Hero Post -->
             <div class="single-hero-post bg-overlay">
                 <!-- Post Image -->
-                <div class="slide-img bg-img" style="background-image: url({{ asset("template/img/bg-img/1.jpg") }});"></div>
+                <div class="slide-img bg-img"
+                     style="background-image: url({{ asset("template/img/bg-img/1.jpg") }});"></div>
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
@@ -35,7 +36,8 @@
             <!-- Single Hero Post -->
             <div class="single-hero-post bg-overlay">
                 <!-- Post Image -->
-                <div class="slide-img bg-img" style="background-image: url({{ asset("template/img/bg-img/2.jpg") }});"></div>
+                <div class="slide-img bg-img"
+                     style="background-image: url({{ asset("template/img/bg-img/2.jpg") }});"></div>
                 <div class="container h-100">
                     <div class="row h-100 align-items-center">
                         <div class="col-12">
@@ -186,29 +188,29 @@
 
                         <!-- Single Testimonial Slide -->
                         @foreach($testimonials as $testimonial)
-                        <div class="single-testimonial-slide">
-                            <div class="row align-items-center">
-                                <div class="col-12 col-md-6">
-                                    <div class="testimonial-thumb">
-                                        <img src="{{ $testimonial->image }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                    <div class="testimonial-content">
-                                        <!-- Section Heading -->
-                                        <div class="section-heading">
-                                            <h2>TÉMOIGNAGE</h2>
-                                            <p>Quelques mots aimables de clients sur COMECA</p>
+                            <div class="single-testimonial-slide">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-6">
+                                        <div class="testimonial-thumb">
+                                            <img src="{{ $testimonial->image }}" alt="">
                                         </div>
-                                        <p>“{{ $testimonial->text }}”</p>
-                                        <div class="testimonial-author-info">
-                                            <h6>{{ $testimonial->name }}</h6>
-                                            <p>{{ $testimonial->work }}</p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="testimonial-content">
+                                            <!-- Section Heading -->
+                                            <div class="section-heading">
+                                                <h2>TÉMOIGNAGE</h2>
+                                                <p>Quelques mots aimables de clients sur COMECA</p>
+                                            </div>
+                                            <p>“{{ $testimonial->text }}”</p>
+                                            <div class="testimonial-author-info">
+                                                <h6>{{ $testimonial->name }}</h6>
+                                                <p>{{ $testimonial->work }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>
@@ -232,32 +234,34 @@
 
             <div class="row">
 
-                @foreach($products as $product)
+            @foreach($products as $product)
                 <!-- Single Product Area -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-product-area mb-50 wow fadeInUp" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <a href="{{ route('shop-detail', ['slug' => $product->slug]) }}"><img src="{{ $product->images->first()->path }}" alt=""></a>
-                            <!-- Product Tag -->
-                            <div class="product-tag">
-                                <a href="#">Hot</a>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="single-product-area mb-50 wow fadeInUp" data-wow-delay="100ms"
+                             style="visibility: visible; animation-delay: 100ms; animation-name: fadeInUp;">
+                            <!-- Product Image -->
+                            <div class="product-img">
+                                <a href="{{ route('shop-detail', ['slug' => $product->slug]) }}"><img
+                                        src="{{ $product->images->first()->path }}" alt=""></a>
+                                <!-- Product Tag -->
+                                <div class="product-tag">
+                                    <a href="#">Hot</a>
+                                </div>
+                                <div class="product-meta d-flex">
+                                    <a href="#" class="wishlist-btn"><i class="fas fa-shopping-basket mt-3"></i></a>
+                                    <add-to-cart :product="{{ $product }}"></add-to-cart>
+                                    <a href="#" class="compare-btn"><i class="fas fa-plus-circle mt-3"></i></a>
+                                </div>
                             </div>
-                            <div class="product-meta d-flex">
-                                <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
-                                <add-to-cart :product="{{ $product }}"></add-to-cart>
-                                <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
+                            <!-- Product Info -->
+                            <div class="product-info mt-15 text-center">
+                                <a href="{{ route('shop-detail', ['slug' => $product->slug]) }}">
+                                    <p>{{ $product->name }}</p>
+                                </a>
+                                <h6>{{ $product->price }} FCFA</h6>
                             </div>
-                        </div>
-                        <!-- Product Info -->
-                        <div class="product-info mt-15 text-center">
-                            <a href="{{ route('shop-detail', ['slug' => $product->slug]) }}">
-                                <p>{{ $product->name }}</p>
-                            </a>
-                            <h6>{{ $product->price }} FCFA</h6>
                         </div>
                     </div>
-                </div>
                 @endforeach
                 <div class="col-12 text-center">
                     <a href="{{ route("shop") }}" class="btn alazea-btn">Vior tout</a>
@@ -282,7 +286,8 @@
                 <div class="col-12 col-lg-6">
                     <div class="subscribe-form">
                         <form action="#" method="get">
-                            <input type="email" name="subscribe-email" id="subscribeEmail" placeholder="Enter your email">
+                            <input type="email" name="subscribe-email" id="subscribeEmail"
+                                   placeholder="Enter your email">
                             <button type="submit" class="btn alazea-btn">S'ABONNER</button>
                         </form>
                     </div>
@@ -314,22 +319,26 @@
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="contact-name" name="name" placeholder="Votre nom">
+                                        <input type="text" class="form-control" id="contact-name" name="name"
+                                               placeholder="Votre nom">
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="contact-email" name="email" placeholder="Votre e-mail">
+                                        <input type="email" class="form-control" id="contact-email" name="email"
+                                               placeholder="Votre e-mail">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="contact-subject" name="subject" placeholder="Subject">
+                                        <input type="text" class="form-control" id="contact-subject" name="subject"
+                                               placeholder="Subject">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                        <textarea class="form-control" name="message" id="message" cols="30" rows="10"
+                                                  placeholder="Message"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -343,7 +352,9 @@
                 <div class="col-12 col-lg-6">
                     <!-- Google Maps -->
                     <div class="map-area mb-100">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7944.807046958833!2d10.421631631653211!3d5.355232996115477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105f92650ec63879%3A0x5b8bb33f48320fc3!2sInstitut%20Universitaire%20Des%20Technologies%20Fotso%20Victor%20De%20Bandjoun!5e0!3m2!1sfr!2scm!4v1583234991882!5m2!1sfr!2scm" allowfullscreen></iframe>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7944.807046958833!2d10.421631631653211!3d5.355232996115477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105f92650ec63879%3A0x5b8bb33f48320fc3!2sInstitut%20Universitaire%20Des%20Technologies%20Fotso%20Victor%20De%20Bandjoun!5e0!3m2!1sfr!2scm!4v1583234991882!5m2!1sfr!2scm"
+                            allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -353,6 +364,7 @@
 @endsection
 <script>
     import AddToCart from "../js/components/AddToCart";
+
     export default {
         components: {AddToCart}
     }

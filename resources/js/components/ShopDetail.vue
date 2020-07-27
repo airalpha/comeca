@@ -70,25 +70,19 @@
                                             cart
                                         </button>
                                     </form>
-                                    <!-- Wishlist & Compare -->
-                                    <div class="wishlist-compare d-flex flex-wrap align-items-center">
-                                        <a href="#" class="wishlist-btn ml-15"><i class="icon_heart_alt"></i></a>
-                                        <a href="#" class="compare-btn ml-15"><i class="arrow_left-right_alt"></i></a>
-                                    </div>
                                 </div>
 
                                 <div class="products--meta">
-                                    <p><span>SKU:</span> <span>CT201807</span></p>
-                                    <p v-if="product.category"><span>Category:</span>
+                                    <p v-if="product.category"><span>Categorie:</span>
                                         <span>{{ product.category.name }}</span></p>
                                     <p><span>Tags:</span> <span v-for="tag in product.tags">{{ tag.name }} &nbsp;</span></p>
                                     <p>
                                         <span>Share on:</span>
                                         <span>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a :href="getUrl(2)"
+                                       target="_blank"><i class="fa fa-facebook"></i></a>
+                                    <a :href="getUrl(1)"
+                                       target="_blank"><i class="fa fa-twitter"></i></a>
                                 </span>
                                     </p>
                                 </div>
@@ -109,8 +103,8 @@
                                     <a href="#description" class="nav-link active" data-toggle="tab" role="tab">Description</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews <span
-                                        class="text-muted">({{ product.raitings.length }})</span></a>
+                                    <a href="#reviews" class="nav-link" data-toggle="tab" role="tab">Reviews
+                                        <span class="text-muted">({{ product.raitings.length }})</span></a>
                                 </li>
                             </ul>
                             <!-- Tab Content -->
@@ -333,6 +327,13 @@
 
             background(image) {
                 return `background-image: url(${image});`
+            },
+
+            getUrl($lieu) {
+                if ($lieu===1)
+                    return 'https://twitter.com/intent/tweet?url='+window.location.href;
+                else
+                    return 'https://www.facebook.com/sharer/sharer.php?u='+window.location.href;
             }
         },
 
@@ -343,12 +344,12 @@
         },
 
         mounted() {
-            this.loadProduct();
-            this.loadProducts();
+
         },
 
         created() {
-
+            this.loadProduct();
+            this.loadProducts();
         }
     }
 </script>

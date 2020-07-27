@@ -4,7 +4,7 @@
             <div class="card-header ui-sortable-handle" style="cursor: move;">
                 <h3 class="card-title">Messages de groupes</h3>
                 <div class="card-tools">
-                    <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
+                    <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">{{messages.length}}</span>
                 </div>
             </div>
             <!-- /.card-header -->

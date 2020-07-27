@@ -31,7 +31,9 @@ class ProductController extends Controller
         if($user->isAdmin())
             return Product::with('Category', 'Images', 'Tags')->get();
         return Product::where('user_id', auth('api')->id())->with('Category', 'Images', 'Tags')->get();
+
     }
+
 
     public function slug($slug)
     {
